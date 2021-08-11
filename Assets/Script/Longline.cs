@@ -5,14 +5,11 @@ using UnityEngine;
 public class Longline : MonoBehaviour
 {
     //ラインレンダラーの定義
-    private LineRenderer lineRenderer;
-    private Transform[] points;
-    
-    private void Start()
-    {
-        //lineRenderer = GetComponent<LineRenderer>();
+    LineRenderer lineRenderer;
+    Transform[] points;
 
-    }
+
+
     public void SetupLine(Transform[] points)
     {
         //ロングノーツに配列を渡す
@@ -20,12 +17,21 @@ public class Longline : MonoBehaviour
         lineRenderer.positionCount = points.Length;
         this.points = points;
 
+        //ロングノーツの各点(ワールド座標系)を取得
         Vector3[] positions = this.GetPositions();
+
+        //各点をlineRenderer座標系に変換
+        positions = Transformation(positions);
+
+        //各点をlineRendererにセット
         lineRenderer.SetPositions(positions);
-        
+
+        //ロングノーツのlineRendererを90度回転させる
+        this.transform.Rotate(new Vector3(90f, 0, 0));
+
     }
 
-
+    //Transform配列からVector3配列に変換
     Vector3[] GetPositions()
     {
         Vector3[] result = new Vector3[this.points.Length];
@@ -37,5 +43,19 @@ public class Longline : MonoBehaviour
 
         return result;
     }
-    
+
+    //Vector3配列(ワールド座標系)からVector3配列(ロングノーツ座標系)へ変換
+    Vector3[] Transformation(Vector3[] positions)
+    {
+        Vector3[] result = new Vector3[positions.Length];
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            Vector3 vector = positions[i];
+            result[i] = new Vector3(vector.x, vector.z, -(vector.y + 0.01f));
+        }
+
+        return result;
+    }
+
 }
