@@ -8,7 +8,8 @@ public class Longline : MonoBehaviour
     LineRenderer lineRenderer;
     Transform[] points;
 
-
+    [SerializeField]
+    float lineWidth = 1.4f;
 
     public void SetupLine(Transform[] points)
     {
@@ -25,6 +26,9 @@ public class Longline : MonoBehaviour
 
         //各点をlineRendererにセット
         lineRenderer.SetPositions(positions);
+
+        //lineRendererのWidthを変更
+        lineRenderer.widthMultiplier = lineWidth;
 
         //ロングノーツのlineRendererを90度回転させる
         this.transform.Rotate(new Vector3(90f, 0, 0));
