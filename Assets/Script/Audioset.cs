@@ -13,7 +13,7 @@ public class Audioset : MonoBehaviour
     {
         //オーディオにセットされた曲データの回収
         clip = AudioObject.GetComponent<AudioSource>().clip;
-        startaudio();
+        this.audioAwake();
     }
 
     // Update is called once per frame
@@ -22,14 +22,7 @@ public class Audioset : MonoBehaviour
 
     }
     //オフセットの時間及びオフセット起動用
-    void startaudio()
-    {
-        float[] allSamples = new float[clip.samples * clip.channels];
-        clip.GetData(allSamples, 0);
-        float offset = (clip.frequency * clip.channels)/20000;
-        Invoke("audioAwake", offset);
-        Debug.Log(offset+"\n"+ clip.frequency * clip.channels);
-    }
+    
     //オーディオのオブジェクトをアクティブ化
     void audioAwake()
     {

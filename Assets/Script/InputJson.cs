@@ -32,17 +32,29 @@ public class InputJson : MonoBehaviour
     [SerializeField]
     GameObject fumenGameObj;
 
-    public GameObject notepref;
-    public GameObject longnotespref;
+    [SerializeField]
+    GameObject notepref;
+    
+    [SerializeField]
+    GameObject longnotespref;
+
+    [SerializeField]
+    Transform MainJPointTransform;
+
+    
+
     //public GameObject lineOBJ;
     // Start is called before the first frame update
     void Start()
     {
+        
+
+        float fumenScrollSpeed = fumenGameObj.GetComponent<Move>().speed;
+
         //Jsonファイルの読み出し
         string inputString = Resources.Load<TextAsset>("NoteJson/test1").ToString();
-        Debug.Log(inputString);
+        //Debug.Log(inputString);
         Humen inputJson = JsonUtility.FromJson<Humen>(inputString);
-        //longline = lineOBJ.GetComponent<Longline>();
 
         for (int a = 0; a < inputJson.notes.Length; a++)
         {
@@ -51,9 +63,15 @@ public class InputJson : MonoBehaviour
             //シングルノーツの生成及び配置
             //Instantiate(notepref, new Vector3(-4 + inputJson.notes[a].block * 2f, 0f, 40 + inputJson.notes[a].num * 60 / inputJson.BPM * 10f), Quaternion.identity, fumenGameObj.transform);
             notepref.GetComponent<NotesController>().SetTrack((Track)inputJson.notes[a].block + 1);
-            GameObject parentlong = Instantiate(notepref, new Vector3(-4 + inputJson.notes[a].block * 2f, 0.5f, 40 + ((inputJson.notes[a].num * 600) / inputJson.BPM)/* * 1.0f*/), Quaternion.identity, fumenGameObj.transform);
 
-            Debug.Log("Num:" + inputJson.notes[a].num + "　Block:" + inputJson.notes[a].block + "　A:" + "NoteType" + inputJson.notes[a].type.ToString() + "   " + a);
+            float zPosition = NotesPositionCalculation.CalcZPosition(inputJson.BPM, inputJson.offset, 44100, inputJson.notes[a].LPB, inputJson.notes[a].num, fumenScrollSpeed);
+
+            zPosition += MainJPointTransform.position.z;
+            //Debug.Log(zPosition);
+
+            GameObject parentlong = Instantiate(notepref, new Vector3(-4 + inputJson.notes[a].block * 2f, 0.5f, zPosition), Quaternion.identity, fumenGameObj.transform);
+
+            //Debug.Log("Num:" + inputJson.notes[a].num + "　Block:" + inputJson.notes[a].block + "　A:" + "NoteType" + inputJson.notes[a].type.ToString() + "   " + a);
             if (inputJson.notes[a].type == 2)
             {
                 GameObject longnotesGameObjList = new GameObject("LongNotes");
@@ -72,12 +90,16 @@ public class InputJson : MonoBehaviour
                 for (int i = 0; i < m_note.Length; i++)
                 {
                     //先頭以外のロングノーツの生成
-                    Debug.Log("long" + i);
+                    //Debug.Log("long" + i);
                     // notepref.transform.parent = Notes.transform;
 
                     notepref.GetComponent<NotesController>().SetTrack((Track)inputJson.notes[a].block + 1);
 
-                    GameObject notes = Instantiate(notepref, new Vector3(-4 + m_note[i].block * 2f, 0.5f, 40 + ((m_note[i].num * 600) / inputJson.BPM)/* * 1.0f*/), Quaternion.identity, longnotesGameObjList.transform);
+                    zPosition = NotesPositionCalculation.CalcZPosition(inputJson.BPM, inputJson.offset, 44100, m_note[i].LPB, m_note[i].num, fumenScrollSpeed);
+                    zPosition += MainJPointTransform.position.z;
+
+
+                    GameObject notes = Instantiate(notepref, new Vector3(-4 + m_note[i].block * 2f, 0.5f, zPosition), Quaternion.identity, longnotesGameObjList.transform);
                     longnote.GetComponent<test1>().SetPoint(i + 1, notes.transform);
                     if (i == m_note.Length - 1)
                     {
