@@ -121,6 +121,12 @@ public class GameSystem : MonoBehaviour
     {
         return m_result;
     }
+
+    //ƒV[ƒ“
+    public void ChangeScene(string scenename)
+    {
+        SceneManager.LoadScene(scenename);
+    }
     //Ši•t‚¯
     public void SetRank(int score)
     {
