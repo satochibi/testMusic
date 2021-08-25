@@ -19,7 +19,7 @@ public enum ScoreRankType
 public class GameSystem : MonoBehaviour
 {
 
-
+    public GameObject JUI;
 
     //各ランクのスコアボーダー
     public int[] m_rankBorder =
@@ -56,15 +56,19 @@ public class GameSystem : MonoBehaviour
     public ResultPalam m_result;
     //コンボ数
     public int Combo = 0;
+    //総ノーツ数
+    public int notesnum = 0;
     //デバッグ用タップ処理
     public void DebugTap()
     {
         //ランダム生成
         int a = Random.Range(0, 20);
-        //中身適当だが判定処理が実装できれば書き換えて使うつもり。
-        //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
-        //判定指数:Perfect 1.0,Great 0.9,Good 0.7,Bad 0.5, Miss 0.0
-        switch (a)
+        JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay();
+        
+            //中身適当だが判定処理が実装できれば書き換えて使うつもり。
+            //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
+            //判定指数:Perfect 1.0,Great 0.9,Good 0.7,Bad 0.5, Miss 0.0
+            switch (a)
         {
             case 0:
                 m_result.Great++;
@@ -114,6 +118,64 @@ public class GameSystem : MonoBehaviour
                 }
                 break;
         }
+
+    }
+    //タップ時の処理
+    public void Tap(JudgementType judge)
+    {
+        //ランダム生成
+        int a = Random.Range(0, 20);
+        JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay();
+        if (m_result.MaxCombo < Combo)
+            //中身適当だが判定処理が実装できれば書き換えて使うつもり。
+            //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
+            //判定指数:Perfect 1.0,Great 0.9,Good 0.7,Bad 0.5, Miss 0.0
+            switch (judge)
+            {
+
+                case JudgementType.Perfect:
+
+                    m_result.score += 10000;
+                    Debug.Log("Perfect!");
+                    Combo++;
+
+                    {
+                        m_result.MaxCombo = Combo;
+                    }
+                    break;
+                case JudgementType.Great:
+                    m_result.Great++;
+                    m_result.score += 5000;
+                    Combo++;
+                    Debug.Log("Great!");
+                    //最大コンボ更新！
+                    if (m_result.MaxCombo < Combo)
+                    {
+                        m_result.MaxCombo = Combo;
+                    }
+                    break;
+                
+                case JudgementType.Good:
+                    m_result.Good++;
+                    Debug.Log("Good");
+                    Combo = 0;
+                    break;
+                case JudgementType.Bad:
+                    m_result.Bad++;
+                    Debug.Log("Bad");
+                    Combo = 0;
+                    break;
+                case JudgementType.Miss:
+                    m_result.Miss++;
+                    Debug.Log("Miss");
+                    Combo = 0;
+                    break;
+
+                default:
+                    
+                    
+                    break;
+            }
 
     }
     //リザルト用パラメータを取得
@@ -180,6 +242,7 @@ public class GameSystem : MonoBehaviour
             SetRank(m_result.score);
             SceneManager.LoadScene("Result");
         }
+       
        //リザルトパラメータをデバッグ表示
         if (Input.GetKeyDown(KeyCode.Space))
         {

@@ -49,7 +49,7 @@ public class InputJson : MonoBehaviour
     {
         
 
-        float fumenScrollSpeed = fumenGameObj.GetComponent<Move>().speed;
+        float fumenScrollSpeed = fumenGameObj.GetComponent<Fumen>().speed;
 
         //Jsonファイルの読み出し
         string inputString = Resources.Load<TextAsset>("NoteJson/test1").ToString();
