@@ -1,30 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class JudgeUI : MonoBehaviour
 {
-    public bool isEnd = false;
 
-    private Animator animator;
+    //UIオブジェクト
+    public GameObject[] UI={};
+    //アタッチされている各アニメーター
+    private Animator[] animator ={ };
 
-    public void JudgeUIAnimationPlay()
+    //判定によって2Dアニメーションを再生　JudgementType(引数)に対応。
+    public void JudgeUIAnimationPlay(JudgementType type)
     { 
-        animator.Play("Anim",0,0.0f);
+        //intにキャストして再生。
+        //State:Anim |layer 0 |normlizedTime 0.0f|
+        animator[(int)type].Play("Anim",0,0.0f);
     }
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        Debug.Log(UI.Length);
+        //アニメーターの配列のサイズをUIオブジェクトと同じにする。
+        Array.Resize(ref animator, UI.Length);
+
+        for (int i = 0; i < UI.Length; i++) {
+            animator[i] = UI[i].GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(isEnd)
-        //{
-        //    animator.SetInteger("PlayFlag", 0);
-        //    isEnd = false;
-        //}
+      
     }
 }

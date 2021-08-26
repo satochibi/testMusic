@@ -36,15 +36,15 @@ public class MusicSelect : MonoBehaviour
 
         for(int i =0;i<names.Length;i++)
         {
-            pos.Set(-150, -40, 600);
-
+            pos.Set(0,0,80);
+            
             if (i == 1)
             {
-                pos.y -= 150.0f;
+                pos.y -= 20.0f;
             }
             else if(i ==names.Length-1)
             {
-                pos.y += 150.0f;
+                pos.y += 20.0f;
             }
             names[i] = Path.GetFileNameWithoutExtension(names[i]);
             GameObject m_obj = Instantiate(listItemPre,pos,Quaternion.identity);

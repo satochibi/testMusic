@@ -14,9 +14,12 @@ public class NotesCollisionDetection : MonoBehaviour
     float distanceOfNote = float.NaN;
 
     float distanceOfNotePrev = float.NaN;
-
+    private GameSystem manager;
     const string tagName = "note";
-
+    private void Start()
+    {
+        manager = GameObject.Find("GameManager").GetComponent<GameSystem>();
+    }
     void Update()
     {
         //Debug.Log(track + " dis: "+ distanceOfNote);
@@ -31,6 +34,7 @@ public class NotesCollisionDetection : MonoBehaviour
             if (Mathf.Sign(distanceOfNote) != Mathf.Sign(distanceOfNotePrev))
             {
                 this.Play();
+
             }
 
         }

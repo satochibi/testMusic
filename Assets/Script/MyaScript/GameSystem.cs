@@ -16,11 +16,17 @@ public enum ScoreRankType
     D,
     TypeNum
 }
+[System.Serializable]
+public class SaveDataPalam
+{
+    public string musicname;
+    public int score;
+}
 public class GameSystem : MonoBehaviour
 {
 
-    public GameObject JUI;
-
+    public GameObject JUI = null;
+    public string GameSceneName;
     //各ランクのスコアボーダー
     public int[] m_rankBorder =
     {
@@ -31,6 +37,8 @@ public class GameSystem : MonoBehaviour
         750000,
         700000   
     };
+    
+
     //リザルトで使用するパラメータ
     public struct ResultPalam
     {
@@ -63,7 +71,7 @@ public class GameSystem : MonoBehaviour
     {
         //ランダム生成
         int a = Random.Range(0, 20);
-        JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay();
+        
         
             //中身適当だが判定処理が実装できれば書き換えて使うつもり。
             //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
@@ -80,6 +88,7 @@ public class GameSystem : MonoBehaviour
                 {
                     m_result.MaxCombo = Combo;
                 }
+                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
                 break;
             case 1:
                 m_result.Great++;
@@ -90,21 +99,25 @@ public class GameSystem : MonoBehaviour
                 {
                     m_result.MaxCombo = Combo;
                 }
+                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
                 break;
             case 2:
                 m_result.Good++;
                 Debug.Log("Good");
                 Combo = 0;
+                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
                 break;
             case 3:
                 m_result.Bad++;
                 Debug.Log("Bad");
                 Combo = 0;
+                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
                 break;
             case 4:
                 m_result.Miss++;
                 Debug.Log("Miss");
                 Combo = 0;
+                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Miss);
                 break;
 
             default:
@@ -112,6 +125,7 @@ public class GameSystem : MonoBehaviour
                 m_result.score += 10000;
                 Debug.Log("Perfect!");
                 Combo++;
+                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
                 if (m_result.MaxCombo < Combo)
                 {
                     m_result.MaxCombo = Combo;
@@ -125,7 +139,7 @@ public class GameSystem : MonoBehaviour
     {
         //ランダム生成
         int a = Random.Range(0, 20);
-        JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay();
+        
         if (m_result.MaxCombo < Combo)
             //中身適当だが判定処理が実装できれば書き換えて使うつもり。
             //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
@@ -138,7 +152,7 @@ public class GameSystem : MonoBehaviour
                     m_result.score += 10000;
                     Debug.Log("Perfect!");
                     Combo++;
-
+                    JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
                     {
                         m_result.MaxCombo = Combo;
                     }
@@ -147,6 +161,7 @@ public class GameSystem : MonoBehaviour
                     m_result.Great++;
                     m_result.score += 5000;
                     Combo++;
+                    JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
                     Debug.Log("Great!");
                     //最大コンボ更新！
                     if (m_result.MaxCombo < Combo)
@@ -159,16 +174,19 @@ public class GameSystem : MonoBehaviour
                     m_result.Good++;
                     Debug.Log("Good");
                     Combo = 0;
+                    JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
                     break;
                 case JudgementType.Bad:
                     m_result.Bad++;
                     Debug.Log("Bad");
                     Combo = 0;
+                    JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
                     break;
                 case JudgementType.Miss:
                     m_result.Miss++;
                     Debug.Log("Miss");
                     Combo = 0;
+                    JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Miss);
                     break;
 
                 default:
@@ -189,6 +207,13 @@ public class GameSystem : MonoBehaviour
     {
         SceneManager.LoadScene(scenename);
     }
+    public void MusicEnd()
+    {
+
+        GameObject.Find("Fade").GetComponent<FadeC>().SceneChangeOut("Result");
+
+    }
+
     //格付け
     public void SetRank(int score)
     {
@@ -235,9 +260,19 @@ public class GameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //JUIオブジェクト取得。無理やり感がすごい（構築が汚い）
+        if (SceneManager.GetActiveScene().name == GameSceneName && JUI == null)
+        {
+            JUI = GameObject.Find("JudgeUI");
+        }
+        else
+        {
+            //JUI = null;
+            JUI = GameObject.Find("JudgeUI");
+            
+        }
         //リザルトシーンへGO
-       if( Input.GetKeyDown(KeyCode.A))
+        if ( Input.GetKeyDown(KeyCode.A))
        {
             SetRank(m_result.score);
             SceneManager.LoadScene("Result");

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Musicselect.unity
     guid: 0c6d4ec7fc26dad4fbf75139de57b155
+  - enabled: 1
+    path: Assets/Scenes/Gallery.unity
+    guid: 424056dec9c30f343b3e41cb6a33cab8
   m_configObjects: {}

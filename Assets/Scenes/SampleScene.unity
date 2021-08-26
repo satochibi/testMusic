@@ -164,14 +164,13 @@ GameObject:
   - component: {fileID: 51823284}
   - component: {fileID: 51823283}
   - component: {fileID: 51823282}
-  - component: {fileID: 51823285}
   m_Layer: 0
   m_Name: Judge_Good
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &51823282
 Animator:
   serializedVersion: 3
@@ -256,19 +255,6 @@ Transform:
   m_Father: {fileID: 793943728}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &51823285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51823281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4774f49224c754cb77d9ff4204950f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!1 &113746803
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,17 +666,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!114 &252033080 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5962017566774257197, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
-  m_PrefabInstance: {fileID: 5962017567188081749}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56692ed221c15dc4c885700a3b5288d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &290359712
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,9 +817,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 252033080}
-          m_TargetAssemblyTypeName: GameSystem, Assembly-CSharp
-          m_MethodName: DebugTap
+        - m_Target: {fileID: 1614465405}
+          m_TargetAssemblyTypeName: TapL, Assembly-CSharp
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -897,14 +872,13 @@ GameObject:
   - component: {fileID: 330314991}
   - component: {fileID: 330314990}
   - component: {fileID: 330314989}
-  - component: {fileID: 330314992}
   m_Layer: 0
   m_Name: Judge_Bad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &330314989
 Animator:
   serializedVersion: 3
@@ -989,19 +963,6 @@ Transform:
   m_Father: {fileID: 793943728}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &330314992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330314988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4774f49224c754cb77d9ff4204950f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!1 &350743508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,6 +1619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 793943728}
+  - component: {fileID: 793943729}
   m_Layer: 0
   m_Name: JudgeUI
   m_TagString: Untagged
@@ -1684,6 +1646,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &793943729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793943727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4774f49224c754cb77d9ff4204950f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI:
+  - {fileID: 1347723496}
+  - {fileID: 1103065011}
+  - {fileID: 51823281}
+  - {fileID: 330314988}
+  - {fileID: 1135811529}
 --- !u!1 &823819903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,14 +1998,13 @@ GameObject:
   - component: {fileID: 1103065014}
   - component: {fileID: 1103065013}
   - component: {fileID: 1103065012}
-  - component: {fileID: 1103065015}
   m_Layer: 0
   m_Name: Judge_Great
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1103065012
 Animator:
   serializedVersion: 3
@@ -2110,19 +2089,6 @@ Transform:
   m_Father: {fileID: 793943728}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &1103065015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103065011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4774f49224c754cb77d9ff4204950f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!1 &1135811529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,14 +2100,13 @@ GameObject:
   - component: {fileID: 1135811532}
   - component: {fileID: 1135811531}
   - component: {fileID: 1135811530}
-  - component: {fileID: 1135811533}
   m_Layer: 0
   m_Name: Judge_Miss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1135811530
 Animator:
   serializedVersion: 3
@@ -2226,19 +2191,6 @@ Transform:
   m_Father: {fileID: 793943728}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &1135811533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135811529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4774f49224c754cb77d9ff4204950f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!1 &1347723496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,7 +2202,6 @@ GameObject:
   - component: {fileID: 1347723498}
   - component: {fileID: 1347723497}
   - component: {fileID: 1347723499}
-  - component: {fileID: 1347723500}
   m_Layer: 0
   m_Name: Judge_Perfect
   m_TagString: Untagged
@@ -2342,19 +2293,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1347723500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347723496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4774f49224c754cb77d9ff4204950f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnd: 0
 --- !u!1 &1368333551
 GameObject:
   m_ObjectHideFlags: 0
@@ -4180,6 +4118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5962017566774257186, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5962017566774257196, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -4227,6 +4169,6 @@ PrefabInstance:
     - target: {fileID: 5962017566774257197, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
       propertyPath: JUI
       value: 
-      objectReference: {fileID: 1347723496}
+      objectReference: {fileID: 793943727}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
