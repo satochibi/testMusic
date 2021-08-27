@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShaderColorChange : MonoBehaviour
 {
 
-    private Material material;
+    Material material;
 
     // Start is called before the first frame update
     void Start()

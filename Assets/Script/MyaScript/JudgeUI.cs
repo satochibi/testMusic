@@ -5,7 +5,7 @@ using System;
 
 public class JudgeUI : MonoBehaviour
 {
-
+    [SerializeField]
     //UIオブジェクト
     public GameObject[] UI={};
     //アタッチされている各アニメーター

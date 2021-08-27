@@ -24,7 +24,7 @@ public class SaveDataPalam
 }
 public class GameSystem : MonoBehaviour
 {
-
+    [SerializeField]
     public GameObject JUI = null;
     public string GameSceneName;
     //各ランクのスコアボーダー
@@ -37,8 +37,8 @@ public class GameSystem : MonoBehaviour
         750000,
         700000   
     };
-    
 
+    [SerializeField]
     //リザルトで使用するパラメータ
     public struct ResultPalam
     {
@@ -60,6 +60,7 @@ public class GameSystem : MonoBehaviour
 
 
     }
+    [SerializeField]
     //リザルト変数
     public ResultPalam m_result;
     //コンボ数
@@ -138,7 +139,7 @@ public class GameSystem : MonoBehaviour
     public void Tap(JudgementType judge)
     {
         //ランダム生成
-        int a = Random.Range(0, 20);
+        int rand = Random.Range(0, 20);
         
         if (m_result.MaxCombo < Combo)
             //中身適当だが判定処理が実装できれば書き換えて使うつもり。
@@ -201,18 +202,16 @@ public class GameSystem : MonoBehaviour
     {
         return m_result;
     }
-
+    public void SetMusicName(string name)
+    {
+        m_result.MusicTitle = name;
+    }
     //シーン
     public void ChangeScene(string scenename)
     {
         SceneManager.LoadScene(scenename);
     }
-    public void MusicEnd()
-    {
-
-        GameObject.Find("Fade").GetComponent<FadeC>().SceneChangeOut("Result");
-
-    }
+ 
 
     //格付け
     public void SetRank(int score)
@@ -260,17 +259,14 @@ public class GameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //JUIオブジェクト取得。無理やり感がすごい（構築が汚い）
-        if (SceneManager.GetActiveScene().name == GameSceneName && JUI == null)
+        //JUIオブジェクト取得。無理やり感がすごい
+        if (SceneManager.GetActiveScene().name == GameSceneName &&JUI ==null)
         {
+           
             JUI = GameObject.Find("JudgeUI");
+           
         }
-        else
-        {
-            //JUI = null;
-            JUI = GameObject.Find("JudgeUI");
-            
-        }
+        
         //リザルトシーンへGO
         if ( Input.GetKeyDown(KeyCode.A))
        {

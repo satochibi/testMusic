@@ -47,12 +47,14 @@ public class InputJson : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        GameSystem m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
+        string m_name = m_system.GetResultPalam().MusicTitle;
 
         float fumenScrollSpeed = fumenGameObj.GetComponent<Fumen>().speed;
 
         //Jsonファイルの読み出し
-        string inputString = Resources.Load<TextAsset>("NoteJson/test1").ToString();
+        string inputString = Resources.Load<TextAsset>("NoteJson/"+m_name).ToString();
         //Debug.Log(inputString);
         Humen inputJson = JsonUtility.FromJson<Humen>(inputString);
 

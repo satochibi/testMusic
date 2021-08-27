@@ -7,12 +7,15 @@ using System.IO;
 
 public class MusicSelect : MonoBehaviour
 {
+
+    [SerializeField]
     public string[] names;
     public GameObject listItemPre;
     public List<GameObject> m_nameList;
-    public GameObject canvasOBJ;
-    private Vector3 pos;
-
+    public GameObject contentOBJ;
+    
+    Vector3 pos;
+   
     public void EraceList()
     {
         foreach(GameObject obj in m_nameList)
@@ -34,25 +37,19 @@ public class MusicSelect : MonoBehaviour
  
         }
 
-        for(int i =0;i<names.Length;i++)
+        for (int i = 0; i < names.Length; i++)
         {
-            pos.Set(0,0,80);
+            pos.Set(0, 0, 0);
+
             
-            if (i == 1)
-            {
-                pos.y -= 20.0f;
-            }
-            else if(i ==names.Length-1)
-            {
-                pos.y += 20.0f;
-            }
             names[i] = Path.GetFileNameWithoutExtension(names[i]);
-            GameObject m_obj = Instantiate(listItemPre,pos,Quaternion.identity);
-            m_obj.transform.parent = canvasOBJ.transform;
+            GameObject m_obj = Instantiate(listItemPre, pos, Quaternion.identity);
+            //m_obj.transform.parent = contentOBJ.transform;
+            m_obj.transform.SetParent(contentOBJ.transform, false);
             m_nameList.Add(m_obj);
-            m_nameList[i].transform.Find("Text").GetComponent<Text>().text = names[i];
+            m_nameList[i].transform.Find("Musicname").GetComponent<Text>().text = names[i];
         }
-        
+
     }
 
     // Update is called once per frame
