@@ -718,6 +718,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f4c6c87c0ff72054c918ab09088c702e, type: 3}
   - {fileID: 8300000, guid: aafee4bac133dc74ca20b7b8146c531e, type: 3}
   autoPlay: 1
+  tapLList:
+  - {fileID: 1614465405}
+  - {fileID: 788334631}
+  - {fileID: 1879338914}
+  - {fileID: 1848571764}
+  - {fileID: 1948478219}
 --- !u!54 &350743511
 Rigidbody:
   m_ObjectHideFlags: 0

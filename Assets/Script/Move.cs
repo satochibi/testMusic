@@ -20,6 +20,9 @@ public class Move : MonoBehaviour
     [SerializeField]
     bool autoPlay = true;
 
+    [SerializeField]
+    TapL[] tapLList;
+
     public float Speed { get { return this.speed; } }
 
     public bool IsGameStart { get { return this.isGameStart; } }
@@ -73,18 +76,28 @@ public class Move : MonoBehaviour
                 {
                     case Track.track1:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[0]);
+                        this.tapLList[0].Tap();
+                        this.tapLList[0].Exit();
                         break;
                     case Track.track2:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[1]);
+                        this.tapLList[1].Tap();
+                        this.tapLList[1].Exit();
                         break;
                     case Track.track3:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[2]);
+                        this.tapLList[2].Tap();
+                        this.tapLList[2].Exit();
                         break;
                     case Track.track4:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[3]);
+                        this.tapLList[3].Tap();
+                        this.tapLList[3].Exit();
                         break;
                     case Track.track5:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[4]);
+                        this.tapLList[4].Tap();
+                        this.tapLList[4].Exit();
                         break;
                     default:
                         break;
