@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FadeC : MonoBehaviour
 {
+
+    [SerializeField]
     //フェードスピード
     public float speed;
     //フェード管理用フラグ

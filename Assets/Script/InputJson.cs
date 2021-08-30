@@ -50,7 +50,10 @@ public class InputJson : MonoBehaviour
 
         GameSystem m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
         string m_name = m_system.GetResultPalam().MusicTitle;
-
+        if (string.IsNullOrEmpty(m_name))
+        {
+            m_name = "シャイニングスター";
+        }
         float fumenScrollSpeed = fumenGameObj.GetComponent<Fumen>().speed;
 
         //Jsonファイルの読み出し
@@ -91,9 +94,7 @@ public class InputJson : MonoBehaviour
 
                 for (int i = 0; i < m_note.Length; i++)
                 {
-                    //先頭以外のロングノーツの生成
-                    //Debug.Log("long" + i);
-                    // notepref.transform.parent = Notes.transform;
+                    
 
                     notepref.GetComponent<NotesController>().SetTrack((Track)inputJson.notes[a].block + 1);
 

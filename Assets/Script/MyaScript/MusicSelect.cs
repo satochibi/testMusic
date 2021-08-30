@@ -26,17 +26,13 @@ public class MusicSelect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //指定フォルダからjsonファイルを一括読み込み
         string path = Application.dataPath + "/Resources/NoteJson/";
              names = Directory.GetFiles(@path, "*.json",SearchOption.TopDirectoryOnly);
         
         Debug.Log(names[0]);
-        
-
-        foreach (string name in names)
-        {
- 
-        }
-
+  
         for (int i = 0; i < names.Length; i++)
         {
             pos.Set(0, 0, 0);
