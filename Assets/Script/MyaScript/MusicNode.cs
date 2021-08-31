@@ -4,20 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MusicNode : MonoBehaviour
 {
-
+    public GameObject m_textOBJ;
     public void SetFileName()
     {
-        GameObject.Find("GameManager").GetComponent<GameSystem>().SetMusicName(GetComponent<Text>().text);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameSystem m_system =GameObject.Find("GameManager").GetComponent<GameSystem>();
+        m_system.SetMusicName(GetComponent<Text>().text);
+        m_system.MusicTitleDisp(GetComponent<Text>().text);
     }
 }

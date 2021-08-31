@@ -41,7 +41,8 @@ public class InputJson : MonoBehaviour
     [SerializeField]
     Transform MainJPointTransform;
 
-    
+    [SerializeField]
+    public int notesNum;
 
     //public GameObject lineOBJ;
     // Start is called before the first frame update
@@ -85,7 +86,7 @@ public class InputJson : MonoBehaviour
                 parentlong.name = "ロングノーツ先頭";
                 parentlong.transform.parent = longnotesGameObjList.transform;
                 GameObject longnote = Instantiate(longnotespref, Vector3.zero, Quaternion.identity, longnotesGameObjList.transform);
-
+               
                 longnote.GetComponent<test1>().Init(longnotesGameObjList);
                 
                 Notes[] m_note = inputJson.notes[a].notes;
@@ -103,6 +104,7 @@ public class InputJson : MonoBehaviour
 
 
                     GameObject notes = Instantiate(notepref, new Vector3(-4 + m_note[i].block * 2f, 0.5f, zPosition), Quaternion.identity, longnotesGameObjList.transform);
+                    notesNum++;
                     longnote.GetComponent<test1>().SetPoint(i + 1, notes.transform);
                     if (i == m_note.Length - 1)
                     {
@@ -125,11 +127,9 @@ public class InputJson : MonoBehaviour
 
 
         }
-
-
-
-
-
+        //test53:シャイニングスター
+        notesNum += inputJson.notes.Length;
+        m_system.SetNotesNum(notesNum);
     }
 
 }

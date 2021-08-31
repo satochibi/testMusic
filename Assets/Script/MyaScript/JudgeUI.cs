@@ -21,7 +21,6 @@ public class JudgeUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(UI.Length);
         //アニメーターの配列のサイズをUIオブジェクトと同じにする。
         Array.Resize(ref animator, UI.Length);
 

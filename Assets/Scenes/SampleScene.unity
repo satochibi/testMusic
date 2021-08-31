@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
-  notesNum: 0
+  notelist: []
 --- !u!54 &350743511
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1697,6 +1697,7 @@ MonoBehaviour:
   notepref: {fileID: 6808905431021682974, guid: 78a2434227fe94c41a335643fb588522, type: 3}
   longnotespref: {fileID: 6901420768220649772, guid: abd81fe5cff003148ae7104ed791f9cc, type: 3}
   MainJPointTransform: {fileID: 417766103}
+  notesNum: 0
 --- !u!4 &823819905
 Transform:
   m_ObjectHideFlags: 0

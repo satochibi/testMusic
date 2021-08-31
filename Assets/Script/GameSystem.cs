@@ -26,7 +26,7 @@ public class GameSystem : MonoBehaviour
 {
     [SerializeField]
     public GameObject JUI = null;
-    public string GameSceneName;
+    public static string GameSceneName = "SampleScene";
     //各ランクのスコアボーダー
     public int[] m_rankBorder =
     {
@@ -37,7 +37,7 @@ public class GameSystem : MonoBehaviour
         750000,
         700000   
     };
-
+    
     [SerializeField]
     //リザルトで使用するパラメータ
     public struct ResultPalam
@@ -67,6 +67,10 @@ public class GameSystem : MonoBehaviour
     public int Combo = 0;
     //総ノーツ数
     public int notesnum = 0;
+    //判定指数１の場合のスコア
+    public float normalscore = 0;
+    //計算用スコア
+    public float sumscore = 0.0f;
     //デバッグ用タップ処理
     public void DebugTap()
     {
@@ -74,14 +78,14 @@ public class GameSystem : MonoBehaviour
         int a = Random.Range(0, 20);
         
         
-            //中身適当だが判定処理が実装できれば書き換えて使うつもり。
-            //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
-            //判定指数:Perfect 1.0,Great 0.9,Good 0.7,Bad 0.5, Miss 0.0
-            switch (a)
+        //中身適当だが判定処理が実装できれば書き換えて使うつもり。
+        //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
+        //判定指数:Perfect 1.0,Great 0.9,Good 0.7,Bad 0.5, Miss 0.0
+        switch (a)
         {
             case 0:
                 m_result.Great++;
-                m_result.score += 5000;
+                m_result.score += (int)(normalscore * 0.9);
                 Combo++;
                 Debug.Log("Great!");
                 //最大コンボ更新！
@@ -93,7 +97,7 @@ public class GameSystem : MonoBehaviour
                 break;
             case 1:
                 m_result.Great++;
-                m_result.score += 5000;
+                m_result.score += (int)(normalscore * 0.9);
                 Combo++;
                 Debug.Log("Great!");
                 if (m_result.MaxCombo < Combo)
@@ -104,6 +108,7 @@ public class GameSystem : MonoBehaviour
                 break;
             case 2:
                 m_result.Good++;
+                m_result.score += (int)(normalscore * 0.7);
                 Debug.Log("Good");
                 Combo = 0;
                 JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
@@ -111,6 +116,7 @@ public class GameSystem : MonoBehaviour
             case 3:
                 m_result.Bad++;
                 Debug.Log("Bad");
+                m_result.score += (int)(normalscore * 0.5);
                 Combo = 0;
                 JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
                 break;
@@ -123,7 +129,7 @@ public class GameSystem : MonoBehaviour
 
             default:
                 m_result.Perfect++;
-                m_result.score += 10000;
+                sumscore += normalscore;
                 Debug.Log("Perfect!");
                 Combo++;
                 JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
@@ -136,13 +142,11 @@ public class GameSystem : MonoBehaviour
 
     }
     //タップ時の処理
-    public void Tap(JudgementType judge)
+    public void AddResultPalam(JudgementType judge)
     {
-        //ランダム生成
-        int rand = Random.Range(0, 20);
         
-        if (m_result.MaxCombo < Combo)
-            //中身適当だが判定処理が実装できれば書き換えて使うつもり。
+        
+        
             //実際のスコア計算(仮)：１ノーツあたり　(1,000,000/ノーツ数)＊判定指数
             //判定指数:Perfect 1.0,Great 0.9,Good 0.7,Bad 0.5, Miss 0.0
             switch (judge)
@@ -150,17 +154,19 @@ public class GameSystem : MonoBehaviour
 
                 case JudgementType.Perfect:
 
-                    m_result.score += 10000;
+                m_result.Perfect++;
+                sumscore += normalscore;
                     Debug.Log("Perfect!");
                     Combo++;
                     JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
+                    if (m_result.MaxCombo < Combo)
                     {
                         m_result.MaxCombo = Combo;
                     }
                     break;
                 case JudgementType.Great:
                     m_result.Great++;
-                    m_result.score += 5000;
+                    sumscore += normalscore * 0.9f;
                     Combo++;
                     JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
                     Debug.Log("Great!");
@@ -173,12 +179,14 @@ public class GameSystem : MonoBehaviour
                 
                 case JudgementType.Good:
                     m_result.Good++;
+                    sumscore += normalscore * 0.7f;
                     Debug.Log("Good");
                     Combo = 0;
                     JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
                     break;
                 case JudgementType.Bad:
                     m_result.Bad++;
+                    sumscore += normalscore * 0.5f;
                     Debug.Log("Bad");
                     Combo = 0;
                     JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
@@ -195,6 +203,8 @@ public class GameSystem : MonoBehaviour
                     
                     break;
             }
+        //表示及び記録用パラメータに計算用スコアを四捨五入＋int型にキャストして代入。
+        m_result.score = (int)Mathf.Round(sumscore);
 
     }
     //リザルト用パラメータを取得
@@ -205,6 +215,15 @@ public class GameSystem : MonoBehaviour
     public void SetMusicName(string name)
     {
         m_result.MusicTitle = name;
+    }
+    //ノーツの総数を設定
+    public void SetNotesNum(int num)
+    {
+        notesnum = num;
+    }
+    public void MusicTitleDisp(string titlename)
+    {
+        GameObject.Find("Canvas/MusicTitle").GetComponent<MusicTitle>().Disp(titlename);
     }
     //シーン
     public void ChangeScene(string scenename)
@@ -259,12 +278,14 @@ public class GameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //JUIオブジェクト取得。無理やり感がすごい
+        //JUIオブジェクト取得。
         if (SceneManager.GetActiveScene().name == GameSceneName &&JUI ==null)
         {
            
             JUI = GameObject.Find("JudgeUI");
-           
+
+            normalscore = 1000000.00f / notesnum;
+
         }
         
         //リザルトシーンへGO
