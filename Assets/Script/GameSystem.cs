@@ -71,6 +71,8 @@ public class GameSystem : MonoBehaviour
     public float normalscore = 0;
     //計算用スコア
     public float sumscore = 0.0f;
+
+    AudioSource music;
     //デバッグ用タップ処理
     public void DebugTap()
     {
@@ -278,21 +280,32 @@ public class GameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //JUIオブジェクト取得。
+       
         if (SceneManager.GetActiveScene().name == GameSceneName &&JUI ==null)
         {
-           
+            
+            //JUIオブジェクト取得。
             JUI = GameObject.Find("JudgeUI");
 
             normalscore = 1000000.00f / notesnum;
-
+            music = GameObject.Find("Audio").GetComponent<AudioSource>();
+            music.clip = Resources.Load<AudioClip>("MusicF/"+m_result.MusicTitle);
+            music.Play();
         }
-        
-        //リザルトシーンへGO
-        if ( Input.GetKeyDown(KeyCode.A))
+        if (SceneManager.GetActiveScene().name == "Musicselect")
+        {
+            if (m_result.score != 0)
+            {
+                m_result.score = 0;
+                sumscore = 0.0f;
+            }
+        }
+            //リザルトシーンへGO
+            if ( Input.GetKeyDown(KeyCode.A))
        {
             SetRank(m_result.score);
             SceneManager.LoadScene("Result");
+            
         }
        
        //リザルトパラメータをデバッグ表示
