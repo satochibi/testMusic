@@ -246,6 +246,8 @@ public class GameSystem : MonoBehaviour
         Combo = 0;
         sumscore = 0.0f;
     }
+
+    
     //Ši•t‚¯
     public void SetRank(int score)
     {
