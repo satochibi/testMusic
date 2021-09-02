@@ -230,10 +230,22 @@ public class GameSystem : MonoBehaviour
     //シーン
     public void ChangeScene(string scenename)
     {
+        if (scenename == "Musicselect")
+        {
+            InitializedResultPalam();
+            
+            Debug.Log("Resultパラメータを初期化しました。");
+        }
         SceneManager.LoadScene(scenename);
+        
     }
  
-
+    public void InitializedResultPalam()
+    {
+        m_result = new ResultPalam();
+        Combo = 0;
+        sumscore = 0.0f;
+    }
     //格付け
     public void SetRank(int score)
     {
@@ -280,7 +292,12 @@ public class GameSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            DebugTap();
+        }
+        
+
         if (SceneManager.GetActiveScene().name == GameSceneName &&JUI ==null)
         {
             
@@ -288,18 +305,13 @@ public class GameSystem : MonoBehaviour
             JUI = GameObject.Find("JudgeUI");
 
             normalscore = 1000000.00f / notesnum;
+           
             music = GameObject.Find("Audio").GetComponent<AudioSource>();
             music.clip = Resources.Load<AudioClip>("MusicF/"+m_result.MusicTitle);
             music.Play();
         }
-        if (SceneManager.GetActiveScene().name == "Musicselect")
-        {
-            if (m_result.score != 0)
-            {
-                m_result.score = 0;
-                sumscore = 0.0f;
-            }
-        }
+        
+        
             //リザルトシーンへGO
             if ( Input.GetKeyDown(KeyCode.A))
        {
