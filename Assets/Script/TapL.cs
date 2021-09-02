@@ -66,7 +66,8 @@ public class TapL : MonoBehaviour
 
         JudgementType type = JudgementType.Perfect;
         manager.AddResultPalam(type);
-        //manager.DebugTap();
+
+       
     }
     public void Exit()
     {

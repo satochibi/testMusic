@@ -1338,6 +1338,10 @@ PrefabInstance:
       propertyPath: nextSceneName
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5476568793330818926, guid: d3a707974b1dff2449314d910308e998, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a707974b1dff2449314d910308e998, type: 3}
 --- !u!1 &1559793154
@@ -1628,7 +1632,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 303.92, y: 39.385002}
+  m_AnchoredPosition: {x: 303.92, y: 39.38501}
   m_SizeDelta: {x: -638.45, y: -132.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2055033773

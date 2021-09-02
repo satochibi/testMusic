@@ -68,7 +68,7 @@ public class GameSystem : MonoBehaviour
     //総ノーツ数
     public int notesnum = 0;
     //判定指数１の場合のスコア
-    public float normalscore = 0;
+    public float normalscore = 0.0f;
     //計算用スコア
     public float sumscore = 0.0f;
 
