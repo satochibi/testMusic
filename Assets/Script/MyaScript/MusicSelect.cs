@@ -23,12 +23,32 @@ public class MusicSelect : MonoBehaviour
             Destroy(obj);
         }
     }
+
+    public static string path
+    {
+        get
+        {
+            switch (Application.platform)
+            {
+                case RuntimePlatform.IPhonePlayer:
+                    return Application.persistentDataPath+ "/Resources/NoteJson/";
+
+                case RuntimePlatform.Android:
+                    return Application.temporaryCachePath+"/Resources/NoteJson/";
+
+                case RuntimePlatform.LinuxPlayer:
+                    return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "/Resources/NoteJson/");
+                default:
+                    return Application.dataPath + "/Resources/NoteJson/";
+            }
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1.0f;
         //指定フォルダからjsonファイルを一括読み込み
-        string path = "jar:file://"+Application.dataPath + "/Resources/NoteJson/";
+       // string path = Application.dataPath + "/Resources/NoteJson/";
              names = Directory.GetFiles(@path, "*.json",SearchOption.TopDirectoryOnly);
         
         Debug.Log(names[0]);
