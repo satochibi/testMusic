@@ -27,6 +27,8 @@ public class pause : MonoBehaviour
     public void SceneChange(string nextSceneName)
     {
         GameObject.Find("GameManager").GetComponent<GameSystem>().ChangeScene(nextSceneName);
+        
+
     }
     // Update is called once per frame
     void Update()

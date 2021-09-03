@@ -68,9 +68,9 @@ public class GameSystem : MonoBehaviour
     //総ノーツ数
     public int notesnum = 0;
     //判定指数１の場合のスコア
-    public float normalscore = 0.0f;
+    public double normalscore = 0.00;
     //計算用スコア
-    public float sumscore = 0.0f;
+    public double sumscore = 0.0;
 
     AudioSource music;
     //デバッグ用タップ処理
@@ -206,7 +206,9 @@ public class GameSystem : MonoBehaviour
                     break;
             }
         //表示及び記録用パラメータに計算用スコアを四捨五入＋int型にキャストして代入。
-        m_result.score = (int)Mathf.Round(sumscore);
+       // m_result.score = (int)Mathf.Round(sumscore, System.MidpointRounding.AwayFromZero);
+        m_result.score = (int)System.Math.Round(sumscore, System.MidpointRounding.AwayFromZero);
+        //m_result.score = (int)sumscore;
 
     }
     //リザルト用パラメータを取得
@@ -236,6 +238,8 @@ public class GameSystem : MonoBehaviour
             
             Debug.Log("Resultパラメータを初期化しました。");
         }
+        SetRank(m_result.score);
+
         SceneManager.LoadScene(scenename);
         
     }
@@ -244,7 +248,7 @@ public class GameSystem : MonoBehaviour
     {
         m_result = new ResultPalam();
         Combo = 0;
-        sumscore = 0.0f;
+        sumscore = 0.00f;
     }
 
     
@@ -306,7 +310,7 @@ public class GameSystem : MonoBehaviour
             //JUIオブジェクト取得。
             JUI = GameObject.Find("JudgeUI");
 
-            normalscore = 1000000.00f / notesnum;
+            normalscore = 1000000.00 / notesnum;
            
             music = GameObject.Find("Audio").GetComponent<AudioSource>();
             music.clip = Resources.Load<AudioClip>("MusicF/"+m_result.MusicTitle);
@@ -316,7 +320,7 @@ public class GameSystem : MonoBehaviour
         
             //リザルトシーンへGO
             if ( Input.GetKeyDown(KeyCode.A))
-       {
+              {
             SetRank(m_result.score);
             SceneManager.LoadScene("Result");
             
