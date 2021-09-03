@@ -28,7 +28,7 @@ public class MusicSelect : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         //指定フォルダからjsonファイルを一括読み込み
-        string path = Application.dataPath + "/Resources/NoteJson/";
+        string path = "jar:file://"+Application.dataPath + "/Resources/NoteJson/";
              names = Directory.GetFiles(@path, "*.json",SearchOption.TopDirectoryOnly);
         
         Debug.Log(names[0]);
