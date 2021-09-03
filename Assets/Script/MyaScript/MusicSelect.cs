@@ -35,9 +35,7 @@ public class MusicSelect : MonoBehaviour
   
         for (int i = 0; i < names.Length; i++)
         {
-            pos.Set(0, 0, 0);
 
-            
             names[i] = Path.GetFileNameWithoutExtension(names[i]);
             GameObject m_obj = Instantiate(listItemPre, pos, Quaternion.identity);
             //m_obj.transform.parent = contentOBJ.transform;

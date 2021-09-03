@@ -313,7 +313,10 @@ public class GameSystem : MonoBehaviour
             normalscore = 1000000.00 / notesnum;
            
             music = GameObject.Find("Audio").GetComponent<AudioSource>();
-            music.clip = Resources.Load<AudioClip>("MusicF/"+m_result.MusicTitle);
+            if (!string.IsNullOrEmpty(m_result.MusicTitle))
+            {
+                music.clip = Resources.Load<AudioClip>("MusicF/" + m_result.MusicTitle);
+            }
             music.Play();
         }
         

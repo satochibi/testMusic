@@ -9,7 +9,6 @@ public class Scoredisp : MonoBehaviour
 
     GameSystem manager;
    
-    int combonum =0;
     // Start is called before the first frame update
     void Start()
     {
