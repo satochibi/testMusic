@@ -63,7 +63,11 @@ public class TapL : MonoBehaviour
         this.enabled = true;
         Debug.Log("Tap");
         Lf = true;
-        manager.DebugTap();
+
+        JudgementType type = JudgementType.Perfect;
+        manager.AddResultPalam(type);
+
+       
     }
     public void Exit()
     {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6045888217023204686}
   - component: {fileID: 6045888217023204689}
   - component: {fileID: 6045888217023204688}
+  - component: {fileID: 404923931266818458}
   m_Layer: 0
   m_Name: Lane4
   m_TagString: Untagged
@@ -95,6 +96,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &404923931266818458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045888217023204690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda51ec448252ba4386493ca434243a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6045888217777607339
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +120,7 @@ GameObject:
   - component: {fileID: 6045888217777607335}
   - component: {fileID: 6045888217777607334}
   - component: {fileID: 6045888217777607337}
+  - component: {fileID: 5995870467792923455}
   m_Layer: 0
   m_Name: Lane3
   m_TagString: Untagged
@@ -190,6 +204,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5995870467792923455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045888217777607339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda51ec448252ba4386493ca434243a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6045888217858234558
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +228,7 @@ GameObject:
   - component: {fileID: 6045888217858234554}
   - component: {fileID: 6045888217858234557}
   - component: {fileID: 6045888217858234556}
+  - component: {fileID: 1683010066850362502}
   m_Layer: 0
   m_Name: Lane2
   m_TagString: Untagged
@@ -285,6 +312,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1683010066850362502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045888217858234558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda51ec448252ba4386493ca434243a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6045888217909853211
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +336,7 @@ GameObject:
   - component: {fileID: 6045888217909853207}
   - component: {fileID: 6045888217909853206}
   - component: {fileID: 6045888217909853209}
+  - component: {fileID: 8295518966074856259}
   m_Layer: 0
   m_Name: Lane5
   m_TagString: Untagged
@@ -380,6 +420,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8295518966074856259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045888217909853211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda51ec448252ba4386493ca434243a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6045888218392752656
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +479,7 @@ GameObject:
   - component: {fileID: 6045888218404628927}
   - component: {fileID: 6045888218404628926}
   - component: {fileID: 6045888218404628865}
+  - component: {fileID: 891540110394558187}
   m_Layer: 0
   m_Name: Lane1
   m_TagString: Untagged
@@ -510,3 +563,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &891540110394558187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045888218404628867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda51ec448252ba4386493ca434243a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
