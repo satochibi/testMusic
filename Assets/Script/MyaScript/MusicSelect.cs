@@ -16,7 +16,7 @@ public class MusicSelect : MonoBehaviour
 
     public List<Humen> musicList;
     Vector3 pos;
-   
+
     public void EraceList()
     {
         foreach(GameObject obj in m_nameList)
