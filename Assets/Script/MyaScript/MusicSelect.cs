@@ -24,26 +24,26 @@ public class MusicSelect : MonoBehaviour
             Destroy(obj);
         }
     }
+    //プラットフォーム別参照パス
+    //public static string path
+    //{
+    //    get
+    //    {
+    //        switch (Application.platform)
+    //        {
+    //            case RuntimePlatform.IPhonePlayer:
+    //                return Application.persistentDataPath+ "/Resources/NoteJson/";
 
-    public static string path
-    {
-        get
-        {
-            switch (Application.platform)
-            {
-                case RuntimePlatform.IPhonePlayer:
-                    return Application.persistentDataPath+ "/Resources/NoteJson/";
+    //            case RuntimePlatform.Android:
+    //                return Application.temporaryCachePath+"/Resources/NoteJson/";
 
-                case RuntimePlatform.Android:
-                    return Application.temporaryCachePath+"/Resources/NoteJson/";
-
-                case RuntimePlatform.LinuxPlayer:
-                    return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "/Resources/NoteJson/");
-                default:
-                    return Application.dataPath + "/Resources/NoteJson/";
-            }
-        }
-    }
+    //            case RuntimePlatform.LinuxPlayer:
+    //                return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "/Resources/NoteJson/");
+    //            default:
+    //                return Application.dataPath + "/Resources/NoteJson/";
+    //        }
+    //    }
+    //}
     // Start is called before the first frame update
     void Start()
     {
