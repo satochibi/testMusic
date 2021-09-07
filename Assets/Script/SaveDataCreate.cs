@@ -35,7 +35,7 @@ public class SaveDataCreate : MonoBehaviour
     {
         TextAsset[] musicname = Resources.LoadAll<TextAsset>("NoteJson");
         TextAsset[] savename=Resources.LoadAll<TextAsset>("SaveJson");
-        Debug.Log( savename.Length == 0);
+        
         if (savename.Length==0)
         {
             for(int i=0;i<musicname.Length; i++)
@@ -70,16 +70,28 @@ public class SaveDataCreate : MonoBehaviour
                 data.name = musicname[i].name + plusname;
                 data.highscore = 0;
                 var Json = JsonUtility.ToJson(data);
-                if (!System.IO.File.Exists(data.name))
+                if (androidflag == true)
                 {
-
-                    if (androidflag == true)
+                    var path = Application.persistentDataPath + "/" + "SaveJson";
+                    if (!System.IO.File.Exists(path + data.name))
                     {
 
                     }
-                    else
+                }
+                else
+                {
+                    
+                    var path = Application.dataPath + "/Resources/SaveJson/";
+                    Debug.Log(path + data.name);
+                   
+                    if (!System.IO.File.Exists(path + data.name+ ".json"))
                     {
-
+                        Debug.Log("point1");
+                        StreamWriter writer;
+                        writer = new StreamWriter(path + data.name + ".json", false);
+                        writer.Write(Json);
+                        writer.Flush();
+                        writer.Close();
                     }
                 }
 
