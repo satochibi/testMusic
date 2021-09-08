@@ -8,7 +8,7 @@ public class MusicTitle : MonoBehaviour
     [SerializeField]
     public Image MusicIllust;
     public Text TitleText;
-
+    public GameObject[] difficultyButtonOBJ;
     Sprite sprite;
     public GameSystem m_system;
     public void Disp(string name)
@@ -18,6 +18,10 @@ public class MusicTitle : MonoBehaviour
             GetComponent<Image>().enabled = true;
             MusicIllust.enabled = true;
             TitleText.enabled = true;
+        }
+        foreach(GameObject button in difficultyButtonOBJ)
+        {
+            button.SetActive(true);
         }
         TitleText.text = name;
         sprite = Resources.Load<Sprite>("MusicTitleIllust/"+name);

@@ -24,10 +24,10 @@ public class FadeC : MonoBehaviour
         green = fadeimage.color.g;
         blue = fadeimage.color.b;
         alfa = fadeimage.color.a;
-        if (alfa == 1)
-        {
-            isFadein = true;
-        }
+        alfa = 1;
+        
+        isFadein = true;
+        
     }
 
     public void SceneChangeOut(string name)

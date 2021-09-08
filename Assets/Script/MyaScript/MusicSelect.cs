@@ -24,7 +24,7 @@ public class MusicSelect : MonoBehaviour
             Destroy(obj);
         }
     }
-    //プラットフォーム別参照パス
+    
     //public static string path
     //{
     //    get

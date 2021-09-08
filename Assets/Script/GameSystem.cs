@@ -17,11 +17,26 @@ public enum ScoreRankType
     TypeNum
 }
 [System.Serializable]
+
+public enum Difficulty
+{ 
+    easy,
+    normal,
+    hard,
+    DifficaltyType
+}
+
 public class SaveDataPalam
 {
-    public string musicname;
-    public int score;
+    [SerializeField]
+
+    public int highscore =0;
+    public bool isFullCombo =false;
+    public ScoreRankType rankType = ScoreRankType.D;
+
 }
+
+
 public class GameSystem : MonoBehaviour
 {
     [SerializeField]
@@ -73,6 +88,7 @@ public class GameSystem : MonoBehaviour
     public double sumscore = 0.0;
 
     AudioSource music;
+    SaveDataPalam saveData;
     //デバッグ用タップ処理
     public void DebugTap()
     {
@@ -247,10 +263,15 @@ public class GameSystem : MonoBehaviour
     public void InitializedResultPalam()
     {
         m_result = new ResultPalam();
+        saveData = new SaveDataPalam();
         Combo = 0;
         sumscore = 0.00f;
     }
-
+    public void WriteSaveData(SaveDataPalam s_data)
+    {
+        TextAsset text = Resources.Load<TextAsset>("SaveJson/" + m_result.MusicTitle+"_score");
+        JsonUtility.ToJson(s_data);
+    }
 
     //格付け
     public void SetRank(int score)
@@ -325,6 +346,7 @@ public class GameSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             SetRank(m_result.score);
+            
             SceneManager.LoadScene("Result");
 
         }
