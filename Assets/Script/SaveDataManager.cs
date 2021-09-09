@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.IO;
 
@@ -55,9 +56,16 @@ public class SaveDataManager : MonoBehaviour
             if (!File.Exists(path + m_name + "/" + ((Difficulty)i).ToString() + ".json"))
             {
                 var data = new SaveDataPalam();
+                
+                if(m_name =="ハルジオン")
+                {
+                    data.highscore = 750000;
+                }
+
                 var Json = JsonUtility.ToJson(data);
                 StreamWriter writer;
                 writer = new StreamWriter(path + m_name + "/" + ((Difficulty)i).ToString() + ".json", false);
+               
                 Debug.Log(m_name +"の"+ ((Difficulty)i).ToString() +"のセーブデータを作成しました。");
                 writer.Write(Json);
                 writer.Flush();
@@ -74,6 +82,12 @@ public class SaveDataManager : MonoBehaviour
 
         savedata = JsonUtility.FromJson<SaveDataPalam>(File.ReadAllText(savepath));
         Debug.Log(m_system.m_result.MusicTitle + "\n" + difficulty + "のハイスコア" + savedata.highscore);
+    }
+
+    public void SetHighScore(Text m_text)
+    {
+        m_text.enabled = true;
+        m_text.text = "ハイスコア　"+savedata.highscore.ToString();
     }
     // Start is called before the first frame update
     void Start()
