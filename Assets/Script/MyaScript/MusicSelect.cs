@@ -10,90 +10,64 @@ public class MusicSelect : MonoBehaviour
 {
 
     [SerializeField]
-    public string[] names;
+    //public string[] names;
+    //musicNodeのプレファブ
     public GameObject listItemPre;
-    public List<GameObject> m_nameList;
+    //nodeのリスト
+    public List<GameObject> nodeObjList;
+    //生成先の親オブジェクト
     public GameObject contentOBJ;
 
-    public List<Humen> musicList;
-    public string[] musicnames;
+    //public List<Humen> musicList;
+    public List<string> musicnames;
     Vector3 pos;
 
     public void EraceList()
     {
-        foreach(GameObject obj in m_nameList)
+        foreach(GameObject obj in nodeObjList)
         {
             Destroy(obj);
         }
     }
+    //ResourceのNoteJson内に入ってる曲名をすべて取得。
+    //＜注意＞NoteJson内には譜面データ以外のJsonファイルを入れないこと
+    public static void SearchMusicNamesFromResources(List<string> names)
+    {
+         
+        TextAsset[] textassets = Resources.LoadAll<TextAsset>("NoteJson/");
+       
+        names.Add(JsonUtility.FromJson<Humen>(textassets[0].ToString()).name);
+
+
+        for (int i = 1; i < textassets.Length; i++)
+        {
+
+            if (!names.Contains(JsonUtility.FromJson<Humen>(textassets[i].ToString()).name))
+            {
+
+               names.Add(JsonUtility.FromJson<Humen>(textassets[i].ToString()).name);
+
+            }
+
+        }
+        
+    }
     
-    //public static string path
-    //{
-    //    get
-    //    {
-    //        switch (Application.platform)
-    //        {
-    //            case RuntimePlatform.IPhonePlayer:
-    //                return Application.persistentDataPath+ "/Resources/NoteJson/";
-
-    //            case RuntimePlatform.Android:
-    //                return Application.temporaryCachePath+"/Resources/NoteJson/";
-
-    //            case RuntimePlatform.LinuxPlayer:
-    //                return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "/Resources/NoteJson/");
-    //            default:
-    //                return Application.dataPath + "/Resources/NoteJson/";
-    //        }
-    //    }
-    //}
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1.0f;
-        //指定フォルダからjsonファイルを一括読み込み
-        // string path = Application.dataPath + "/Resources/NoteJson/";
-        //names = Directory.GetFiles(@path, "*.json",SearchOption.TopDirectoryOnly);
-
-        TextAsset[] textassets =Resources.LoadAll<TextAsset>("NoteJson/");
-        //DefaultAsset[] textassets =Resources.LoadAll<DefaultAsset>("NoteJson/");
-        Array.Resize<string>(ref musicnames, 1);
-        musicnames[0] = JsonUtility.FromJson<Humen>(textassets[0].ToString()).name;
-       
-        int typenum = 0;
-        for (int i = 1; i < textassets.Length; i++)
-        {
-
-            if(musicnames[typenum]!= JsonUtility.FromJson<Humen>(textassets[i].ToString()).name)
-            {
-                typenum++;
-                Array.Resize<string>(ref musicnames, musicnames.Length + 1);
-                musicnames[typenum] = JsonUtility.FromJson<Humen>(textassets[i].ToString()).name;
-            }
-        }
-
-
-        //Array.Resize<string>(ref names, textassets.Length);
-        //以下textassets ->musicnames
-        Array.Resize<string>(ref names, musicnames.Length);
-        names = musicnames;
-        Debug.Log(musicnames.Length);
-        //for (int i =0;i<musicnames.Length;i++)
-        //{
-        //    musicList.Add(JsonUtility.FromJson<Humen>(musicnames[i].ToString()));
-        //    names[i] = musicList[i].name;
-        //    //textassets[i].name = musicList[i].name;
-        //}
         
-  
-        for (int i = 0; i < names.Length; i++)
+        SearchMusicNamesFromResources(musicnames);
+        for (int i = 0; i < musicnames.ToArray().Length; i++)
         {
 
             //names[i] = Path.GetFileNameWithoutExtension(names[i]);
             GameObject m_obj = Instantiate(listItemPre, pos, Quaternion.identity);
             //m_obj.transform.parent = contentOBJ.transform;
             m_obj.transform.SetParent(contentOBJ.transform, false);
-            m_nameList.Add(m_obj);
-            m_nameList[i].transform.Find("Musicname").GetComponent<Text>().text = names[i];
+            nodeObjList.Add(m_obj);
+            nodeObjList[i].transform.Find("Musicname").GetComponent<Text>().text = musicnames[i];
         }
 
     }
