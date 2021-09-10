@@ -9,7 +9,7 @@ public class MusicNode : MonoBehaviour
     public void SetFileName()
     {
         GameSystem m_system =GameObject.Find("GameManager").GetComponent<GameSystem>();
-        SelectAudio = GameObject.Find("SelectMusic").GetComponent<AudioSource>();
+        SelectAudio = GameObject.Find("SaveDataManager").GetComponent<AudioSource>();
         m_system.SetMusicName(GetComponent<Text>().text);
         m_system.MusicTitleDisp(GetComponent<Text>().text);
         SelectAudio.clip = Resources.Load<AudioClip>("MusicF/"+GetComponent<Text>().text);

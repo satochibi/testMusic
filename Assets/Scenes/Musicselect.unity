@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 139761586}
   - component: {fileID: 139761588}
   m_Layer: 0
-  m_Name: SelectMusic
+  m_Name: SaveDataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,9 +528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: []
   listItemPre: {fileID: 6839387808026735123, guid: 6b6388f9443836946bd7f4b43ad714b3, type: 3}
-  m_nameList: []
+  nodeObjList: []
   contentOBJ: {fileID: 140481388}
-  musicList: []
+  musicnames: []
 --- !u!4 &269666608
 Transform:
   m_ObjectHideFlags: 0
