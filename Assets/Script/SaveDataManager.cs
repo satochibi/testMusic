@@ -26,7 +26,7 @@ public class SaveDataManager : MonoBehaviour
 
     //}
     //プラットフォーム別参照パス
-    static string path
+    public static string path
     {
         get
         {
@@ -75,12 +75,13 @@ public class SaveDataManager : MonoBehaviour
         }
     }
 
-    public void SaveDataLoad(string difficulty)
+    public void SaveDataLoad(int difficulty)
     {
         GameSystem m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
-        string savepath = path + m_system.m_result.MusicTitle + "/" + difficulty + ".json";
+        string savepath = path + m_system.m_result.MusicTitle + "/" + ((Difficulty) difficulty).ToString() + ".json";
 
         savedata = JsonUtility.FromJson<SaveDataPalam>(File.ReadAllText(savepath));
+        m_system.m_result.difficulty =(Difficulty)difficulty;
         Debug.Log(m_system.m_result.MusicTitle + "\n" + difficulty + "のハイスコア" + savedata.highscore);
     }
 
@@ -89,6 +90,7 @@ public class SaveDataManager : MonoBehaviour
         m_text.enabled = true;
         m_text.text = "ハイスコア　"+savedata.highscore.ToString();
     }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -26,8 +26,16 @@ public class pause : MonoBehaviour
     }
     public void SceneChange(string nextSceneName)
     {
-        GameObject.Find("GameManager").GetComponent<GameSystem>().ChangeScene(nextSceneName);
-        
+        GameSystem game= GameObject.Find("GameManager").GetComponent<GameSystem>();
+
+        if (nextSceneName == "Result")
+        {
+            game.IsEnd = true;
+        }
+        else
+        {
+            game.ChangeScene(nextSceneName);
+        }
 
     }
     // Update is called once per frame

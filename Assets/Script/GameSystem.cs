@@ -19,7 +19,7 @@ public enum ScoreRankType
 [System.Serializable]
 
 public enum Difficulty
-{ 
+{
     easy,
     normal,
     hard,
@@ -30,8 +30,8 @@ public class SaveDataPalam
 {
     [SerializeField]
 
-    public int highscore =0;
-    public bool isFullCombo =false;
+    public int highscore = 0;
+    public bool isFullCombo = false;
     public ScoreRankType rankType = ScoreRankType.D;
 
 }
@@ -59,6 +59,7 @@ public class GameSystem : MonoBehaviour
     {
 
         public string MusicTitle;   //ミュージックタイトル
+        public Difficulty difficulty; //難易度
 
         public int score;           //スコア       
         public ScoreRankType Rank;  //スコアランク
@@ -86,8 +87,11 @@ public class GameSystem : MonoBehaviour
     public double normalscore = 0.00;
     //計算用スコア
     public double sumscore = 0.0;
-
+    //曲終了フラグ
+    public bool IsEnd = false;
     AudioSource music;
+
+    //今回の記録データ
     SaveDataPalam saveData;
     //デバッグ用タップ処理
     public void DebugTap()
@@ -250,27 +254,58 @@ public class GameSystem : MonoBehaviour
     {
         if (scenename == "Musicselect")
         {
-            InitializedResultPalam();
+            InitializedPalam();
 
             Debug.Log("Resultパラメータを初期化しました。");
         }
         SetRank(m_result.score);
-
+        IsEnd = false;
         SceneManager.LoadScene(scenename);
 
     }
 
-    public void InitializedResultPalam()
+    public void InitializedPalam()
     {
         m_result = new ResultPalam();
         saveData = new SaveDataPalam();
         Combo = 0;
         sumscore = 0.00f;
+
     }
-    public void WriteSaveData(SaveDataPalam s_data)
+    public void ComparePastData()
     {
-        TextAsset text = Resources.Load<TextAsset>("SaveJson/" + m_result.MusicTitle+"_score");
-        JsonUtility.ToJson(s_data);
+        string savepath = SaveDataManager.path + m_result.MusicTitle + "/" + m_result.difficulty.ToString() + ".json";
+        if (!System.IO.File.Exists(savepath))
+        {
+            Debug.Log("セーブデータが見つかりません！");
+            return;
+        }
+        SaveDataPalam pastsaveData;
+        pastsaveData = new SaveDataPalam();
+        pastsaveData = JsonUtility.FromJson<SaveDataPalam>(System.IO.File.ReadAllText(savepath));
+        if (pastsaveData.highscore > saveData.highscore)
+        {
+            saveData.highscore = pastsaveData.highscore;
+        }
+        if ((int)pastsaveData.rankType < (int)saveData.rankType)
+        {
+            saveData.rankType = pastsaveData.rankType;
+        }
+        if (pastsaveData.isFullCombo == true)
+        {
+            saveData.isFullCombo = true;
+        }
+    }
+    public void WritePlayData()
+    {
+        var Json = JsonUtility.ToJson(saveData);
+        System.IO.StreamWriter writer;
+        writer = new System.IO.StreamWriter(SaveDataManager.path + m_result.MusicTitle + "/" + m_result.difficulty.ToString() + ".json", false);
+
+        Debug.Log(m_result.MusicTitle + "の" + m_result.difficulty.ToString() + "のセーブデータを作成しました。");
+        writer.Write(Json);
+        writer.Flush();
+        writer.Close();
     }
 
     //格付け
@@ -345,12 +380,20 @@ public class GameSystem : MonoBehaviour
         //リザルトシーンへGO
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SetRank(m_result.score);
-            
-            SceneManager.LoadScene("Result");
+            IsEnd = true;
 
         }
-
+        if (IsEnd)
+        {
+            SetRank(m_result.score);
+            saveData.highscore = m_result.score;
+            saveData.rankType = m_result.Rank;
+            saveData.isFullCombo = m_result.isFullCombo;
+            ComparePastData();
+            WritePlayData();
+            IsEnd = false;
+            SceneManager.LoadScene("Result");
+        }
         //リザルトパラメータをデバッグ表示
         if (Input.GetKeyDown(KeyCode.Space))
         {

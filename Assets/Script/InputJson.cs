@@ -58,7 +58,7 @@ public class InputJson : MonoBehaviour
 
 
         //Jsonファイルの読み出し
-        string inputString = Resources.Load<TextAsset>("NoteJson/"+m_name).ToString();
+        string inputString = Resources.Load<TextAsset>("NoteJson/"+m_name+"/"+m_system.m_result.difficulty.ToString()).ToString();
         //Debug.Log(inputString);
         Humen inputJson = JsonUtility.FromJson<Humen>(inputString);
 

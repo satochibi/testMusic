@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 using System;
 using System.IO;
@@ -15,6 +16,7 @@ public class MusicSelect : MonoBehaviour
     public GameObject contentOBJ;
 
     public List<Humen> musicList;
+    public string[] musicnames;
     Vector3 pos;
 
     public void EraceList()
@@ -49,16 +51,39 @@ public class MusicSelect : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         //指定フォルダからjsonファイルを一括読み込み
-       // string path = Application.dataPath + "/Resources/NoteJson/";
-             //names = Directory.GetFiles(@path, "*.json",SearchOption.TopDirectoryOnly);
-        TextAsset[] textassets =Resources.LoadAll<TextAsset>("NoteJson");
-        Array.Resize<string>(ref names, textassets.Length);
-        for(int i =0;i<textassets.Length;i++)
+        // string path = Application.dataPath + "/Resources/NoteJson/";
+        //names = Directory.GetFiles(@path, "*.json",SearchOption.TopDirectoryOnly);
+
+        TextAsset[] textassets =Resources.LoadAll<TextAsset>("NoteJson/");
+        //DefaultAsset[] textassets =Resources.LoadAll<DefaultAsset>("NoteJson/");
+        Array.Resize<string>(ref musicnames, 1);
+        musicnames[0] = JsonUtility.FromJson<Humen>(textassets[0].ToString()).name;
+       
+        int typenum = 0;
+        for (int i = 1; i < textassets.Length; i++)
         {
-            musicList.Add(JsonUtility.FromJson<Humen>(textassets[i].ToString()));
-            names[i] = musicList[i].name;
+
+            if(musicnames[typenum]!= JsonUtility.FromJson<Humen>(textassets[i].ToString()).name)
+            {
+                typenum++;
+                Array.Resize<string>(ref musicnames, musicnames.Length + 1);
+                musicnames[typenum] = JsonUtility.FromJson<Humen>(textassets[i].ToString()).name;
+            }
         }
-        Debug.Log(textassets);
+
+
+        //Array.Resize<string>(ref names, textassets.Length);
+        //以下textassets ->musicnames
+        Array.Resize<string>(ref names, musicnames.Length);
+        names = musicnames;
+        Debug.Log(musicnames.Length);
+        //for (int i =0;i<musicnames.Length;i++)
+        //{
+        //    musicList.Add(JsonUtility.FromJson<Humen>(musicnames[i].ToString()));
+        //    names[i] = musicList[i].name;
+        //    //textassets[i].name = musicList[i].name;
+        //}
+        
   
         for (int i = 0; i < names.Length; i++)
         {
