@@ -24,6 +24,7 @@ public class pause : MonoBehaviour
         gameObject.SetActive(false);
         Time.timeScale = 1.0f;
     }
+   
     public void SceneChange(string nextSceneName)
     {
         GameSystem game= GameObject.Find("GameManager").GetComponent<GameSystem>();

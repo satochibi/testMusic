@@ -99,7 +99,7 @@ public class Fumen : MonoBehaviour
 
         for (int index = 0; index < notesList.Count; index++)
         {
-            //if (notesList[index].GetComponent<NotesController>().NotesTrack == (Track)track)
+            if (notesList[index].GetComponent<NotesController>().NotesTrack == (Track)track)
             {
                 float n_time = notesList[index].GetComponent<NotesController>().NotesTime;
                 if (n_time - Playtime <= 0.05)
