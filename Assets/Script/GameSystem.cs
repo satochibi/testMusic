@@ -39,6 +39,9 @@ public class SaveDataPalam
 
 public class GameSystem : MonoBehaviour
 {
+
+
+    public static GameSystem instance;
     [SerializeField]
     public GameObject JUI = null;
     public static string GameSceneName = "SampleScene";
@@ -410,8 +413,17 @@ public class GameSystem : MonoBehaviour
 
     }
     //シーンが切り替わっても残り続ける
+    //シングルトンパターン導入」
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

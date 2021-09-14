@@ -119,7 +119,7 @@ public class InputJson : MonoBehaviour
                     }
                     else
                     {
-                        notes.name = "ロングノーツ" + i;
+                        notes.name = "ロングノーツ";
                     }
                     //notepoints[i] = gameobject.transform;
 

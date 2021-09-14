@@ -18,12 +18,17 @@ public class Fumen : MonoBehaviour
     AudioClip[] tapAudioClip;
 
     [SerializeField]
+    AudioClip normalTapAudioClip;
+    [SerializeField]
     bool autoPlay = true;
 
     [SerializeField]
     TapL[] tapLList;
 
-    public float Speed { get { return this.speed; } }
+    [SerializeField]
+    float Playtime;
+    GameSystem system;
+    public float Speed { get { return this.speed; }  }
 
     public bool IsGameStart { get { return this.isGameStart; } }
 
@@ -43,7 +48,7 @@ public class Fumen : MonoBehaviour
         tapAudioSource = this.GetComponent<AudioSource>();
         this.isGameStart = false;
         audioGameObj.GetComponent<AudioSource>().Stop();
-
+        system = GameObject.Find("GameManager").GetComponentInChildren<GameSystem>();
     }
 
     //éûä‘Ç≈ÇÃÉmÅ[ÉcîªíË
@@ -53,53 +58,141 @@ public class Fumen : MonoBehaviour
         {
             return;
         }
-        float time = Time.fixedTime - this.GameStartTime;
-
-
+        Playtime = Time.fixedTime - this.GameStartTime;
+        CheckOverNotes();
+        //for (int i = 1; i < 6; i++)
+        //{
+        //    Judge(i);
+        //}
         if (autoPlay)
         {
-            AutoPlay(time);
+            AutoPlay(Playtime);
+
         }
         else
         {
+            
 
         }
 
         
     }
+    public void CheckOverNotes()
+    {
 
+        for (int index = 0; index < notesList.Count; index++)
+        {
+            float n_time = notesList[index].GetComponent<NotesController>().NotesTime;
+            if(n_time - Playtime<-0.25f)
+            {
+                Destroy(notesList[index]);
+                system.AddResultPalam(JudgementType.Miss);
+                notesList.RemoveAt(0);
+                continue;
+            }
+
+        }
+    }
+    public void Judge(int track)
+    {
+        Debug.Log("Judge:" + Playtime);
+
+        for (int index = 0; index < notesList.Count; index++)
+        {
+            //if (notesList[index].GetComponent<NotesController>().NotesTrack == (Track)track)
+            {
+                float n_time = notesList[index].GetComponent<NotesController>().NotesTime;
+                if (n_time - Playtime <= 0.05)
+                {
+                    //ç∑ÇOÅDÇSÇRÇÃèÍçá8Ç™îªíË
+                    switch ((int)(Mathf.Abs(n_time - Playtime) * 20))
+                    {
+                        //åÎç∑0.05ïb
+                        case 1:
+
+                            system.AddResultPalam(JudgementType.Perfect);
+                            tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                            //Destroy(notesList[index]);
+                            notesList.RemoveAt(0);
+                            return;
+                        //åÎç∑0.1ïb
+                        case 2:
+                            system.AddResultPalam(JudgementType.Great);
+                            tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                            //Destroy(notesList[index]);
+                            notesList.RemoveAt(0);
+                            return;
+
+                        case 3:
+                            system.AddResultPalam(JudgementType.Good);
+                            tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                            //Destroy(notesList[index]);
+                            notesList.RemoveAt(0);
+
+                            return;
+                        case 4:
+                            system.AddResultPalam(JudgementType.Bad);
+                            tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                            // Destroy(notesList[index]);
+                            notesList.RemoveAt(0);
+
+                            return;
+                        //case 5:
+                        //    system.AddResultPalam(JudgementType.Bad);
+                        //    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                        //    // Destroy(notesList[index]);
+                        //    notesList.RemoveAt(0);
+
+                        //    return;
+                        default:
+                            // system.AddResultPalam(JudgementType.Miss);
+
+                            break;
+
+                    }
+                }
+            }
+        }
+    }
     void AutoPlay(float time)
     {
         for (int index = 0; index < notesList.Count; index++)
         {
             if (time >= notesList[index].GetComponent<NotesController>().NotesTime)
             {
+                Debug.Log(notesList[index].transform.position.z);
                 switch (notesList[index].GetComponent<NotesController>().NotesTrack)
                 {
                     case Track.track1:
+                        
                         tapAudioSource.PlayOneShot(this.tapAudioClip[0]);
                         this.tapLList[0].Tap();
+                        system.AddResultPalam(JudgementType.Perfect);
                         this.tapLList[0].Exit();
                         break;
                     case Track.track2:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[1]);
                         this.tapLList[1].Tap();
                         this.tapLList[1].Exit();
+                        system.AddResultPalam(JudgementType.Perfect);
                         break;
                     case Track.track3:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[2]);
                         this.tapLList[2].Tap();
                         this.tapLList[2].Exit();
+                        system.AddResultPalam(JudgementType.Perfect);
                         break;
                     case Track.track4:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[3]);
                         this.tapLList[3].Tap();
                         this.tapLList[3].Exit();
+                        system.AddResultPalam(JudgementType.Perfect);
                         break;
                     case Track.track5:
                         tapAudioSource.PlayOneShot(this.tapAudioClip[4]);
                         this.tapLList[4].Tap();
                         this.tapLList[4].Exit();
+                        system.AddResultPalam(JudgementType.Perfect);
                         break;
                     default:
                         break;

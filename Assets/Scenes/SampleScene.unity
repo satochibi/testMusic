@@ -1613,6 +1613,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 350743510}
+          m_TargetAssemblyTypeName: Fumen, Assembly-CSharp
+          m_MethodName: Judge
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -1636,6 +1648,22 @@ MonoBehaviour:
         - m_Target: {fileID: 1614465405}
           m_TargetAssemblyTypeName: TapL, Assembly-CSharp
           m_MethodName: Exit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1614465405}
+          m_TargetAssemblyTypeName: TapL, Assembly-CSharp
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1800,13 +1828,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 42c2d07ad4869e742a72cc3dd8b251f6, type: 3}
   - {fileID: 8300000, guid: f4c6c87c0ff72054c918ab09088c702e, type: 3}
   - {fileID: 8300000, guid: aafee4bac133dc74ca20b7b8146c531e, type: 3}
-  autoPlay: 1
+  normalTapAudioClip: {fileID: 8300000, guid: f1030a607b3ee4b4ba899274196e1e32, type: 3}
+  autoPlay: 0
   tapLList:
   - {fileID: 1614465405}
   - {fileID: 788334631}
   - {fileID: 1879338914}
   - {fileID: 1848571764}
   - {fileID: 1948478219}
+  Playtime: 0
 --- !u!54 &350743511
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2322,7 +2352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422567668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -17.98}
+  m_LocalPosition: {x: 0, y: 0, z: -18.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1388442194}
@@ -2783,6 +2813,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 350743510}
+          m_TargetAssemblyTypeName: Fumen, Assembly-CSharp
+          m_MethodName: Judge
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -2806,6 +2848,22 @@ MonoBehaviour:
         - m_Target: {fileID: 788334631}
           m_TargetAssemblyTypeName: TapL, Assembly-CSharp
           m_MethodName: Exit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 788334631}
+          m_TargetAssemblyTypeName: TapL, Assembly-CSharp
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3190,6 +3248,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 350743510}
+          m_TargetAssemblyTypeName: Fumen, Assembly-CSharp
+          m_MethodName: Judge
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -3213,6 +3283,22 @@ MonoBehaviour:
         - m_Target: {fileID: 1948478219}
           m_TargetAssemblyTypeName: TapL, Assembly-CSharp
           m_MethodName: Exit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1948478219}
+          m_TargetAssemblyTypeName: TapL, Assembly-CSharp
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3863,6 +3949,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 350743510}
+          m_TargetAssemblyTypeName: Fumen, Assembly-CSharp
+          m_MethodName: Judge
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -3886,6 +3984,22 @@ MonoBehaviour:
         - m_Target: {fileID: 1848571764}
           m_TargetAssemblyTypeName: TapL, Assembly-CSharp
           m_MethodName: Exit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1848571764}
+          m_TargetAssemblyTypeName: TapL, Assembly-CSharp
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4558,6 +4672,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 350743510}
+          m_TargetAssemblyTypeName: Fumen, Assembly-CSharp
+          m_MethodName: Judge
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -4581,6 +4707,22 @@ MonoBehaviour:
         - m_Target: {fileID: 1879338914}
           m_TargetAssemblyTypeName: TapL, Assembly-CSharp
           m_MethodName: Exit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1879338914}
+          m_TargetAssemblyTypeName: TapL, Assembly-CSharp
+          m_MethodName: Tap
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5474,7 +5616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652409510986588818, guid: ba19d9ef4e8ec5140a7c20d8306c5ff5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.98
+      value: -18.15
       objectReference: {fileID: 0}
     - target: {fileID: 8652409510986588818, guid: ba19d9ef4e8ec5140a7c20d8306c5ff5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5563,7 +5705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5962017566774257186, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5962017566774257196, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
       propertyPath: m_RootOrder
@@ -5612,6 +5754,6 @@ PrefabInstance:
     - target: {fileID: 5962017566774257197, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
       propertyPath: JUI
       value: 
-      objectReference: {fileID: 793943727}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
