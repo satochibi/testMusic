@@ -108,7 +108,7 @@ public class Fumen : MonoBehaviour
                     switch ((int)(Mathf.Abs(n_time - Playtime) * 20))
                     {
                         //åÎç∑0.05ïb
-                        case 1:
+                        case 0:
 
                             system.AddResultPalam(JudgementType.Perfect);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
@@ -116,21 +116,21 @@ public class Fumen : MonoBehaviour
                             notesList.RemoveAt(0);
                             return;
                         //åÎç∑0.1ïb
-                        case 2:
+                        case 1:
                             system.AddResultPalam(JudgementType.Great);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             //Destroy(notesList[index]);
                             notesList.RemoveAt(0);
                             return;
 
-                        case 3:
+                        case 2:
                             system.AddResultPalam(JudgementType.Good);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             //Destroy(notesList[index]);
                             notesList.RemoveAt(0);
 
                             return;
-                        case 4:
+                        case 3:
                             system.AddResultPalam(JudgementType.Bad);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             // Destroy(notesList[index]);
