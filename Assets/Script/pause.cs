@@ -28,7 +28,12 @@ public class pause : MonoBehaviour
     public void SceneChange(string nextSceneName)
     {
         GameSystem game= GameObject.Find("GameManager").GetComponent<GameSystem>();
-
+        if(nextSceneName =="SampleScene")
+        {
+            string titlename = game.m_result.MusicTitle;
+            game.InitializedPalam();
+            game.m_result.MusicTitle = titlename;
+        }
         if (nextSceneName == "Result")
         {
             game.IsEnd = true;
