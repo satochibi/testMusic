@@ -275,6 +275,8 @@ public class GameSystem : MonoBehaviour
         sumscore = 0.00f;
 
     }
+    
+
     public void ComparePastData()
     {
         string savepath = SaveDataManager.path + m_result.MusicTitle + "/" + m_result.difficulty.ToString() + ".json";

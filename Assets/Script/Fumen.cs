@@ -60,10 +60,15 @@ public class Fumen : MonoBehaviour
         }
         Playtime = Time.fixedTime - this.GameStartTime;
         CheckOverNotes();
-        //for (int i = 1; i < 6; i++)
-        //{
-        //    Judge(i);
-        //}
+        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            for (int i = 1; i < 6; i++)
+            {
+                Judge(i);
+            }
+        }
+        
         if (autoPlay)
         {
             AutoPlay(Playtime);
@@ -95,13 +100,14 @@ public class Fumen : MonoBehaviour
     }
     public void Judge(int track)
     {
-        Debug.Log("Judge:" + Playtime);
+        //Debug.Log("Judge:" + Playtime);
 
         for (int index = 0; index < notesList.Count; index++)
         {
             if (notesList[index].GetComponent<NotesController>().NotesTrack == (Track)track)
             {
                 float n_time = notesList[index].GetComponent<NotesController>().NotesTime;
+                //if(notesList[index].GetComponent<NotesController>().)
                 if (n_time - Playtime <= 0.05)
                 {
                     //·‚OD‚S‚R‚Ìê‡8‚ª”»’è
