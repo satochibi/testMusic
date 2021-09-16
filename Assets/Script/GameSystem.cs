@@ -66,7 +66,7 @@ public class GameSystem : MonoBehaviour
 
         public int score;           //スコア       
         public ScoreRankType Rank;  //スコアランク
-
+        public CharacterType character;
         public int Perfect;         //Perfectの数        
         public int Great;           //Greatの数
         public int Good;            //Goodの数
