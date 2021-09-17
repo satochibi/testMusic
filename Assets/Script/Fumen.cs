@@ -21,7 +21,7 @@ public class Fumen : MonoBehaviour
     AudioClip normalTapAudioClip;
     [SerializeField]
     bool autoPlay = true;
-
+    
     [SerializeField]
     TapL[] tapLList;
 
@@ -40,7 +40,6 @@ public class Fumen : MonoBehaviour
     AudioSource tapAudioSource;
 
     List<GameObject> notesList;
-
     // Use this for initialization
     void Start()
     {
@@ -68,8 +67,8 @@ public class Fumen : MonoBehaviour
                 Judge(i);
             }
         }
-        
-        if (autoPlay)
+        Debug.Log(Input.touches.Length);
+            if (autoPlay)
         {
             AutoPlay(Playtime);
 
@@ -82,74 +81,88 @@ public class Fumen : MonoBehaviour
 
         
     }
+    
     public void CheckOverNotes()
     {
 
         for (int index = 0; index < notesList.Count; index++)
         {
             float n_time = notesList[index].GetComponent<NotesController>().NotesTime;
-            if(n_time - Playtime<-0.25f)
+            if(n_time - Playtime<-0.2f)
             {
-                Destroy(notesList[index]);
-                system.AddResultPalam(JudgementType.Miss);
-                notesList.RemoveAt(0);
-                continue;
+                
+                if (!notesList[index].GetComponent<NotesController>().IsTapped)
+                {
+                    Destroy(notesList[index]);
+                    system.AddResultPalam(JudgementType.Miss);
+                    notesList.RemoveAt(0);
+                    continue;
+                }
+                else
+                {
+                    Destroy(notesList[index]);
+                    notesList.RemoveAt(0);
+                    continue;
+                }
             }
 
         }
+        
     }
     public void Judge(int track)
     {
         //Debug.Log("Judge:" + Playtime);
-
+       
+                
         for (int index = 0; index < notesList.Count; index++)
         {
-            if (notesList[index].GetComponent<NotesController>().NotesTrack == (Track)track)
+            NotesController noteCon = notesList[index].GetComponent<NotesController>();
+
+            if (noteCon.NotesTrack == (Track)track)
             {
-                float n_time = notesList[index].GetComponent<NotesController>().NotesTime;
-                //if(notesList[index].GetComponent<NotesController>().)
+                float n_time = noteCon.NotesTime;
+                
                 if (n_time - Playtime <= 0.05)
-                {
+                {   
+                    notesList[index].GetComponent<MeshRenderer>().enabled =false;
+                    noteCon.IsTapped = true;
+
                     //ç∑ÇOÅDÇSÇRÇÃèÍçá8Ç™îªíË
                     switch ((int)(Mathf.Abs(n_time - Playtime) * 20))
                     {
                         //åÎç∑0.05ïb
                         case 0:
-
+                            
                             system.AddResultPalam(JudgementType.Perfect);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+
+                            //notesList.RemoveAt(0);
                             //Destroy(notesList[index]);
-                            notesList.RemoveAt(0);
                             return;
                         //åÎç∑0.1ïb
                         case 1:
                             system.AddResultPalam(JudgementType.Great);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             //Destroy(notesList[index]);
-                            notesList.RemoveAt(0);
+                            //notesList.RemoveAt(0);
                             return;
-
+                        //åÎç∑0.15ïb
                         case 2:
                             system.AddResultPalam(JudgementType.Good);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             //Destroy(notesList[index]);
-                            notesList.RemoveAt(0);
+                            //notesList.RemoveAt(0);
 
                             return;
+                        //åÎç∑0.2ïb
                         case 3:
                             system.AddResultPalam(JudgementType.Bad);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             // Destroy(notesList[index]);
-                            notesList.RemoveAt(0);
+                            //notesList.RemoveAt(0);
 
                             return;
-                        //case 5:
-                        //    system.AddResultPalam(JudgementType.Bad);
-                        //    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
-                        //    // Destroy(notesList[index]);
-                        //    notesList.RemoveAt(0);
-
-                        //    return;
+                      
                         default:
                             // system.AddResultPalam(JudgementType.Miss);
 
