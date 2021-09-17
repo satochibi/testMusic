@@ -40,6 +40,13 @@ public class GalleryManager : MonoBehaviour
     private void Start()
     {
         system = GameObject.Find("GameManager").GetComponent<GameSystem>();
+        if (system.p_palam.character != default)
+        {
+            c_type = system.p_palam.character;
+        }
+        else c_type = CharacterType.kerotama;
+
+        SelectON();
     }
     public void OpenMenu(int type)
     {
@@ -54,8 +61,8 @@ public class GalleryManager : MonoBehaviour
     }
     public void SelectCharacter()
     {
-        system.m_result.character = c_type;
-        Debug.Log(system.m_result.character.ToString() + "がセットされました！");
+        system.p_palam.character = c_type;
+        Debug.Log(system.p_palam.character.ToString() + "がセットされました！");
     }
    public void SelectON()
     {

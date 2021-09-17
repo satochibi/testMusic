@@ -66,13 +66,13 @@ public class GameSystem : MonoBehaviour
 
         public int score;           //スコア       
         public ScoreRankType Rank;  //スコアランク
-        public CharacterType character;
+        
         public int Perfect;         //Perfectの数        
         public int Great;           //Greatの数
         public int Good;            //Goodの数
         public int Bad;             //Badの数
         public int Miss;            //Missの数
-
+        
         public int MaxCombo;        //最大コンボ数
         public bool isFullCombo;    //フルコンボしたかどうか
         //public bool isAllPerfect;
@@ -80,8 +80,16 @@ public class GameSystem : MonoBehaviour
 
     }
     [SerializeField]
+    public struct PlayerPalam
+    {
+        public CharacterType character;
+    }
+
+    [SerializeField]
     //リザルト変数
     public ResultPalam m_result;
+
+    public PlayerPalam p_palam;
     //コンボ数
     public int Combo = 0;
     //総ノーツ数
