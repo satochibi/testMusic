@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FileDisp : MonoBehaviour
 {
-
-    public Text m_text;
+    [SerializeField]
+    Text m_text;
     
     public void SetText(string name)
     {

@@ -9,17 +9,17 @@ using System.IO;
 public class MusicSelect : MonoBehaviour
 {
 
-    [SerializeField]
+   
     //public string[] names;
     //musicNodeのプレファブ
-    public GameObject listItemPre;
+    GameObject listItemPre;
     //nodeのリスト
-    public List<GameObject> nodeObjList;
+    List<GameObject> nodeObjList;
     //生成先の親オブジェクト
-    public GameObject contentOBJ;
+    GameObject contentOBJ;
 
     //public List<Humen> musicList;
-    public List<string> musicnames;
+    List<string> musicnames;
     Vector3 pos;
 
     public void EraceList()

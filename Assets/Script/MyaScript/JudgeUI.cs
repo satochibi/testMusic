@@ -7,9 +7,9 @@ public class JudgeUI : MonoBehaviour
 {
     [SerializeField]
     //UIオブジェクト
-    public GameObject[] UI={};
+    GameObject[] UI={};
     //アタッチされている各アニメーター
-    private Animator[] animator ={ };
+    Animator[] animator ={ };
 
     //判定によって2Dアニメーションを再生　JudgementType(引数)に対応。
     public void JudgeUIAnimationPlay(JudgementType type)

@@ -55,8 +55,6 @@ public class GameSystem : MonoBehaviour
         750000,
         700000
     };
-
-    [SerializeField]
     //リザルトで使用するパラメータ
     public struct ResultPalam
     {
@@ -79,13 +77,13 @@ public class GameSystem : MonoBehaviour
 
 
     }
-    [SerializeField]
+   
     public struct PlayerPalam
     {
         public CharacterType character;
     }
 
-    [SerializeField]
+   
     //リザルト変数
     public ResultPalam m_result;
 

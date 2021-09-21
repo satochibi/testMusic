@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MusicNode : MonoBehaviour
 {
-    public GameObject m_textOBJ;
-    public AudioSource SelectAudio;
+    [SerializeField]
+    GameObject m_textOBJ;
+    [SerializeField]
+    AudioSource SelectAudio;
     public void SetFileName()
     {
         GameSystem m_system =GameObject.Find("GameManager").GetComponent<GameSystem>();

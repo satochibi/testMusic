@@ -6,32 +6,32 @@ using UnityEngine.UI;
 public class Blink : MonoBehaviour
 {
 
-    //public
-    public float speed = 1.0f;
+    [SerializeField]
+    float speed = 1.0f;
 
     //private
-    private Text text;
-    private Image image;
-    private float time;
+    Text text;
+    Image image;
+    float time;
 
-    private enum ObjType
+    enum ObjType
     {
-        TEXT,
-        IMAGE
+        Text,
+        Image
     };
-    private ObjType thisObjType = ObjType.TEXT;
+    ObjType thisObjType = ObjType.Text;
 
     void Start()
     {
         //アタッチしてるオブジェクトを判別
         if (this.gameObject.GetComponent<Image>())
         {
-            thisObjType = ObjType.IMAGE;
+            thisObjType = ObjType.Image;
             image = this.gameObject.GetComponent<Image>();
         }
         else if (this.gameObject.GetComponent<Text>())
         {
-            thisObjType = ObjType.TEXT;
+            thisObjType = ObjType.Text;
             text = this.gameObject.GetComponent<Text>();
         }
     }
@@ -39,11 +39,11 @@ public class Blink : MonoBehaviour
     void Update()
     {
         //オブジェクトのAlpha値を更新
-        if (thisObjType == ObjType.IMAGE)
+        if (thisObjType == ObjType.Image)
         {
             image.color = GetAlphaColor(image.color);
         }
-        else if (thisObjType == ObjType.TEXT)
+        else if (thisObjType == ObjType.Text)
         {
             text.color = GetAlphaColor(text.color);
         }
