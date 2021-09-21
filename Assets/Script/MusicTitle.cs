@@ -6,8 +6,9 @@ public class MusicTitle : MonoBehaviour
 {
 
     [SerializeField]
-    public Image MusicIllust;
-    public Text TitleText;
+    Text titleText;
+    [SerializeField]
+    Image musicIllust;
     public GameObject[] difficultyButtonOBJ;
     Sprite sprite;
     public GameSystem m_system;
@@ -16,23 +17,22 @@ public class MusicTitle : MonoBehaviour
         if (GetComponent<Image>().enabled == false)
         {
             GetComponent<Image>().enabled = true;
-            MusicIllust.enabled = true;
-            TitleText.enabled = true;
+            musicIllust.enabled = true;
+            titleText.enabled = true;
         }
         foreach(GameObject button in difficultyButtonOBJ)
         {
             button.SetActive(true);
         }
-        TitleText.text = name;
+        titleText.text = name;
         sprite = Resources.Load<Sprite>("MusicTitleIllust/"+name);
         Debug.Log("MusicTitleIllust/" + name);
-        MusicIllust.sprite = sprite;
+        musicIllust.sprite = sprite;
     }
     // Start is called before the first frame update
     void Start()
     {
         m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
-        
     }
 
     // Update is called once per frame

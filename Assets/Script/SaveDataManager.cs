@@ -8,12 +8,12 @@ using System.IO;
 public class SaveDataManager : MonoBehaviour
 {
     [SerializeField]
-    static string plusname = "_Score";
+    
     public SaveDataPalam savedata;
     public List<string> musicnames;
     
     //プラットフォーム別参照パス
-    public static string path
+    public static string Path
     {
         get
         {
@@ -33,14 +33,14 @@ public class SaveDataManager : MonoBehaviour
     public void DirectoryOrFileCheck(string m_name)
     {
 
-        if (!Directory.Exists(path + m_name))
+        if (!Directory.Exists(Path + m_name))
         {
-            Directory.CreateDirectory(path + m_name);
+            Directory.CreateDirectory(Path + m_name);
             Debug.Log(m_name + "ディレクトリを作成しました。");
         }
         for (int i = 0; i < (int)Difficulty.DifficaltyType; i++)
         {
-            if (!File.Exists(path + m_name + "/" + ((Difficulty)i).ToString() + ".json"))
+            if (!File.Exists(Path + m_name + "/" + ((Difficulty)i).ToString() + ".json"))
             {
                 var data = new SaveDataPalam();
 
@@ -51,7 +51,7 @@ public class SaveDataManager : MonoBehaviour
 
                 var Json = JsonUtility.ToJson(data);
                 StreamWriter writer;
-                writer = new StreamWriter(path + m_name + "/" + ((Difficulty)i).ToString() + ".json", false);
+                writer = new StreamWriter(Path + m_name + "/" + ((Difficulty)i).ToString() + ".json", false);
 
                 Debug.Log(m_name + "の" + ((Difficulty)i).ToString() + "のセーブデータを作成しました。");
                 writer.Write(Json);
@@ -65,7 +65,7 @@ public class SaveDataManager : MonoBehaviour
     public void SaveDataLoad(int difficulty)
     {
         GameSystem m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
-        string savepath = path + m_system.m_result.MusicTitle + "/" + ((Difficulty)difficulty).ToString() + ".json";
+        string savepath = Path + m_system.m_result.MusicTitle + "/" + ((Difficulty)difficulty).ToString() + ".json";
         Debug.Log(savepath);
         savedata = JsonUtility.FromJson<SaveDataPalam>(File.ReadAllText(savepath));
         m_system.m_result.difficulty = (Difficulty)difficulty;

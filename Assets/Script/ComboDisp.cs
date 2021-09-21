@@ -9,7 +9,7 @@ public class ComboDisp : MonoBehaviour
     public GameSystem gameSystem;
     public GameObject hukidasi;
     public Animator animator;
-    public GameObject ComboText;
+    public GameObject comboText;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,13 +30,13 @@ public class ComboDisp : MonoBehaviour
         {
             GetComponent<MeshRenderer>().enabled = true;
             hukidasi.GetComponent<SpriteRenderer>().enabled = true;
-            ComboText.GetComponent<MeshRenderer>().enabled = true;
+            comboText.GetComponent<MeshRenderer>().enabled = true;
         }
         else
         {
             GetComponent<MeshRenderer>().enabled = false;
             hukidasi.GetComponent<SpriteRenderer>().enabled = false;
-            ComboText.GetComponent<MeshRenderer>().enabled = false;
+            comboText.GetComponent<MeshRenderer>().enabled = false;
             animator.SetInteger("CharaState", 0);
         }
     }

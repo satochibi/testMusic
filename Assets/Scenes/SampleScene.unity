@@ -1528,7 +1528,7 @@ MonoBehaviour:
   gameSystem: {fileID: 0}
   hukidasi: {fileID: 1647580740}
   animator: {fileID: 162906952}
-  ComboText: {fileID: 226655612}
+  comboText: {fileID: 226655612}
 --- !u!1 &290359712
 GameObject:
   m_ObjectHideFlags: 0

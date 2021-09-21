@@ -712,7 +712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5962017566774257186, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5962017566774257196, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
       propertyPath: m_RootOrder
@@ -2446,8 +2446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7384f1e924f2f4793fa6e554930bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicIllust: {fileID: 1123694887}
-  TitleText: {fileID: 514327116}
+  titleText: {fileID: 514327116}
+  musicIllust: {fileID: 1123694887}
   difficultyButtonOBJ:
   - {fileID: 2033169255}
   - {fileID: 1114582850}
