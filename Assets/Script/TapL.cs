@@ -7,7 +7,7 @@ public class TapL : MonoBehaviour
     //判定ライン上のライトの点灯及び消灯スクリプト
     public float speed = 1.0f;
     private new Renderer renderer;
-    private bool Lf = false;
+    private bool lf = false;
 
     GameSystem manager;
 
@@ -48,7 +48,7 @@ public class TapL : MonoBehaviour
         }
         else
         {
-            if (Lf == false)
+            if (lf == false)
             {
                 var alfa = renderer.material.color.a - speed * Time.deltaTime;
                 renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alfa);
@@ -62,7 +62,7 @@ public class TapL : MonoBehaviour
         Default();
         this.enabled = true;
         Debug.Log("Tap");
-        Lf = true;
+        lf = true;
 
         //JudgementType type = JudgementType.Perfect;
         //manager.AddResultPalam(type);
@@ -72,6 +72,6 @@ public class TapL : MonoBehaviour
     public void Exit()
     {
         //判定外に出たときの消灯用フラグ
-        Lf = false;
+        lf = false;
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public enum CharacterType
 {
-    kerotama =0,
+    Kerotama =0,
     Cheerleader,
-    typenum
+    Typenum
 }
 
 
@@ -44,7 +44,7 @@ public class GalleryManager : MonoBehaviour
         {
             c_type = system.p_palam.character;
         }
-        else c_type = CharacterType.kerotama;
+        else c_type = CharacterType.Kerotama;
 
         SelectON();
     }

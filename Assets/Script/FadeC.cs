@@ -10,10 +10,10 @@ public class FadeC : MonoBehaviour
     //フェードスピード
     public float speed;
     //フェード管理用フラグ
-    public bool isFadein = false;
-    public bool isFadeout = false;
-    public bool isEnd = false;
-    private float red, green, blue, alfa;
+    public bool IsFadein { get; set; } =false;
+    public bool IsFadeout { get; set; } = false;
+    public bool IsEnd { get; set; } = false;
+    float red, green, blue, alfa;
     Image fadeimage;
 
     public string nextSceneName;
@@ -26,23 +26,23 @@ public class FadeC : MonoBehaviour
         alfa = fadeimage.color.a;
         alfa = 1;
         
-        isFadein = true;
+        IsFadein = true;
         
     }
 
     public void SceneChangeOut(string name)
     {
-        isFadeout = true;
+        IsFadeout = true;
         nextSceneName = name;
     }
     public void FadeIn()
     {
         alfa -= speed;
-        isEnd = false;
+        IsEnd = false;
         setalfa();
         if (alfa <= 0)
         {
-            isFadein = false;
+            IsFadein = false;
             fadeimage.enabled = false;
         }
     }
@@ -53,8 +53,8 @@ public class FadeC : MonoBehaviour
         setalfa();
         if (alfa >= 1)
         {
-            isFadeout = false;
-            isEnd = true;
+            IsFadeout = false;
+            IsEnd = true;
         }
     }
     void setalfa()
@@ -66,15 +66,15 @@ public class FadeC : MonoBehaviour
     {
 
         
-        if (isFadein)
+        if (IsFadein)
         {
             FadeIn();
         }
-        if (isFadeout)
+        if (IsFadeout)
         {
             FadeOut();
         }
-        if(isEnd)
+        if(IsEnd)
         {
             GameObject.Find("GameManager").GetComponent<GameSystem>().ChangeScene(nextSceneName);
         }

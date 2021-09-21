@@ -287,7 +287,7 @@ public class GameSystem : MonoBehaviour
 
     public void ComparePastData()
     {
-        string savepath = SaveDataManager.path + m_result.MusicTitle + "/" + m_result.difficulty.ToString() + ".json";
+        string savepath = SaveDataManager.Path + m_result.MusicTitle + "/" + m_result.difficulty.ToString() + ".json";
         if (!System.IO.File.Exists(savepath))
         {
             Debug.Log("セーブデータが見つかりません！");
@@ -313,7 +313,7 @@ public class GameSystem : MonoBehaviour
     {
         var Json = JsonUtility.ToJson(saveData);
         System.IO.StreamWriter writer;
-        writer = new System.IO.StreamWriter(SaveDataManager.path + m_result.MusicTitle + "/" + m_result.difficulty.ToString() + ".json", false);
+        writer = new System.IO.StreamWriter(SaveDataManager.Path + m_result.MusicTitle + "/" + m_result.difficulty.ToString() + ".json", false);
 
         Debug.Log(m_result.MusicTitle + "の" + m_result.difficulty.ToString() + "のセーブデータを作成しました。");
         writer.Write(Json);
