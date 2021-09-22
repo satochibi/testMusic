@@ -28,22 +28,13 @@ public enum Difficulty
 
 public class SaveDataPalam
 {
-    
-    int highscore = 0;
-    
 
-    public int Highscore
-    {
-        get{ return this.highscore; }
-        set {
-            if (value < 0)
-            {
-                this.highscore = value;
-            }
-        }
-    }
-    public bool IsFullCombo { set; get; } = false;
-    public ScoreRankType RankType { set; get; }
+    //public int highscore { get; set; }
+    //public bool isFullCombo { set; get; } = false;
+    //public ScoreRankType rankType { set; get; }
+    public int highscore = 0;
+    public bool isFullCombo  = false;
+    public ScoreRankType rankType = ScoreRankType.D;
 }
 
 
@@ -290,7 +281,7 @@ public class GameSystem : MonoBehaviour
         sumscore = 0.00f;
 
     }
-    
+  
 
     public void ComparePastData()
     {
@@ -303,17 +294,17 @@ public class GameSystem : MonoBehaviour
         SaveDataPalam pastsaveData;
         pastsaveData = new SaveDataPalam();
         pastsaveData = JsonUtility.FromJson<SaveDataPalam>(System.IO.File.ReadAllText(savepath));
-        if (pastsaveData.Highscore > saveData.Highscore)
+        if (pastsaveData.highscore > saveData.highscore)
         {
-            saveData.Highscore = pastsaveData.Highscore;
+            saveData.highscore = pastsaveData.highscore;
         }
-        if ((int)pastsaveData.Highscore < (int)saveData.Highscore)
+        if ((int)pastsaveData.rankType < (int)saveData.rankType)
         {
-            saveData.Highscore = pastsaveData.Highscore;
+            saveData.rankType = pastsaveData.rankType;
         }
-        if (pastsaveData.IsFullCombo == true)
+        if (pastsaveData.isFullCombo == true)
         {
-            saveData.IsFullCombo = true;
+            saveData.isFullCombo = true;
         }
     }
     public void WritePlayData()
@@ -402,9 +393,9 @@ public class GameSystem : MonoBehaviour
         if (IsEnd)
         {
             SetRank(result.score);
-            saveData.Highscore = result.score;
-            saveData.RankType = result.Rank;
-            saveData.IsFullCombo = result.isFullCombo;
+            saveData.highscore = result.score;
+            saveData.rankType = result.Rank;
+            saveData.isFullCombo = result.isFullCombo;
             ComparePastData();
             WritePlayData();
             IsEnd = false;

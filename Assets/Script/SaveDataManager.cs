@@ -42,11 +42,18 @@ public class SaveDataManager : MonoBehaviour
         {
             if (!File.Exists(Path + m_name + "/" + ((Difficulty)i).ToString() + ".json"))
             {
-                var data = new SaveDataPalam();
+                //var data = new SaveDataPalam
+                //{
+                //    highscore = 0,
+                //    isFullCombo = false,
+                //    rankType = ScoreRankType.D
 
+                //};
+                var data = new SaveDataPalam();
+                Debug.Log(data.ToString());
                 if (m_name == "ハルジオン")
                 {
-                    data.Highscore = 750000;
+                    data.highscore = 750000;
                 }
 
                 var Json = JsonUtility.ToJson(data);
@@ -69,13 +76,13 @@ public class SaveDataManager : MonoBehaviour
         Debug.Log(savepath);
         savedata = JsonUtility.FromJson<SaveDataPalam>(File.ReadAllText(savepath));
         m_system.result.difficulty = (Difficulty)difficulty;
-        Debug.Log(m_system.result.MusicTitle + "\n" + difficulty + "のハイスコア" + savedata.Highscore);
+        Debug.Log(m_system.result.MusicTitle + "\n" + difficulty + "のハイスコア" + savedata.highscore);
     }
 
     public void SetHighScore(Text m_text)
     {
         m_text.enabled = true;
-        m_text.text = "ハイスコア　" + savedata.Highscore.ToString();
+        m_text.text = "ハイスコア　" + savedata.highscore.ToString();
     }
 
     // Start is called before the first frame update

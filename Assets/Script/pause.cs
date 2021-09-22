@@ -31,8 +31,10 @@ public class pause : MonoBehaviour
         if(nextSceneName =="SampleScene")
         {
             string titlename = game.result.MusicTitle;
+            Difficulty difficulty = game.result.difficulty;
             game.InitializedPalam();
             game.result.MusicTitle = titlename;
+            game.result.difficulty = difficulty;
         }
         if (nextSceneName == "Result")
         {
