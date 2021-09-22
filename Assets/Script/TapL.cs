@@ -31,7 +31,7 @@ public class TapL : MonoBehaviour
 
     private void Start()
     {
-        if (speed == 0 || speed == null)
+        if (speed == 0 )
         {
             //Á“”‚Ü‚Å‚Ì‘‚³
             speed = 1;
@@ -63,9 +63,6 @@ public class TapL : MonoBehaviour
         this.enabled = true;
         Debug.Log("Tap");
         lf = true;
-
-        //JudgementType type = JudgementType.Perfect;
-        //manager.AddResultPalam(type);
 
        
     }

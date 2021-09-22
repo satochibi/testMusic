@@ -42,13 +42,7 @@ public class SaveDataManager : MonoBehaviour
         {
             if (!File.Exists(Path + m_name + "/" + ((Difficulty)i).ToString() + ".json"))
             {
-                //var data = new SaveDataPalam
-                //{
-                //    highscore = 0,
-                //    isFullCombo = false,
-                //    rankType = ScoreRankType.D
-
-                //};
+               
                 var data = new SaveDataPalam();
                 Debug.Log(data.ToString());
                 if (m_name == "ƒnƒ‹ƒWƒIƒ“")
@@ -88,9 +82,6 @@ public class SaveDataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TextAsset[] musicname = Resources.LoadAll<TextAsset>("NoteJson");
-        //TextAsset[] savename=Resources.LoadAll<TextAsset>("SaveJson");
-
 
         MusicSelect.SearchMusicNamesFromResources(musicNames);
         string[] musicname = musicNames.ToArray();

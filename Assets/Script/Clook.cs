@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Clook : MonoBehaviour
 {
-    public Camera camera;
+    //public Camera camera;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,6 @@ public class Clook : MonoBehaviour
         /*Vector3 cl = Camera.main.transform.position;
         cl.y = transform.position.y;
         transform.LookAt(cl);*/
-        this.transform.LookAt(this.camera.transform.position);
+        //this.transform.LookAt(this.camera.transform.position);
     }
 }

@@ -76,7 +76,6 @@ public class Fumen : MonoBehaviour
                 Judge(i);
             }
        }
-        Debug.Log(Input.touches.Length);
         if (autoPlay)
         {
             AutoPlay(Playtime);
@@ -90,7 +89,9 @@ public class Fumen : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// 一定時間経ったノーツ削除処理
+    /// </summary>
     public void CheckOverNotes()
     {
 
@@ -118,6 +119,10 @@ public class Fumen : MonoBehaviour
         }
 
     }
+    /// <summary>
+    /// ノーマルタップ判定処理
+    /// </summary>
+    /// <param name="track">入力トラック番号</param>
     public void Judge(int track)
     {
         //Debug.Log("Judge:" + Playtime);
