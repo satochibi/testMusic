@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b00692ef3b66440a11befc3e7e4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicnames: []
+  musicNames: []
 --- !u!1 &140481388
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,9 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listItemPre: {fileID: 6839387808026735123, guid: 6b6388f9443836946bd7f4b43ad714b3, type: 3}
-  nodeObjList: []
   contentOBJ: {fileID: 140481388}
-  musicnames: []
 --- !u!4 &269666608
 Transform:
   m_ObjectHideFlags: 0

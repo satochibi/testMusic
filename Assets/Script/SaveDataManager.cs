@@ -10,7 +10,7 @@ public class SaveDataManager : MonoBehaviour
     [SerializeField]
     
     public SaveDataPalam savedata;
-    public List<string> musicnames;
+    public List<string> musicNames;
     
     //プラットフォーム別参照パス
     public static string Path
@@ -46,7 +46,7 @@ public class SaveDataManager : MonoBehaviour
 
                 if (m_name == "ハルジオン")
                 {
-                    data.highscore = 750000;
+                    data.Highscore = 750000;
                 }
 
                 var Json = JsonUtility.ToJson(data);
@@ -65,17 +65,17 @@ public class SaveDataManager : MonoBehaviour
     public void SaveDataLoad(int difficulty)
     {
         GameSystem m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
-        string savepath = Path + m_system.m_result.MusicTitle + "/" + ((Difficulty)difficulty).ToString() + ".json";
+        string savepath = Path + m_system.result.MusicTitle + "/" + ((Difficulty)difficulty).ToString() + ".json";
         Debug.Log(savepath);
         savedata = JsonUtility.FromJson<SaveDataPalam>(File.ReadAllText(savepath));
-        m_system.m_result.difficulty = (Difficulty)difficulty;
-        Debug.Log(m_system.m_result.MusicTitle + "\n" + difficulty + "のハイスコア" + savedata.highscore);
+        m_system.result.difficulty = (Difficulty)difficulty;
+        Debug.Log(m_system.result.MusicTitle + "\n" + difficulty + "のハイスコア" + savedata.Highscore);
     }
 
     public void SetHighScore(Text m_text)
     {
         m_text.enabled = true;
-        m_text.text = "ハイスコア　" + savedata.highscore.ToString();
+        m_text.text = "ハイスコア　" + savedata.Highscore.ToString();
     }
 
     // Start is called before the first frame update
@@ -85,8 +85,8 @@ public class SaveDataManager : MonoBehaviour
         //TextAsset[] savename=Resources.LoadAll<TextAsset>("SaveJson");
 
 
-        MusicSelect.SearchMusicNamesFromResources(musicnames);
-        string[] musicname = musicnames.ToArray();
+        MusicSelect.SearchMusicNamesFromResources(musicNames);
+        string[] musicname = musicNames.ToArray();
         for (int i = 0; i < musicname.Length; i++)
         {
             DirectoryOrFileCheck(musicname[i]);

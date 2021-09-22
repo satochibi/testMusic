@@ -31,23 +31,23 @@ public class Result : MonoBehaviour
 
                 break;
             case ResultPalam.Perfect:
-                GetComponent<Text>().text = gameSystem.GetResultPalam().Perfect.ToString();
+                GetComponent<Text>().text = gameSystem.GetResultPalam().perfect.ToString();
 
                 break;
             case ResultPalam.Great:
-                GetComponent<Text>().text = gameSystem.GetResultPalam().Great.ToString();
+                GetComponent<Text>().text = gameSystem.GetResultPalam().great.ToString();
 
                 break;
             case ResultPalam.Good:
-                GetComponent<Text>().text = gameSystem.GetResultPalam().Good.ToString();
+                GetComponent<Text>().text = gameSystem.GetResultPalam().good.ToString();
 
                 break;
             case ResultPalam.Bad:
-                GetComponent<Text>().text = gameSystem.GetResultPalam().Bad.ToString();
+                GetComponent<Text>().text = gameSystem.GetResultPalam().bad.ToString();
 
                 break;
             case ResultPalam.Miss:
-                GetComponent<Text>().text = gameSystem.GetResultPalam().Miss.ToString();
+                GetComponent<Text>().text = gameSystem.GetResultPalam().miss.ToString();
 
                 break;
             case ResultPalam.MaxCombo:

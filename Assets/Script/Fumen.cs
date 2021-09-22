@@ -21,14 +21,14 @@ public class Fumen : MonoBehaviour
     AudioClip normalTapAudioClip;
     [SerializeField]
     bool autoPlay = true;
-    
+
     [SerializeField]
     TapL[] tapLList;
 
     [SerializeField]
     float Playtime;
     GameSystem system;
-    public float Speed { get { return this.speed; }  }
+    public float Speed { get { return this.speed; } }
 
     public bool IsGameStart { get { return this.isGameStart; } }
 
@@ -40,6 +40,15 @@ public class Fumen : MonoBehaviour
     AudioSource tapAudioSource;
 
     List<GameObject> notesList;
+    //判定の間隔（単位（秒））
+    readonly float[] judgeStep =
+    {
+        0.05f,  //パーフェクト判定間隔
+        0.1f,   //グレイト判定間隔
+        0.15f,  //グッド判定間隔
+        0.2f    //バッド判定間隔
+    
+    };
     // Use this for initialization
     void Start()
     {
@@ -59,38 +68,38 @@ public class Fumen : MonoBehaviour
         }
         Playtime = Time.fixedTime - this.GameStartTime;
         CheckOverNotes();
-        
-        if(Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             for (int i = 1; i < 6; i++)
             {
                 Judge(i);
             }
-        }
+       }
         Debug.Log(Input.touches.Length);
-            if (autoPlay)
+        if (autoPlay)
         {
             AutoPlay(Playtime);
 
         }
         else
         {
-            
+
 
         }
 
-        
+
     }
-    
+
     public void CheckOverNotes()
     {
 
         for (int index = 0; index < notesList.Count; index++)
         {
             float n_time = notesList[index].GetComponent<NotesController>().NotesTime;
-            if(n_time - Playtime<-0.2f)
+            if (n_time - Playtime < -0.2f)
             {
-                
+
                 if (!notesList[index].GetComponent<NotesController>().IsTapped)
                 {
                     Destroy(notesList[index]);
@@ -107,13 +116,13 @@ public class Fumen : MonoBehaviour
             }
 
         }
-        
+
     }
     public void Judge(int track)
     {
         //Debug.Log("Judge:" + Playtime);
-       
-                
+
+
         for (int index = 0; index < notesList.Count; index++)
         {
             NotesController noteCon = notesList[index].GetComponent<NotesController>();
@@ -121,18 +130,18 @@ public class Fumen : MonoBehaviour
             if (noteCon.NotesTrack == (Track)track)
             {
                 float n_time = noteCon.NotesTime;
-                
-                if (n_time - Playtime <= 0.05)
-                {   
-                    notesList[index].GetComponent<MeshRenderer>().enabled =false;
+                //ノーツの判定時間と現在の経過時間の差
+                float timediff = Mathf.Abs(n_time - Playtime);
+                if (timediff <= judgeStep[(int)JudgementType.Bad])
+                {
+                    notesList[index].GetComponent<MeshRenderer>().enabled = false;
                     noteCon.IsTapped = true;
 
-                    //差０．４３の場合8が判定
-                    switch ((int)(Mathf.Abs(n_time - Playtime) * 20))
+                    switch (timediff)
                     {
                         //誤差0.05秒
-                        case 0:
-                            
+                        case float i when i < judgeStep[(int)JudgementType.Perfect]:
+
                             system.AddResultPalam(JudgementType.Perfect);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
 
@@ -140,14 +149,14 @@ public class Fumen : MonoBehaviour
                             //Destroy(notesList[index]);
                             return;
                         //誤差0.1秒
-                        case 1:
+                        case float i when i < judgeStep[(int)JudgementType.Great]:
                             system.AddResultPalam(JudgementType.Great);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             //Destroy(notesList[index]);
                             //notesList.RemoveAt(0);
                             return;
                         //誤差0.15秒
-                        case 2:
+                        case float i when i < judgeStep[(int)JudgementType.Good]:
                             system.AddResultPalam(JudgementType.Good);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             //Destroy(notesList[index]);
@@ -155,14 +164,14 @@ public class Fumen : MonoBehaviour
 
                             return;
                         //誤差0.2秒
-                        case 3:
+                        case float i when i < judgeStep[(int)JudgementType.Bad]:
                             system.AddResultPalam(JudgementType.Bad);
                             tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             // Destroy(notesList[index]);
                             //notesList.RemoveAt(0);
 
                             return;
-                      
+
                         default:
                             // system.AddResultPalam(JudgementType.Miss);
 
@@ -183,7 +192,7 @@ public class Fumen : MonoBehaviour
                 switch (notesList[index].GetComponent<NotesController>().NotesTrack)
                 {
                     case Track.track1:
-                        
+
                         tapAudioSource.PlayOneShot(this.tapAudioClip[0]);
                         this.tapLList[0].Tap();
                         system.AddResultPalam(JudgementType.Perfect);
@@ -244,7 +253,7 @@ public class Fumen : MonoBehaviour
         //noteGameObjListをnoteTimeで昇順になるように並び替える
         notesList = notesGameObjList.OrderBy(x => x.GetComponent<NotesController>().NotesTime).ToList();
 
-        
+
     }
 
 

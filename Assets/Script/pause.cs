@@ -30,9 +30,9 @@ public class pause : MonoBehaviour
         GameSystem game= GameObject.Find("GameManager").GetComponent<GameSystem>();
         if(nextSceneName =="SampleScene")
         {
-            string titlename = game.m_result.MusicTitle;
+            string titlename = game.result.MusicTitle;
             game.InitializedPalam();
-            game.m_result.MusicTitle = titlename;
+            game.result.MusicTitle = titlename;
         }
         if (nextSceneName == "Result")
         {

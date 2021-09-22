@@ -12,15 +12,18 @@ public class MusicSelect : MonoBehaviour
    
     //public string[] names;
     //musicNodeのプレファブ
+    [SerializeField]
     GameObject listItemPre;
-    //nodeのリスト
-    List<GameObject> nodeObjList;
     //生成先の親オブジェクト
+    [SerializeField]
     GameObject contentOBJ;
+    //nodeのリスト
+    List<GameObject> nodeObjList =new List<GameObject>() ;
 
     //public List<Humen> musicList;
-    List<string> musicnames;
-    Vector3 pos;
+    List<string> musicnames =new List<string>();
+
+    Vector3 pos =default;
 
     public void EraceList()
     {
