@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class test1 : MonoBehaviour
+public class LongnotesInfo : MonoBehaviour
 {
     [SerializeField] private Transform[] points;
     [SerializeField] private GameObject longlinepre;

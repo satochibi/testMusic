@@ -49,12 +49,13 @@ public class InputJson : MonoBehaviour
     void Start()
     {
         GameSystem m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
-        string m_name = m_system.GetResultPalam().MusicTitle;
+        Fumen fumen = fumenGameObj.GetComponent<Fumen>();
+        string m_name = m_system.GetResultPalam().musicTitle;
         if (string.IsNullOrEmpty(m_name))
         {
             m_name = "シャイニングスター";
         }
-        float fumenScrollSpeed = fumenGameObj.GetComponent<Fumen>().Speed;
+        float fumenScrollSpeed = fumen.Speed;
 
 
         //Jsonファイルの読み出し
@@ -83,6 +84,7 @@ public class InputJson : MonoBehaviour
             //Debug.Log("Num:" + inputJson.notes[a].num + "　Block:" + inputJson.notes[a].block + "　A:" + "NoteType" + inputJson.notes[a].type.ToString() + "   " + a);
             if (inputJson.notes[a].type == 2)
             {
+                
                 GameObject longnotesGameObjList = new GameObject("LongNotes");
                 longnotesGameObjList.transform.parent = fumenGameObj.transform;
                 //ロングノーツであれば下記の処理を実行 ロングノーツの先頭のオブジェクトを生成
@@ -90,11 +92,11 @@ public class InputJson : MonoBehaviour
                 parentlong.transform.parent = longnotesGameObjList.transform;
                 GameObject longnote = Instantiate(longnotespref, Vector3.zero, Quaternion.identity, longnotesGameObjList.transform);
                
-                longnote.GetComponent<test1>().Init(longnotesGameObjList);
+                longnote.GetComponent<LongnotesInfo>().Init(longnotesGameObjList);
                 
                 Notes[] m_note = inputJson.notes[a].notes;
-                longnote.GetComponent<test1>().SetPointSize(m_note.Length + 1);
-                longnote.GetComponent<test1>().SetPoint(0, parentlong.transform);
+                longnote.GetComponent<LongnotesInfo>().SetPointSize(m_note.Length + 1);
+                longnote.GetComponent<LongnotesInfo>().SetPoint(0, parentlong.transform);
 
                 for (int i = 0; i < m_note.Length; i++)
                 {
@@ -112,10 +114,19 @@ public class InputJson : MonoBehaviour
 
                     notesNum++;
 
-                    longnote.GetComponent<test1>().SetPoint(i + 1, notes.transform);
+                    longnote.GetComponent<LongnotesInfo>().SetPoint(i + 1, notes.transform);
                     if (i == m_note.Length - 1)
                     {
                         notes.name = "ロングノーツ終端";
+                        fumen.AddLongNotesEvent(
+                    new LongNotesEvent(
+                        parentlong.GetComponent<NotesController>().NotesTime,
+                        notes.GetComponent<NotesController>().NotesTime,
+                        parentlong.GetComponent<NotesController>().NotesTrack,
+                        notes.GetComponent<NotesController>().NotesTrack,
+                        m_note.Length-1
+                        )
+                     );
                     }
                     else
                     {
@@ -127,7 +138,7 @@ public class InputJson : MonoBehaviour
                 }
 
                 //ロングノーツの線を引く
-                longnote.GetComponent<test1>().DrawLine();
+                longnote.GetComponent<LongnotesInfo>().DrawLine();
 
 
             }

@@ -51,11 +51,11 @@ public class Result : MonoBehaviour
 
                 break;
             case ResultPalam.MaxCombo:
-                GetComponent<Text>().text = gameSystem.GetResultPalam().MaxCombo.ToString();
+                GetComponent<Text>().text = gameSystem.GetResultPalam().maxCombo.ToString();
 
                 break;
             case ResultPalam.Rank:
-                if (gameSystem.GetResultPalam().Rank == m_rank)
+                if (gameSystem.GetResultPalam().rank == m_rank)
                 {
                     GetComponent<SpriteRenderer>().enabled = true;
                 }

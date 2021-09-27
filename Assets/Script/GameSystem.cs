@@ -42,8 +42,8 @@ public class GameSystem : MonoBehaviour
 {
     static GameSystem instance;
     [SerializeField]
-    public GameObject JUI = null;
-    public static string GameSceneName = "SampleScene";
+    GameObject jUI = null;
+    static string gameSceneName = "SampleScene";
     //各ランクのスコアボーダー
     public int[] m_rankBorder =
     {
@@ -58,11 +58,11 @@ public class GameSystem : MonoBehaviour
     public struct ResultPalam
     {
 
-        public string MusicTitle;   //ミュージックタイトル
+        public string musicTitle;   //ミュージックタイトル
         public Difficulty difficulty; //難易度
 
         public int score;           //スコア       
-        public ScoreRankType Rank;  //スコアランク
+        public ScoreRankType rank;  //スコアランク
         
         public int perfect;         //Perfectの数        
         public int great;           //Greatの数
@@ -70,7 +70,7 @@ public class GameSystem : MonoBehaviour
         public int bad;             //Badの数
         public int miss;            //Missの数
         
-        public int MaxCombo;        //最大コンボ数
+        public int maxCombo;        //最大コンボ数
         public bool isFullCombo;    //フルコンボしたかどうか
         //public bool isAllPerfect;
 
@@ -120,42 +120,42 @@ public class GameSystem : MonoBehaviour
                 combo++;
                 Debug.Log("Great!");
                 //最大コンボ更新！
-                if (result.MaxCombo < combo)
+                if (result.maxCombo < combo)
                 {
-                    result.MaxCombo = combo;
+                    result.maxCombo = combo;
                 }
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
                 break;
             case 1:
                 result.great++;
                 result.score += (int)(normalScore * 0.9);
                 combo++;
                 Debug.Log("Great!");
-                if (result.MaxCombo < combo)
+                if (result.maxCombo < combo)
                 {
-                    result.MaxCombo = combo;
+                    result.maxCombo = combo;
                 }
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
                 break;
             case 2:
                 result.good++;
                 result.score += (int)(normalScore * 0.7);
                 Debug.Log("Good");
                 combo = 0;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
                 break;
             case 3:
                 result.bad++;
                 Debug.Log("Bad");
                 result.score += (int)(normalScore * 0.5);
                 combo = 0;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
                 break;
             case 4:
                 result.miss++;
                 Debug.Log("Miss");
                 combo = 0;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Miss);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Miss);
                 break;
 
             default:
@@ -163,10 +163,10 @@ public class GameSystem : MonoBehaviour
                 sumscore += normalScore;
                 Debug.Log("Perfect!");
                 combo++;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
-                if (result.MaxCombo < combo)
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
+                if (result.maxCombo < combo)
                 {
-                    result.MaxCombo = combo;
+                    result.maxCombo = combo;
                 }
                 break;
         }
@@ -189,22 +189,22 @@ public class GameSystem : MonoBehaviour
                 sumscore += normalScore;
                 Debug.Log("Perfect!");
                 combo++;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
-                if (result.MaxCombo < combo)
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Perfect);
+                if (result.maxCombo < combo)
                 {
-                    result.MaxCombo = combo;
+                    result.maxCombo = combo;
                 }
                 break;
             case JudgementType.Great:
                 result.great++;
                 sumscore += normalScore * 0.9f;
                 combo++;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Great);
                 Debug.Log("Great!");
                 //最大コンボ更新！
-                if (result.MaxCombo < combo)
+                if (result.maxCombo < combo)
                 {
-                    result.MaxCombo = combo;
+                    result.maxCombo = combo;
                 }
                 break;
 
@@ -213,20 +213,20 @@ public class GameSystem : MonoBehaviour
                 sumscore += normalScore * 0.7f;
                 Debug.Log("Good");
                 combo = 0;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Good);
                 break;
             case JudgementType.Bad:
                 result.bad++;
                 sumscore += normalScore * 0.5f;
                 Debug.Log("Bad");
                 combo = 0;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Bad);
                 break;
             case JudgementType.Miss:
                 result.miss++;
                 Debug.Log("Miss");
                 combo = 0;
-                JUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Miss);
+                jUI.GetComponent<JudgeUI>().JudgeUIAnimationPlay(JudgementType.Miss);
                 break;
 
             default:
@@ -247,7 +247,7 @@ public class GameSystem : MonoBehaviour
     }
     public void SetMusicName(string name)
     {
-        result.MusicTitle = name;
+        result.musicTitle = name;
     }
     //ノーツの総数を設定
     public void SetNotesNum(int num)
@@ -285,7 +285,7 @@ public class GameSystem : MonoBehaviour
 
     public void ComparePastData()
     {
-        string savepath = SaveDataManager.Path + result.MusicTitle + "/" + result.difficulty.ToString() + ".json";
+        string savepath = SaveDataManager.Path + result.musicTitle + "/" + result.difficulty.ToString() + ".json";
         if (!System.IO.File.Exists(savepath))
         {
             Debug.Log("セーブデータが見つかりません！");
@@ -311,9 +311,9 @@ public class GameSystem : MonoBehaviour
     {
         var Json = JsonUtility.ToJson(saveData);
         System.IO.StreamWriter writer;
-        writer = new System.IO.StreamWriter(SaveDataManager.Path + result.MusicTitle + "/" + result.difficulty.ToString() + ".json", false);
+        writer = new System.IO.StreamWriter(SaveDataManager.Path + result.musicTitle + "/" + result.difficulty.ToString() + ".json", false);
 
-        Debug.Log(result.MusicTitle + "の" + result.difficulty.ToString() + "のセーブデータを作成しました。");
+        Debug.Log(result.musicTitle + "の" + result.difficulty.ToString() + "のセーブデータを作成しました。");
         writer.Write(Json);
         writer.Flush();
         writer.Close();
@@ -328,28 +328,28 @@ public class GameSystem : MonoBehaviour
         {
 
             case 14:
-                result.Rank = ScoreRankType.C;
+                result.rank = ScoreRankType.C;
                 break;
             case 15:
-                result.Rank = ScoreRankType.B;
+                result.rank = ScoreRankType.B;
                 break;
             case 16:
-                result.Rank = ScoreRankType.A;
+                result.rank = ScoreRankType.A;
                 break;
             case 17:
-                result.Rank = ScoreRankType.S;
+                result.rank = ScoreRankType.S;
                 break;
             case 18:
-                result.Rank = ScoreRankType.SS;
+                result.rank = ScoreRankType.SS;
                 break;
             case 19:
-                result.Rank = ScoreRankType.SSS;
+                result.rank = ScoreRankType.SSS;
                 break;
             case 20:
-                result.Rank = ScoreRankType.SSS;
+                result.rank = ScoreRankType.SSS;
                 break;
             default:
-                result.Rank = ScoreRankType.D;
+                result.rank = ScoreRankType.D;
                 return;
 
         }
@@ -367,18 +367,18 @@ public class GameSystem : MonoBehaviour
     {
      
 
-        if (SceneManager.GetActiveScene().name == GameSceneName && JUI == null)
+        if (SceneManager.GetActiveScene().name == gameSceneName && jUI == null)
         {
 
             //JUIオブジェクト取得。
-            JUI = GameObject.Find("JudgeUI");
+            jUI = GameObject.Find("JudgeUI");
 
             normalScore = 1000000.00 / notesnum;
 
             music = GameObject.Find("Audio").GetComponent<AudioSource>();
-            if (!string.IsNullOrEmpty(result.MusicTitle))
+            if (!string.IsNullOrEmpty(result.musicTitle))
             {
-                music.clip = Resources.Load<AudioClip>("MusicF/" + result.MusicTitle);
+                music.clip = Resources.Load<AudioClip>("MusicF/" + result.musicTitle);
             }
             //music.Play(); //ボタンで音楽を流すようにしたいので、playは保留
         }
@@ -394,7 +394,7 @@ public class GameSystem : MonoBehaviour
         {
             SetRank(result.score);
             saveData.highscore = result.score;
-            saveData.rankType = result.Rank;
+            saveData.rankType = result.rank;
             saveData.isFullCombo = result.isFullCombo;
             ComparePastData();
             WritePlayData();
@@ -406,8 +406,8 @@ public class GameSystem : MonoBehaviour
         {
 
             Debug.Log("score " + result.score +
-                "\nRank " + result.Rank +
-                "\nMaxCombo " + result.MaxCombo +
+                "\nRank " + result.rank +
+                "\nMaxCombo " + result.maxCombo +
                 "\nPerfect " + result.perfect +
                 "\nGreat " + result.great +
                 "\nGood " + result.good +
@@ -417,7 +417,7 @@ public class GameSystem : MonoBehaviour
 
     }
     //シーンが切り替わっても残り続ける
-    //シングルトンパターン導入」
+    //シングルトンパターン導入
     private void Awake()
     {
         if (instance == null)

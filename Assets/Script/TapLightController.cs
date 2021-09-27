@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TapL : MonoBehaviour
+public class TapLightController : MonoBehaviour
 {
     //判定ライン上のライトの点灯及び消灯スクリプト
     public float speed = 1.0f;
     private new Renderer renderer;
-    private bool lf = false;
+    private bool lightFlag = false;
 
     GameSystem manager;
 
@@ -31,7 +31,7 @@ public class TapL : MonoBehaviour
 
     private void Start()
     {
-        if (speed == 0 )
+        if (speed == 0)
         {
             //消灯までの早さ
             speed = 1;
@@ -48,7 +48,7 @@ public class TapL : MonoBehaviour
         }
         else
         {
-            if (lf == false)
+            if (lightFlag == false)
             {
                 var alfa = renderer.material.color.a - speed * Time.deltaTime;
                 renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alfa);
@@ -56,19 +56,19 @@ public class TapL : MonoBehaviour
         }
     }
 
-    public void Tap()
+    public void LightUp()
     {
         //押された際に光らせる動作
         Default();
         this.enabled = true;
         Debug.Log("Tap");
-        lf = true;
+        lightFlag = true;
 
        
     }
-    public void Exit()
+    public void LightDown()
     {
         //判定外に出たときの消灯用フラグ
-        lf = false;
+        lightFlag = false;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pause : MonoBehaviour
+public class Pause : MonoBehaviour
 {
 
     [SerializeField]
@@ -30,10 +30,10 @@ public class pause : MonoBehaviour
         GameSystem game= GameObject.Find("GameManager").GetComponent<GameSystem>();
         if(nextSceneName =="SampleScene")
         {
-            string titlename = game.result.MusicTitle;
+            string titlename = game.result.musicTitle;
             Difficulty difficulty = game.result.difficulty;
             game.InitializedPalam();
-            game.result.MusicTitle = titlename;
+            game.result.musicTitle = titlename;
             game.result.difficulty = difficulty;
         }
         if (nextSceneName == "Result")

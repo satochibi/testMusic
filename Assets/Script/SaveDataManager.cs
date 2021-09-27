@@ -66,11 +66,11 @@ public class SaveDataManager : MonoBehaviour
     public void SaveDataLoad(int difficulty)
     {
         GameSystem m_system = GameObject.Find("GameManager").GetComponent<GameSystem>();
-        string savepath = Path + m_system.result.MusicTitle + "/" + ((Difficulty)difficulty).ToString() + ".json";
+        string savepath = Path + m_system.result.musicTitle + "/" + ((Difficulty)difficulty).ToString() + ".json";
         Debug.Log(savepath);
         savedata = JsonUtility.FromJson<SaveDataPalam>(File.ReadAllText(savepath));
         m_system.result.difficulty = (Difficulty)difficulty;
-        Debug.Log(m_system.result.MusicTitle + "\n" + difficulty + "のハイスコア" + savedata.highscore);
+        Debug.Log(m_system.result.musicTitle + "\n" + difficulty + "のハイスコア" + savedata.highscore);
     }
 
     public void SetHighScore(Text m_text)
