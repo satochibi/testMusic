@@ -26,7 +26,7 @@ public class MultiTapTest : MonoBehaviour
     {
         Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit mhit = default;
-        if (Physics.Raycast(mouseray, out mhit, 40.0f))
+        if (Physics.Raycast(mouseray, out mhit))
         {
             mhit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
@@ -39,13 +39,15 @@ public class MultiTapTest : MonoBehaviour
     public void SingleTouchTest()
     {
         Touch touch = Input.GetTouch(0);
-        Ray ray = Camera.main.ScreenPointToRay(touch.position);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 40.0f))
+        Vector3 touchPos = touch.position;
+        Ray ray = Camera.main.ScreenPointToRay(touchPos);
+        RaycastHit hit =new RaycastHit();
+        if (Physics.Raycast(ray, out hit))
         {
             hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
-            Debug.Log(hit.collider.gameObject.transform.position);
+            //Debug.Log(hit.collider.gameObject.transform.position);
+            //int hitNum = Physics.RaycastNonAlloc(ray,hit);
         }
 
         switch (touch.phase)
