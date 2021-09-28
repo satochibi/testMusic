@@ -12,11 +12,15 @@ public class MultiTapTest : MonoBehaviour
     Text tapText;
     List<Touch> touches = new List<Touch>();
     List<string> messages = new List<string>();
-
+    List<Ray> rays = new List<Ray>();
     void Start()
     {
         tapText = tapTextGameObj.GetComponent<Text>();
-
+        
+        //if (Physics.Raycast(ray, out hit, 10.0f))
+        //{
+        //    Debug.Log(hit.collider.gameObject.transform.position);
+        //}
     }
     void Update()
     {
@@ -29,21 +33,44 @@ public class MultiTapTest : MonoBehaviour
             touches.Clear();
             messages.Clear();
         }
+        //Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //RaycastHit mhit =default;
+        //if (Physics.Raycast(mouseray, out mhit, 40.0f))
+        //{
+        //    mhit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
 
+        //    Debug.Log(mhit.collider.gameObject.transform.position);
+        //}
         for (int i = 0; i < touchCount; i++)
         {
             touches.Add(Input.GetTouch(i));
+            Ray ray = Camera.main.ScreenPointToRay(touches[i].position);
+            rays.Add(ray);
+            //if (Physics.Raycast(ray, out hit, 40.0f))
+            //{
+            //    hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
+            //    //Debug.Log(hit.collider.gameObject.transform.position);
+            //    rays.Add(ray);
+            //}
+                
         }
 
         //タッチ情報格納
-
+        
         for (int i = 0; i < touches.ToArray().Length; i++)
         {
+            RaycastHit hit;
+            if (Physics.Raycast(rays[i], out hit, 40.0f))
+            {
+                hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
+                
+            }
             Touch touch = touches[i];
             string aMessage = "";
             // Handle finger movements based on touch phase.
             switch (touch.phase)
             {
+
                 // Record initial touch position.
                 case TouchPhase.Began:
                     aMessage = "開始地点: " + touch.position.ToString() + Environment.NewLine;
@@ -60,9 +87,10 @@ public class MultiTapTest : MonoBehaviour
                 case TouchPhase.Ended:
                     //aMessage = "離した" + touch.position.ToString() + Environment.NewLine;
                     int index = touches.FindIndex((anotherTouch) => anotherTouch.fingerId == touch.fingerId);
-                    touches.RemoveAt(index);
-                    messages.RemoveAt(index);
-
+                    //touches.RemoveAt(index);
+                    // messages.RemoveAt(index);
+                    tapTextGameObj.transform.Translate(0.0f,2.0f,0.0f);
+                    //rays.RemoveAt(index);
                     //Debug.Log("Ended" + touch.position);
                     break;
             }
