@@ -59,8 +59,9 @@ public class MultiTapTest : MonoBehaviour
                 // Report that a direction has been chosen when the finger is lifted.
                 case TouchPhase.Ended:
                     //aMessage = "—£‚µ‚½" + touch.position.ToString() + Environment.NewLine;
-                    touches.Remove(touch);
-                    messages.RemoveAt(touchCount - 1);
+                    int index = touches.FindIndex((anotherTouch) => anotherTouch.fingerId == touch.fingerId);
+                    touches.RemoveAt(index);
+                    messages.RemoveAt(index);
 
                     //Debug.Log("Ended" + touch.position);
                     break;
