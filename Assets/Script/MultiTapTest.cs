@@ -10,9 +10,12 @@ public class MultiTapTest : MonoBehaviour
     [SerializeField]
     GameObject tapTextGameObj;
     [SerializeField]
-    GameObject tapLaneTextObj;
-
+    GameObject tapInfoTextObj;
+    [SerializeField]
+    //GameObject fumenObj;
     Text tapText;
+    Text tapInfoText;
+    //Fumen fumen;
     readonly string[] laneNames =
     {
         "Lane1",
@@ -21,6 +24,14 @@ public class MultiTapTest : MonoBehaviour
         "Lane4",
         "Lane5"
 
+    };
+    readonly Color[] tapColors =
+    {
+        Color.red,
+        Color.blue,
+        Color.yellow,
+        Color.green,
+        Color.black
     };
 
     //List<Touch> touches = new List<Touch>();
@@ -31,6 +42,8 @@ public class MultiTapTest : MonoBehaviour
     void Start()
     {
         tapText = tapTextGameObj.GetComponent<Text>();
+        tapInfoText = tapInfoTextObj.GetComponent<Text>();
+        //fumen = fumenObj.GetComponent<Fumen>();
         //if (Physics.Raycast(ray, out hit, 10.0f))
         //{
         //    Debug.Log(hit.collider.gameObject.transform.position);
@@ -109,78 +122,39 @@ public class MultiTapTest : MonoBehaviour
                 GameObject hitOBJ = hit.collider.gameObject;
                 if (hitOBJ.tag == "lane")
                 {
+                    hitOBJ.GetComponent<ShaderColorChange>().ChangeColor(tapColors[i]);
                     switch (multiTap.phase)
                     {
 
                         // Record initial touch position.
                         case TouchPhase.Began:
-                            tapText.text += "開始地点" + multiTap.position.ToString() + Environment.NewLine;
-                            for (int j = 0; j < laneNames.Length; j++)
-                            {
-                                if (hitOBJ.name == laneNames[j])
-                                {
-                                    hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapPress(i);
-                                    tapText.text += multiTap.fingerId + hitOBJ.name + Time.fixedTime.ToString() + Environment.NewLine;
-                                }
-                            }
+
+                            //for (int j = 0; j < laneNames.Length; j++)
+                            //{
+                            //    if (hitOBJ.name == laneNames[i])
+                            //    {
+                            //        fumen.Judge(i);
+                            //        tapInfoText.text = "judge" + Time.deltaTime;
+                            //    }
+                            //}
+
                             break;
+
 
                         // Determine direction by comparing the current touch position with the initial one.
                         case TouchPhase.Moved:
-                            tapText.text += "移動中" + Environment.NewLine;
-                            for (int j = 0; j < laneNames.Length; j++)
-                            {
-                                if (hitOBJ.name == laneNames[j])
-                                {
-                                    //hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapPress(i, Time.fixedTime);
-                                    tapText.text += multiTap.fingerId + hitOBJ.name + Time.fixedTime.ToString() + Environment.NewLine;
-                                }
-
-                            }
+                            
                             break;
                         case TouchPhase.Stationary:
-                            tapText.text += "静止中" + Environment.NewLine;
-                            tapText.text += multiTap.fingerId + hitOBJ.name + Time.fixedTime.ToString() + Environment.NewLine;
 
                             break;
                         // Report that a direction has been chosen when the finger is lifted.
                         case TouchPhase.Ended:
-                            tapText.text += "離した" + Environment.NewLine;
-                            for (int j = 0; j < laneNames.Length; j++)
-                            {
-                                if (hitOBJ.name == laneNames[j])
-                                {
-                                    hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapRelease(i);
-                                    tapText.text += multiTap.fingerId + hitOBJ.name + Time.fixedTime.ToString() + Environment.NewLine;
-                                }
-
-                            }
+                            
+                            //ここに離したかを判別するフラグをtrueにするコード書く。
                             break;
                     }
-                    //switch (hitOBJ.name)
-                    //{
-                    //    case "Lane1":
-                    //        hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapPress(1);
-                    //        tapText.text += multiTap.fingerId + ":Lane1:" + Time.fixedTime.ToString() + Environment.NewLine;
-                    //        break;
-                    //    case "Lane2":
-                    //        hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapPress(2);
-                    //        tapText.text += multiTap.fingerId + ":Lane2:" + Time.fixedTime.ToString() + Environment.NewLine;
-                    //        break;
-                    //    case "Lane3":
-                    //        hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapPress(3);
-                    //        tapText.text += multiTap.fingerId + ":Lane3:" + Time.fixedTime.ToString() + Environment.NewLine;
-                    //        break;
-                    //    case "Lane4":
-                    //        hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapPress(4);
-                    //        tapText.text += multiTap.fingerId + ":Lane4:" + Time.fixedTime.ToString() + Environment.NewLine;
-                    //        break;
-                    //    case "Lane5":
-                    //        hitOBJ.transform.parent.gameObject.GetComponent<LaneTap>().TapPress(5);
-                    //        tapText.text += multiTap.fingerId + ":Lane5:" + Time.fixedTime.ToString() + Environment.NewLine;
-                    //        break;
-                    //}
-                    hitOBJ.GetComponent<ShaderColorChange>().ChangeColor(Color.black);
+                    
 
 
                 }
@@ -200,12 +174,12 @@ public class MultiTapTest : MonoBehaviour
 
         if (touchCount > 0)
         {
-            //MultiTapDebugDisp(touchCount);
-            SingleTouchTest();
+            MultiTapDebugDisp(touchCount);
+            //SingleTouchTest();
         }
         
 
-        MousePointerRaycastTest();
+        //MousePointerRaycastTest();
 
         #region errorCode(2021.9.27) 
         //if (touchCount == 0)
