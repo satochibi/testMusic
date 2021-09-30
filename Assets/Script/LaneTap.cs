@@ -29,7 +29,7 @@ public class LaneTap : MonoBehaviour
 
             //for (int i = 0; i < tapEvents.Length; i++)
             //{
-                Debug.Log("\nTrack" + ( 1).ToString() +" "+ tapEvents[0].IsTapDown);
+                //Debug.Log("\nTrack" + ( 1).ToString() +" "+ tapEvents[0].IsTapDown);
             //}
 
             yield return new WaitForSeconds(timeOut);
