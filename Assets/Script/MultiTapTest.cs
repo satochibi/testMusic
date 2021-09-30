@@ -49,12 +49,16 @@ public class MultiTapTest : MonoBehaviour
                 mhit.collider.gameObject.GetComponent<ShaderColorChange>().ChangeColor(Color.black);
                 tapText.text = mhit.collider.gameObject.name;
             }
+            
             //mhit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
             //mhit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
             //Debug.Log(mhit.collider.gameObject.transform.position + Environment.NewLine);
             Debug.Log("マウス座標" + Input.mousePosition.ToString());
         }
-
+        else
+        {
+            tapText.text = default;
+        }
 
     }
 
@@ -65,7 +69,7 @@ public class MultiTapTest : MonoBehaviour
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray, out hit))
         {
-            hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
+            hit.collider.gameObject.GetComponent<ShaderColorChange>().ChangeColor(Color.black);
 
         }
         //tapText.text = "カメラ座標:" + Camera.main.transform.position + Environment.NewLine;
@@ -196,9 +200,10 @@ public class MultiTapTest : MonoBehaviour
 
         if (touchCount > 0)
         {
-            MultiTapDebugDisp(touchCount);
-            //SingleTouchTest();
+            //MultiTapDebugDisp(touchCount);
+            SingleTouchTest();
         }
+        
 
         MousePointerRaycastTest();
 
