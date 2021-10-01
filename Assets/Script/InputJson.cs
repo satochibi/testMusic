@@ -44,6 +44,10 @@ public class InputJson : MonoBehaviour
     [SerializeField]
     public int notesNum;
 
+    [SerializeField]
+    string musicName;
+    [SerializeField]
+    Difficulty difficultType;
     //public GameObject lineOBJ;
     // Start is called before the first frame update
     void Start()
@@ -53,7 +57,8 @@ public class InputJson : MonoBehaviour
         string m_name = m_system.GetResultPalam().musicTitle;
         if (string.IsNullOrEmpty(m_name))
         {
-            m_name = "シャイニングスター";
+            m_name = musicName;
+            m_system.result.difficulty = difficultType;
         }
         float fumenScrollSpeed = fumen.Speed;
 

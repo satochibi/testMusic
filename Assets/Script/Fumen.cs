@@ -207,10 +207,12 @@ public class Fumen : MonoBehaviour
                         float n_time = noteCon.NotesTime;
                         //ノーツの判定時間と現在の経過時間の差(絶対値)
                         float timediff = Mathf.Abs(n_time - playTime);
+                        
                         //差がBadの判定間隔以内（0.2秒以内）かつ対象ノーツが未判定の時 
                         if (timediff <= judgeStep[(int)JudgementType.Bad] && !noteCon.IsTapped)
                         {
-
+                            noteCon.IsTapped = true;
+                            notesList[index].GetComponent<MeshRenderer>().enabled = false;
                             //差が小さいケースから(Perfect～>...Bad)処理を行い関数を終了する。
                             switch (timediff)
                             {
@@ -240,8 +242,8 @@ public class Fumen : MonoBehaviour
                                     break;
 
                             }
-                            noteCon.IsTapped = true;
-                            notesList[index].GetComponent<MeshRenderer>().enabled = false;
+                            
+                            
                         }
                     }
                 }

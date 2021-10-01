@@ -20,6 +20,7 @@ public class ShaderColorChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (material.HasProperty("_Color"))
         {
             //float val = Mathf.PingPong(Time.time, 2.0F);

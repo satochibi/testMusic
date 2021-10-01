@@ -12,10 +12,10 @@ public class MultiTapTest : MonoBehaviour
     [SerializeField]
     GameObject tapInfoTextObj;
     [SerializeField]
-    //GameObject fumenObj;
+    GameObject fumenObj;
     Text tapText;
     Text tapInfoText;
-    //Fumen fumen;
+    Fumen fumen;
     readonly string[] laneNames =
     {
         "Lane1",
@@ -43,7 +43,7 @@ public class MultiTapTest : MonoBehaviour
     {
         tapText = tapTextGameObj.GetComponent<Text>();
         tapInfoText = tapInfoTextObj.GetComponent<Text>();
-        //fumen = fumenObj.GetComponent<Fumen>();
+        fumen = fumenObj.GetComponent<Fumen>();
         //if (Physics.Raycast(ray, out hit, 10.0f))
         //{
         //    Debug.Log(hit.collider.gameObject.transform.position);
@@ -54,19 +54,31 @@ public class MultiTapTest : MonoBehaviour
         Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit mhit = default;
         Debug.DrawRay(mouseray.origin, mouseray.direction * 50.0f, Color.red);
-
+        
         if (Physics.Raycast(mouseray, out mhit))
         {
+            GameObject mhitOBJ = mhit.collider.gameObject;
             if (mhit.collider.gameObject.tag == "lane")
             {
                 mhit.collider.gameObject.GetComponent<ShaderColorChange>().ChangeColor(Color.black);
                 tapText.text = mhit.collider.gameObject.name;
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    for (int j = 0; j < laneNames.Length; j++)
+                    {
+                        if (mhitOBJ.name == laneNames[j])
+                        {
+                            fumen.Judge(j + 1);
+                            //tapInfoText.text = "judge" + Time.deltaTime;
+                        }
+                    }
+                }
             }
-            
+
             //mhit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
             //mhit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
             //Debug.Log(mhit.collider.gameObject.transform.position + Environment.NewLine);
-            Debug.Log("マウス座標" + Input.mousePosition.ToString());
+            //Debug.Log("マウス座標" + Input.mousePosition.ToString());
         }
         else
         {
@@ -110,6 +122,9 @@ public class MultiTapTest : MonoBehaviour
     }
     public void MultiTapDebugDisp(int count)
     {
+
+
+        
         tapText.text = default;
         for (int i = 0; i < count; i++)
         {
@@ -122,21 +137,21 @@ public class MultiTapTest : MonoBehaviour
                 GameObject hitOBJ = hit.collider.gameObject;
                 if (hitOBJ.tag == "lane")
                 {
-                    hitOBJ.GetComponent<ShaderColorChange>().ChangeColor(tapColors[i]);
+                    hitOBJ.GetComponent<ShaderColorChange>().ChangeColor(tapColors[i%5]);
                     switch (multiTap.phase)
                     {
 
                         // Record initial touch position.
                         case TouchPhase.Began:
 
-                            //for (int j = 0; j < laneNames.Length; j++)
-                            //{
-                            //    if (hitOBJ.name == laneNames[i])
-                            //    {
-                            //        fumen.Judge(i);
-                            //        tapInfoText.text = "judge" + Time.deltaTime;
-                            //    }
-                            //}
+                            for (int j = 0; j < laneNames.Length; j++)
+                            {
+                                if (hitOBJ.name == laneNames[j])
+                                {
+                                    fumen.Judge(j+1);
+                                    tapInfoText.text = "judge" + Time.deltaTime;
+                                }
+                            }
 
                             break;
 
@@ -150,8 +165,15 @@ public class MultiTapTest : MonoBehaviour
                             break;
                         // Report that a direction has been chosen when the finger is lifted.
                         case TouchPhase.Ended:
-                            
-                            //ここに離したかを判別するフラグをtrueにするコード書く。
+
+                            //for (int j = 0; j < laneNames.Length; j++)
+                            //{
+                            //    if (hitOBJ.name == laneNames[j])
+                            //    {
+                            //        //ここに離したかを判別するフラグをtrueにするコード書く。
+                                    
+                            //    }
+                            //}
                             break;
                     }
                     
