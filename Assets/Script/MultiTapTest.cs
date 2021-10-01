@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class MultiTapTest : MonoBehaviour
 {
@@ -54,7 +54,7 @@ public class MultiTapTest : MonoBehaviour
         Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit mhit = default;
         Debug.DrawRay(mouseray.origin, mouseray.direction * 50.0f, Color.red);
-        
+
         if (Physics.Raycast(mouseray, out mhit))
         {
             GameObject mhitOBJ = mhit.collider.gameObject;
@@ -124,23 +124,27 @@ public class MultiTapTest : MonoBehaviour
     {
 
 
-        
+
         tapText.text = default;
+        List<string> tapsLaneNames = new List<string>();
         for (int i = 0; i < count; i++)
         {
+
             Touch multiTap = Input.GetTouch(i);
             Ray ray = Camera.main.ScreenPointToRay(multiTap.position);
-
             RaycastHit hit = new RaycastHit();
+
+
             if (Physics.Raycast(ray, out hit))
             {
+
                 GameObject hitOBJ = hit.collider.gameObject;
                 if (hitOBJ.tag == "lane")
                 {
-                    hitOBJ.GetComponent<ShaderColorChange>().ChangeColor(tapColors[i%5]);
+                    tapsLaneNames.Add(hitOBJ.name + Environment.NewLine);
+                    hitOBJ.GetComponent<ShaderColorChange>().ChangeColor(tapColors[i % 5]);
                     switch (multiTap.phase)
                     {
-
                         // Record initial touch position.
                         case TouchPhase.Began:
 
@@ -148,17 +152,14 @@ public class MultiTapTest : MonoBehaviour
                             {
                                 if (hitOBJ.name == laneNames[j])
                                 {
-                                    fumen.Judge(j+1);
-                                    tapInfoText.text = "judge" + Time.deltaTime;
+                                    fumen.Judge(j + 1);
                                 }
                             }
-
                             break;
-
 
                         // Determine direction by comparing the current touch position with the initial one.
                         case TouchPhase.Moved:
-                            
+
                             break;
                         case TouchPhase.Stationary:
 
@@ -166,17 +167,17 @@ public class MultiTapTest : MonoBehaviour
                         // Report that a direction has been chosen when the finger is lifted.
                         case TouchPhase.Ended:
 
-                            //for (int j = 0; j < laneNames.Length; j++)
-                            //{
-                            //    if (hitOBJ.name == laneNames[j])
-                            //    {
-                            //        //ここに離したかを判別するフラグをtrueにするコード書く。
-                                    
-                            //    }
-                            //}
+                            for (int j = 0; j < laneNames.Length; j++)
+                            {
+                                if (hitOBJ.name == laneNames[j])
+                                {
+                                    //ここに離したかを判別するフラグをtrueにするコード書く。
+                                    fumen.LongNoteJudge(j);
+                                }
+                            }
                             break;
                     }
-                    
+
 
 
                 }
@@ -184,7 +185,17 @@ public class MultiTapTest : MonoBehaviour
             }
 
         }
+        foreach (string names in tapsLaneNames)
+        {
+            tapText.text += names;
+        }
 
+
+
+    }
+
+    void ReLoad()
+    {
 
     }
     void Update()
@@ -199,7 +210,7 @@ public class MultiTapTest : MonoBehaviour
             MultiTapDebugDisp(touchCount);
             //SingleTouchTest();
         }
-        
+
 
         //MousePointerRaycastTest();
 

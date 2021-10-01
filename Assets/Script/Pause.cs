@@ -28,7 +28,7 @@ public class Pause : MonoBehaviour
     public void SceneChange(string nextSceneName)
     {
         GameSystem game= GameObject.Find("GameManager").GetComponent<GameSystem>();
-        if(nextSceneName =="SampleScene")
+        if(nextSceneName =="SampleScene"|| nextSceneName  == "MultiTapTest")
         {
             string titlename = game.result.musicTitle;
             Difficulty difficulty = game.result.difficulty;

@@ -71,6 +71,7 @@ public class Fumen : MonoBehaviour
     [SerializeField]
     List<LongNotesEvent> longNotesEvent =new List<LongNotesEvent>();
 
+    
     public void AddLongNotesEvent(LongNotesEvent @event)
     {
         longNotesEvent.Add(@event);
@@ -247,13 +248,71 @@ public class Fumen : MonoBehaviour
                         }
                     }
                 }
+                
+
             }
         }
     }
 
-    public void LongNoteJudge(float eventtime)
+    
+    public void LongNoteJudge(int track)
     {
+        if (this.isGameStart)
+        {
+            for (int index = 0; index < notesList.Count; index++)
+            {
+                NotesController noteCon = notesList[index].GetComponent<NotesController>();
+                if (notesList[index].name == "ロングノーツ終端")
+                {
+                    if (noteCon.NotesTrack == (Track)track)
+                    {
+                        float n_time = noteCon.NotesTime;
+                        //ノーツの判定時間と現在の経過時間の差(絶対値)
+                        float timediff = Mathf.Abs(n_time - playTime);
 
+                        //差がBadの判定間隔以内（0.2秒以内）かつ対象ノーツが未判定の時 
+                        if (timediff <= judgeStep[(int)JudgementType.Bad] && !noteCon.IsTapped)
+                        {
+                            noteCon.IsTapped = true;
+                            notesList[index].GetComponent<MeshRenderer>().enabled = false;
+                            //差が小さいケースから(Perfect～>...Bad)処理を行い関数を終了する。
+                            switch (timediff)
+                            {
+                                //差0.05秒　→Perfect
+                                case float i when i <= judgeStep[(int)JudgementType.Perfect]:
+                                    system.AddResultPalam(JudgementType.Perfect);
+                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                                    return;
+                                //差0.1秒    →Great
+                                case float i when i <= judgeStep[(int)JudgementType.Great]:
+                                    system.AddResultPalam(JudgementType.Great);
+                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                                    return;
+                                //差0.15秒   →Good
+                                case float i when i <= judgeStep[(int)JudgementType.Good]:
+                                    system.AddResultPalam(JudgementType.Good);
+                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                                    return;
+                                //差0.2秒    →Bad
+                                case float i when i <= judgeStep[(int)JudgementType.Bad]:
+                                    system.AddResultPalam(JudgementType.Bad);
+                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+                                    return;
+
+                                default:
+
+                                    break;
+
+                            }
+
+
+                        }
+                    }
+                }
+
+
+            }
+        }
     }
     void AutoPlay(float time)
     {

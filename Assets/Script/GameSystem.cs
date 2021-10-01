@@ -382,8 +382,21 @@ public class GameSystem : MonoBehaviour
             }
             //music.Play(); //ボタンで音楽を流すようにしたいので、playは保留
         }
+        //デバッグ用
+        if (SceneManager.GetActiveScene().name == "MultiTapTest" && jUI == null)
+        {
 
+            //JUIオブジェクト取得。
+            jUI = GameObject.Find("JudgeUI");
 
+            normalScore = 1000000.00 / notesnum;
+
+            music = GameObject.Find("Audio").GetComponent<AudioSource>();
+            if (!string.IsNullOrEmpty(result.musicTitle))
+            {
+                music.clip = Resources.Load<AudioClip>("MusicF/" + result.musicTitle);
+            }
+        }
         //リザルトシーンへGO
         if (Input.GetKeyDown(KeyCode.A))
         {
