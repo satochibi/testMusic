@@ -123,19 +123,17 @@ public class InputJson : MonoBehaviour
                     if (i == m_note.Length - 1)
                     {
                         notes.name = "ロングノーツ終端";
-                        fumen.AddLongNotesEvent(
-                    new LongNotesEvent(
-                        parentlong.GetComponent<NotesController>().NotesTime,
-                        notes.GetComponent<NotesController>().NotesTime,
-                        parentlong.GetComponent<NotesController>().NotesTrack,
-                        notes.GetComponent<NotesController>().NotesTrack,
-                        m_note.Length-1
-                        )
-                     );
+                        
                     }
                     else
                     {
                         notes.name = "ロングノーツ";
+                        fumen.AddLongNotesEvent(
+                    new LongNotesEvent(
+                       notes.GetComponent<NotesController>().NotesTime,
+                       notes.GetComponent<NotesController>().NotesTrack
+                        )
+                     );
                     }
                     //notepoints[i] = gameobject.transform;
 

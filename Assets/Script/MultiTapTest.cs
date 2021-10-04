@@ -16,6 +16,8 @@ public class MultiTapTest : MonoBehaviour
     Text tapText;
     Text tapInfoText;
     Fumen fumen;
+
+    List<string> tapsLaneNames = new List<string>();
     readonly string[] laneNames =
     {
         "Lane1",
@@ -73,6 +75,19 @@ public class MultiTapTest : MonoBehaviour
                         }
                     }
                 }
+                
+                if (Input.GetMouseButtonUp(0)|| Input.GetMouseButtonUp(0))
+                {
+                    for (int j = 0; j < laneNames.Length; j++)
+                    {
+                        if (mhitOBJ.name == laneNames[j])
+                        {
+                            fumen.LongNoteJudge(j + 1);
+                            
+                            //tapInfoText.text = "judge" + Time.deltaTime;
+                        }
+                    }
+                }
             }
 
             //mhit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
@@ -126,7 +141,7 @@ public class MultiTapTest : MonoBehaviour
 
 
         tapText.text = default;
-        List<string> tapsLaneNames = new List<string>();
+        
         for (int i = 0; i < count; i++)
         {
 
@@ -159,8 +174,6 @@ public class MultiTapTest : MonoBehaviour
 
                         // Determine direction by comparing the current touch position with the initial one.
                         case TouchPhase.Moved:
-
-                            break;
                         case TouchPhase.Stationary:
 
                             break;
@@ -172,7 +185,7 @@ public class MultiTapTest : MonoBehaviour
                                 if (hitOBJ.name == laneNames[j])
                                 {
                                     //ここに離したかを判別するフラグをtrueにするコード書く。
-                                    fumen.LongNoteJudge(j);
+                                    fumen.LongNoteJudge(j+1);
                                 }
                             }
                             break;
@@ -190,7 +203,7 @@ public class MultiTapTest : MonoBehaviour
             tapText.text += names;
         }
 
-
+        tapsLaneNames.Clear();
 
     }
 

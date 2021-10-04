@@ -7,27 +7,13 @@ using System;
 
 public class LongNotesEvent
 {
-    public float StartTime { get; set; }
-    public float EndTime { get; set; }
-    public Track StartTrack { get; set; }
-    public Track EndTrack { get; set; }
+    public float EveTime { get; set; }
+    public Track EveTrack { get; set; }
 
-    public int NotesNum { get; set; }
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    /// <param name="stime">始点の時間</param>
-    /// <param name="etime">終点の時間</param>
-    /// <param name="strack">始点位置</param>
-    /// <param name="etrack">終点位置</param>
-    /// <param name="notesnum">始点から終点までに存在するノーツ数</param>
-    public LongNotesEvent(float stime,float etime,Track strack,Track etrack,int notesnum)
+    public LongNotesEvent(float time, Track track)
     {
-        StartTime = stime;
-        EndTime = etime;
-        StartTrack = strack;
-        EndTrack = etrack;
-        NotesNum = notesnum;
+        EveTime = time;
+        EveTrack = track;
 
     }
 }
@@ -69,9 +55,9 @@ public class Fumen : MonoBehaviour
     List<GameObject> notesList;
 
     [SerializeField]
-    List<LongNotesEvent> longNotesEvent =new List<LongNotesEvent>();
+    List<LongNotesEvent> longNotesEvent = new List<LongNotesEvent>();
 
-    
+
     public void AddLongNotesEvent(LongNotesEvent @event)
     {
         longNotesEvent.Add(@event);
@@ -93,7 +79,7 @@ public class Fumen : MonoBehaviour
         this.isGameStart = false;
         audioGameObj.GetComponent<AudioSource>().Stop();
         system = GameObject.Find("GameManager").GetComponentInChildren<GameSystem>();
-        
+
     }
 
     //時間でのノーツ判定
@@ -107,8 +93,8 @@ public class Fumen : MonoBehaviour
         //Playtime = loadtime - this.GameStartTime;
         KeyBoardTap();
         CheckOverNotes();
+        LongNotesEventJudge();
 
-        
 
         if (autoPlay)
         {
@@ -201,14 +187,14 @@ public class Fumen : MonoBehaviour
             for (int index = 0; index < notesList.Count; index++)
             {
                 NotesController noteCon = notesList[index].GetComponent<NotesController>();
-                if(notesList[index].name != "ロングノーツ" && notesList[index].name != "ロングノーツ終端")
+                if (notesList[index].name != "ロングノーツ" && notesList[index].name != "ロングノーツ終端")
                 {
                     if (noteCon.NotesTrack == (Track)track)
                     {
                         float n_time = noteCon.NotesTime;
                         //ノーツの判定時間と現在の経過時間の差(絶対値)
                         float timediff = Mathf.Abs(n_time - playTime);
-                        
+
                         //差がBadの判定間隔以内（0.2秒以内）かつ対象ノーツが未判定の時 
                         if (timediff <= judgeStep[(int)JudgementType.Bad] && !noteCon.IsTapped)
                         {
@@ -243,18 +229,18 @@ public class Fumen : MonoBehaviour
                                     break;
 
                             }
-                            
-                            
+
+
                         }
                     }
                 }
-                
+
 
             }
         }
     }
 
-    
+    //ロングノーツ（終端ノーツ）
     public void LongNoteJudge(int track)
     {
         if (this.isGameStart)
@@ -313,6 +299,19 @@ public class Fumen : MonoBehaviour
 
             }
         }
+    }
+    public void LongNotesEventJudge()
+    {
+
+        foreach (var eve in longNotesEvent)
+        {
+            if (eve.EveTime == PlayTime)
+            {
+                system.AddResultPalam(JudgementType.Perfect);
+                
+            }
+        }
+
     }
     void AutoPlay(float time)
     {
@@ -376,7 +375,7 @@ public class Fumen : MonoBehaviour
         sender.SetActive(false);
         rb.AddForce(transform.forward * -speed, ForceMode.VelocityChange);
         audioGameObj.GetComponent<AudioSource>().Play();
-        
+
         this.gameStartTime = Time.fixedTime;
 
         //tagが"note"のゲームオブジェクトをすべて検索
