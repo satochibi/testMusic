@@ -287,7 +287,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dcb8254a65f278343a4e00290d69ade6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d4cb8083bfcb5cd4fa37283a2db42db6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -2446,17 +2446,49 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 404923931266818458, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: Tracknum
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 404923931266818458, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: fumenObj
+      value: 
+      objectReference: {fileID: 357788685}
+    - target: {fileID: 404923931266818458, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 891540110394558187, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: Tracknum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 891540110394558187, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: fumenObj
+      value: 
+      objectReference: {fileID: 357788685}
     - target: {fileID: 891540110394558187, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1683010066850362502, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: Tracknum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683010066850362502, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: fumenObj
+      value: 
+      objectReference: {fileID: 357788685}
+    - target: {fileID: 1683010066850362502, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5995870467792923455, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: Tracknum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995870467792923455, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: fumenObj
+      value: 
+      objectReference: {fileID: 357788685}
     - target: {fileID: 5995870467792923455, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2721,6 +2753,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3e7646e0aea1b964ab8d705db55d5b9a, type: 2}
+    - target: {fileID: 8295518966074856259, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: Tracknum
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8295518966074856259, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
+      propertyPath: fumenObj
+      value: 
+      objectReference: {fileID: 357788685}
     - target: {fileID: 8295518966074856259, guid: a71c45cb0aa2c2443a85f35f7b13cffa, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3088,8 +3128,8 @@ MonoBehaviour:
   longnotespref: {fileID: 6901420768220649772, guid: abd81fe5cff003148ae7104ed791f9cc, type: 3}
   MainJPointTransform: {fileID: 1018572636}
   notesNum: 0
-  musicName: "\u30B7\u30E3\u30A4\u30CB\u30F3\u30B0\u30B9\u30BF\u30FC"
-  difficultType: 2
+  musicName: "\u30CF\u30EB\u30B8\u30AA\u30F3"
+  difficultType: 1
 --- !u!4 &1600527979
 Transform:
   m_ObjectHideFlags: 0

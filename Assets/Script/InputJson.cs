@@ -67,7 +67,7 @@ public class InputJson : MonoBehaviour
         string inputString = Resources.Load<TextAsset>("NoteJson/"+m_name+"/"+m_system.result.difficulty.ToString()).ToString();
         //Debug.Log(inputString);
         Humen inputJson = JsonUtility.FromJson<Humen>(inputString);
-
+        int noteIndex =0;
         for (int a = 0; a < inputJson.notes.Length; a++)
         {
 
@@ -81,10 +81,11 @@ public class InputJson : MonoBehaviour
             //Debug.Log(zPosition);
 
             GameObject parentlong = Instantiate(notepref, new Vector3(-4 + inputJson.notes[a].block * 2f, 0.5f, zPosition), Quaternion.identity, fumenGameObj.transform);
+            noteIndex++;
 
             parentlong.GetComponent<NotesController>().NotesTrack = (Track)(inputJson.notes[a].block + 1);
             parentlong.GetComponent<NotesController>().NotesTime = NotesTimeAndPosCalc.CalcNotesTime(inputJson.BPM, inputJson.offset, 44100, inputJson.notes[a].LPB, inputJson.notes[a].num);
-
+            parentlong.GetComponent<NotesController>().Type = NotesType.Normal;
 
             //Debug.Log("Num:" + inputJson.notes[a].num + "　Block:" + inputJson.notes[a].block + "　A:" + "NoteType" + inputJson.notes[a].type.ToString() + "   " + a);
             if (inputJson.notes[a].type == 2)
@@ -94,9 +95,10 @@ public class InputJson : MonoBehaviour
                 longnotesGameObjList.transform.parent = fumenGameObj.transform;
                 //ロングノーツであれば下記の処理を実行 ロングノーツの先頭のオブジェクトを生成
                 parentlong.name = "ロングノーツ先頭";
+                parentlong.GetComponent<NotesController>().Type = NotesType.Normal;
                 parentlong.transform.parent = longnotesGameObjList.transform;
                 GameObject longnote = Instantiate(longnotespref, Vector3.zero, Quaternion.identity, longnotesGameObjList.transform);
-               
+                
                 longnote.GetComponent<LongnotesInfo>().Init(longnotesGameObjList);
                 
                 Notes[] m_note = inputJson.notes[a].notes;
@@ -113,7 +115,7 @@ public class InputJson : MonoBehaviour
 
 
                     GameObject notes = Instantiate(notepref, new Vector3(-4 + m_note[i].block * 2f, 0.5f, zPosition), Quaternion.identity, longnotesGameObjList.transform);
-                    
+                    noteIndex++;
                     notes.GetComponent<NotesController>().NotesTrack = (Track)(m_note[i].block + 1);
                     notes.GetComponent<NotesController>().NotesTime = NotesTimeAndPosCalc.CalcNotesTime(inputJson.BPM, inputJson.offset, 44100, m_note[i].LPB, m_note[i].num);
 
@@ -123,17 +125,16 @@ public class InputJson : MonoBehaviour
                     if (i == m_note.Length - 1)
                     {
                         notes.name = "ロングノーツ終端";
-                        
+                        notes.GetComponent<NotesController>().Type = NotesType.LongEnd;
+
+
                     }
                     else
                     {
                         notes.name = "ロングノーツ";
-                        fumen.AddLongNotesEvent(
-                    new LongNotesEvent(
-                       notes.GetComponent<NotesController>().NotesTime,
-                       notes.GetComponent<NotesController>().NotesTrack
-                        )
-                     );
+                        notes.GetComponent<NotesController>().Type = NotesType.Long;
+
+                     
                     }
                     //notepoints[i] = gameobject.transform;
 

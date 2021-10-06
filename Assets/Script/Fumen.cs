@@ -9,12 +9,13 @@ public class LongNotesEvent
 {
     public float EveTime { get; set; }
     public Track EveTrack { get; set; }
+    public int Index { get; set; }
 
-    public LongNotesEvent(float time, Track track)
+    public LongNotesEvent(float time, Track track, int index)
     {
         EveTime = time;
         EveTrack = track;
-
+        Index = index;
     }
 }
 public class Fumen : MonoBehaviour
@@ -37,6 +38,15 @@ public class Fumen : MonoBehaviour
     [SerializeField]
     TapLightController[] tapLList;
 
+
+    Dictionary<string, string> longNoteTypeName = new Dictionary<string, string>()
+    {
+        { "longNotesStart","ロングノーツ先頭"},
+        { "longNotes","ロングノーツ" },
+        { "longNotesEnd","ロングノーツ終端"}
+    };
+
+    public Dictionary<string, string> LongNoteTypeName { get { return this.longNoteTypeName; } }
     float playTime;
     public float PlayTime { get { return this.playTime; } }
 
@@ -93,7 +103,7 @@ public class Fumen : MonoBehaviour
         //Playtime = loadtime - this.GameStartTime;
         KeyBoardTap();
         CheckOverNotes();
-        LongNotesEventJudge();
+        //LongNotesEventJudge(1);
 
 
         if (autoPlay)
@@ -101,11 +111,7 @@ public class Fumen : MonoBehaviour
             AutoPlay(playTime);
 
         }
-        else
-        {
-
-
-        }
+    
 
 
     }
@@ -114,34 +120,34 @@ public class Fumen : MonoBehaviour
     /// </summary>
     public void KeyBoardTap()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
 
-            Judge((int)Track.track1);
-            Debug.Log(longNotesEvent);
+        //    Judge((int)Track.track1);
+        //    Debug.Log(longNotesEvent);
 
 
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
+        //}
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
 
-            Judge((int)Track.track2);
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
+        //    Judge((int)Track.track2);
+        //}
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
 
-            Judge((int)Track.track3);
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
+        //    Judge((int)Track.track3);
+        //}
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
 
-            Judge((int)Track.track4);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
+        //    Judge((int)Track.track4);
+        //}
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
 
-            Judge((int)Track.track5);
-        }
+        //    Judge((int)Track.track5);
+        //}
     }
     /// <summary>
     /// 一定時間経ったノーツを削除する処理
@@ -180,15 +186,19 @@ public class Fumen : MonoBehaviour
     ///|Bad  → |Good　→|Great→ |　 Perfect　→ |Great→  |Good→  |Bad     |
     /// </summary>
     /// <param name="track">入力トラック番号</param>
-    public void Judge(int track)
+    public void Judge(int track,NotesType type)
     {
         if (this.isGameStart)
         {
             for (int index = 0; index < notesList.Count; index++)
             {
                 NotesController noteCon = notesList[index].GetComponent<NotesController>();
-                if (notesList[index].name != "ロングノーツ" && notesList[index].name != "ロングノーツ終端")
+                if(noteCon.Type ==type)
+                //if (noteCon.Type != NotesType.LongNormal && noteCon.Type != NotesType.LongEnd)
+                //if (notesList[index].name != LongNoteTypeName["longNotes"] && notesList[index].name != LongNoteTypeName["longNotesEnd"])
                 {
+                    
+                    
                     if (noteCon.NotesTrack == (Track)track)
                     {
                         float n_time = noteCon.NotesTime;
@@ -233,85 +243,99 @@ public class Fumen : MonoBehaviour
 
                         }
                     }
+              
                 }
 
 
             }
         }
     }
-
+    
+  
     //ロングノーツ（終端ノーツ）
-    public void LongNoteJudge(int track)
+    //public void LongNoteJudge(int track)
+    //{
+    //    if (this.isGameStart)
+    //    {
+    //        for (int index = 0; index < notesList.Count; index++)
+    //        {
+    //            NotesController noteCon = notesList[index].GetComponent<NotesController>();
+    //            if (notesList[index].name == "ロングノーツ終端")
+    //            {
+    //                if (noteCon.NotesTrack == (Track)track)
+    //                {
+    //                    float n_time = noteCon.NotesTime;
+    //                    //ノーツの判定時間と現在の経過時間の差(絶対値)
+    //                    float timediff = Mathf.Abs(n_time - playTime);
+
+    //                    //差がBadの判定間隔以内（0.2秒以内）かつ対象ノーツが未判定の時 
+    //                    if (timediff <= judgeStep[(int)JudgementType.Bad] && !noteCon.IsTapped)
+    //                    {
+    //                        noteCon.IsTapped = true;
+    //                        notesList[index].GetComponent<MeshRenderer>().enabled = false;
+    //                        //差が小さいケースから(Perfect～>...Bad)処理を行い関数を終了する。
+    //                        switch (timediff)
+    //                        {
+    //                            //差0.05秒　→Perfect
+    //                            case float i when i <= judgeStep[(int)JudgementType.Perfect]:
+    //                                system.AddResultPalam(JudgementType.Perfect);
+    //                                tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+    //                                return;
+    //                            //差0.1秒    →Great
+    //                            case float i when i <= judgeStep[(int)JudgementType.Great]:
+    //                                system.AddResultPalam(JudgementType.Great);
+    //                                tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+    //                                return;
+    //                            //差0.15秒   →Good
+    //                            case float i when i <= judgeStep[(int)JudgementType.Good]:
+    //                                system.AddResultPalam(JudgementType.Good);
+    //                                tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+    //                                return;
+    //                            //差0.2秒    →Bad
+    //                            case float i when i <= judgeStep[(int)JudgementType.Bad]:
+    //                                system.AddResultPalam(JudgementType.Bad);
+    //                                tapAudioSource.PlayOneShot(this.normalTapAudioClip);
+    //                                return;
+
+    //                            default:
+
+    //                                break;
+
+    //                        }
+
+
+    //                    }
+    //                }
+    //            }
+
+
+    //        }
+    //    }
+    //}
+    public void LongNotesEventJudge(int track)
     {
+        
         if (this.isGameStart)
         {
             for (int index = 0; index < notesList.Count; index++)
             {
-                NotesController noteCon = notesList[index].GetComponent<NotesController>();
-                if (notesList[index].name == "ロングノーツ終端")
+                var noteCon = notesList[index].GetComponent<NotesController>();
+                if (noteCon.NotesTrack == (Track)track)
                 {
-                    if (noteCon.NotesTrack == (Track)track)
+                    if (noteCon.Type == NotesType.Long && !noteCon.IsTapped)
                     {
-                        float n_time = noteCon.NotesTime;
-                        //ノーツの判定時間と現在の経過時間の差(絶対値)
-                        float timediff = Mathf.Abs(n_time - playTime);
-
-                        //差がBadの判定間隔以内（0.2秒以内）かつ対象ノーツが未判定の時 
-                        if (timediff <= judgeStep[(int)JudgementType.Bad] && !noteCon.IsTapped)
+                        if (playTime >= noteCon.NotesTime)
                         {
-                            noteCon.IsTapped = true;
                             notesList[index].GetComponent<MeshRenderer>().enabled = false;
-                            //差が小さいケースから(Perfect～>...Bad)処理を行い関数を終了する。
-                            switch (timediff)
-                            {
-                                //差0.05秒　→Perfect
-                                case float i when i <= judgeStep[(int)JudgementType.Perfect]:
-                                    system.AddResultPalam(JudgementType.Perfect);
-                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
-                                    return;
-                                //差0.1秒    →Great
-                                case float i when i <= judgeStep[(int)JudgementType.Great]:
-                                    system.AddResultPalam(JudgementType.Great);
-                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
-                                    return;
-                                //差0.15秒   →Good
-                                case float i when i <= judgeStep[(int)JudgementType.Good]:
-                                    system.AddResultPalam(JudgementType.Good);
-                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
-                                    return;
-                                //差0.2秒    →Bad
-                                case float i when i <= judgeStep[(int)JudgementType.Bad]:
-                                    system.AddResultPalam(JudgementType.Bad);
-                                    tapAudioSource.PlayOneShot(this.normalTapAudioClip);
-                                    return;
-
-                                default:
-
-                                    break;
-
-                            }
-
-
+                            system.AddResultPalam(JudgementType.Perfect);
+                            noteCon.IsTapped = true;
                         }
+
                     }
                 }
-
-
             }
-        }
-    }
-    public void LongNotesEventJudge()
-    {
 
-        foreach (var eve in longNotesEvent)
-        {
-            if (eve.EveTime == PlayTime)
-            {
-                system.AddResultPalam(JudgementType.Perfect);
-                
-            }
         }
-
     }
     void AutoPlay(float time)
     {
