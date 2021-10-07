@@ -238,12 +238,12 @@ public class MultiTapTest : MonoBehaviour
 
         if (touchCount > 0)
         {
-            //MultiTapDebugDisp(touchCount);
+            MultiTapDebugDisp(touchCount);
             //SingleTouchTest();
         }
 
 
-        MousePointerRaycastTest();
+        //MousePointerRaycastTest();
 
         #region errorCode(2021.9.27) 
         //if (touchCount == 0)
