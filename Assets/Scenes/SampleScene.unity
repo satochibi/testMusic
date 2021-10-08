@@ -3067,7 +3067,7 @@ MonoBehaviour:
   longnotespref: {fileID: 6901420768220649772, guid: abd81fe5cff003148ae7104ed791f9cc, type: 3}
   MainJPointTransform: {fileID: 417766103}
   notesNum: 0
-  musicName: mya_original00
+  musicName: "\u30B7\u30E3\u30A4\u30CB\u30F3\u30B0\u30B9\u30BF\u30FC"
   difficultType: 2
 --- !u!4 &823819905
 Transform:
