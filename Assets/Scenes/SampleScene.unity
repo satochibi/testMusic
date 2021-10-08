@@ -2655,7 +2655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8652409510986588818, guid: ba19d9ef4e8ec5140a7c20d8306c5ff5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.3
+      value: -20.28
       objectReference: {fileID: 0}
     - target: {fileID: 8652409510986588818, guid: ba19d9ef4e8ec5140a7c20d8306c5ff5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2688,6 +2688,10 @@ PrefabInstance:
     - target: {fileID: 8652409510986588819, guid: ba19d9ef4e8ec5140a7c20d8306c5ff5, type: 3}
       propertyPath: m_Name
       value: LongNotesMask
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652409510986588819, guid: ba19d9ef4e8ec5140a7c20d8306c5ff5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8652409512010922657, guid: ba19d9ef4e8ec5140a7c20d8306c5ff5, type: 3}
       propertyPath: m_Materials.Array.data[0]

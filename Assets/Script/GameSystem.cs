@@ -322,7 +322,7 @@ public class GameSystem : MonoBehaviour
     //格付け
     public void SetRank(int score)
     {
-        int num = m_rankBorder[1];
+       
         //ランクボーダー/50000で整数範囲switch
         switch (score / 50000)
         {
