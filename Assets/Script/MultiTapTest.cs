@@ -16,7 +16,8 @@ public class MultiTapTest : MonoBehaviour
     Text tapText;
     Text tapInfoText;
     Fumen fumen;
-
+    [SerializeField]
+    bool IsDebug;
     List<string> tapsLaneNames = new List<string>();
     readonly string[] laneNames =
     {
@@ -43,8 +44,11 @@ public class MultiTapTest : MonoBehaviour
 
     void Start()
     {
-        tapText = tapTextGameObj.GetComponent<Text>();
-        tapInfoText = tapInfoTextObj.GetComponent<Text>();
+        if (IsDebug)
+        {
+            tapText = tapTextGameObj.GetComponent<Text>();
+            tapInfoText = tapInfoTextObj.GetComponent<Text>();
+        }
         fumen = fumenObj.GetComponent<Fumen>();
         //Time.timeScale *= 0.5f;
         //if (Physics.Raycast(ray, out hit, 10.0f))
@@ -155,8 +159,10 @@ public class MultiTapTest : MonoBehaviour
     }
     public void MultiTapDebugDisp(int count)
     {
-
-        tapText.text = default;
+        if (IsDebug)
+        {
+            tapText.text = default;
+        }
         
         for (int touchIndex = 0; touchIndex < count; touchIndex++)
         {
@@ -218,16 +224,35 @@ public class MultiTapTest : MonoBehaviour
         }
         foreach (string names in tapsLaneNames)
         {
-            tapText.text += names;
+            if (IsDebug)
+            {
+                tapText.text += names;
+            }
         }
 
         tapsLaneNames.Clear();
 
     }
 
-    void ReLoad()
+    public void ReLoad(string nextSceneName)
     {
-
+        GameSystem game = GameObject.Find("GameManager").GetComponent<GameSystem>();
+        if (nextSceneName == "SampleScene" || nextSceneName == "MultiTapTest")
+        {
+            string titlename = game.result.musicTitle;
+            Difficulty difficulty = game.result.difficulty;
+            game.InitializedPalam();
+            game.result.musicTitle = titlename;
+            game.result.difficulty = difficulty;
+        }
+        if (nextSceneName == "Result")
+        {
+            game.IsEnd = true;
+        }
+        else
+        {
+            game.ChangeScene(nextSceneName);
+        }
     }
     void Update()
     {

@@ -115,6 +115,8 @@ public class Fumen : MonoBehaviour
 
 
     }
+
+   
     /// <summary>
     /// デバッグ用キーボードタップ処理
     /// </summary>

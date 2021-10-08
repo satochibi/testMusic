@@ -287,7 +287,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d4cb8083bfcb5cd4fa37283a2db42db6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cb36da343e534a847a42aa5b0cba738a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -2388,9 +2388,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1694544083}
-        m_TargetAssemblyTypeName: GameSystem, Assembly-CSharp
-        m_MethodName: ChangeScene
+      - m_Target: {fileID: 1998121852}
+        m_TargetAssemblyTypeName: MultiTapTest, Assembly-CSharp
+        m_MethodName: ReLoad
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3128,7 +3128,7 @@ MonoBehaviour:
   longnotespref: {fileID: 6901420768220649772, guid: abd81fe5cff003148ae7104ed791f9cc, type: 3}
   MainJPointTransform: {fileID: 1018572636}
   notesNum: 0
-  musicName: "\u30CF\u30EB\u30B8\u30AA\u30F3"
+  musicName: mya_original00
   difficultType: 1
 --- !u!4 &1600527979
 Transform:
@@ -3244,17 +3244,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 42.296, y: 0, z: 0}
---- !u!114 &1694544083 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5962017566774257197, guid: 85b322a7df12da341a33c91ebd565792, type: 3}
-  m_PrefabInstance: {fileID: 150897609}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56692ed221c15dc4c885700a3b5288d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1752472863
 GameObject:
   m_ObjectHideFlags: 0
