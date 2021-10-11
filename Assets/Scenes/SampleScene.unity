@@ -728,7 +728,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162906951}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3322,7 +3322,7 @@ Camera:
   far clip plane: 1000
   field of view: 68.4
   orthographic: 0
-  orthographic size: 5.9970717
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
