@@ -375,12 +375,7 @@ public class GameSystem : MonoBehaviour
 
             normalScore = 1000000.00 / notesnum;
 
-            music = GameObject.Find("Audio").GetComponent<AudioSource>();
-            if (!string.IsNullOrEmpty(result.musicTitle))
-            {
-                music.clip = Resources.Load<AudioClip>("MusicF/" + result.musicTitle);
-            }
-            //music.Play(); //ボタンで音楽を流すようにしたいので、playは保留
+            
         }
         //デバッグ用
         if (SceneManager.GetActiveScene().name == "MultiTapTest" && jUI == null)

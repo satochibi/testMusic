@@ -58,8 +58,15 @@ public class InputJson : MonoBehaviour
         if (string.IsNullOrEmpty(m_name))
         {
             m_name = musicName;
+            m_system.result.musicTitle = musicName;
             m_system.result.difficulty = difficultType;
         }
+        var music = GameObject.Find("Audio").GetComponent<AudioSource>();
+        //if (!string.IsNullOrEmpty(result.musicTitle))
+        //{
+        music.clip = Resources.Load<AudioClip>("MusicF/" + m_system.result.musicTitle);
+        // }
+        //music.Play(); //ボタンで音楽を流すようにしたいので、playは保留
         float fumenScrollSpeed = fumen.Speed;
 
 
