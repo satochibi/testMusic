@@ -72,6 +72,8 @@ public class GameSystem : MonoBehaviour
         
         public int maxCombo;        //最大コンボ数
         public bool isFullCombo;    //フルコンボしたかどうか
+        public bool isHighScore;    //ハイスコアかどうか。
+        public int ScoreDiff;       //前のスコアの差        
         //public bool isAllPerfect;
 
 
@@ -297,6 +299,12 @@ public class GameSystem : MonoBehaviour
         if (pastsaveData.highscore > saveData.highscore)
         {
             saveData.highscore = pastsaveData.highscore;
+            
+        }
+        else
+        {
+            result.isHighScore = true;
+            result.ScoreDiff = saveData.highscore - pastsaveData.highscore;
         }
         if ((int)pastsaveData.rankType < (int)saveData.rankType)
         {
@@ -400,6 +408,10 @@ public class GameSystem : MonoBehaviour
         }
         if (IsEnd)
         {
+            if(result.good+result.bad+result.miss ==0)
+            {
+                result.isFullCombo = true;
+            }
             SetRank(result.score);
             saveData.highscore = result.score;
             saveData.rankType = result.rank;
