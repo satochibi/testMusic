@@ -18,6 +18,8 @@ public class MultiTapTest : MonoBehaviour
     Fumen fumen;
     [SerializeField]
     bool IsDebug;
+
+    public bool IsPouse { get; set; }
     List<string> tapsLaneNames = new List<string>();
     readonly string[] laneNames =
     {
@@ -260,13 +262,14 @@ public class MultiTapTest : MonoBehaviour
         //ƒ^ƒbƒ`Žæ“¾
         var touchCount = Input.touchCount;
 
-
-        if (touchCount > 0)
+        if (!IsPouse)
         {
-            MultiTapDebugDisp(touchCount);
-            //SingleTouchTest();
+            if (touchCount > 0)
+            {
+                MultiTapDebugDisp(touchCount);
+                //SingleTouchTest();
+            }
         }
-
 
         //MousePointerRaycastTest();
 

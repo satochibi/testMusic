@@ -20,7 +20,7 @@ public class SaveDataManager : MonoBehaviour
             switch (Application.platform)
             {
                 case RuntimePlatform.IPhonePlayer:
-                    return Application.persistentDataPath;
+                    return Application.dataPath + "/SaveData/";
 
                 case RuntimePlatform.Android:
                     return Application.persistentDataPath;

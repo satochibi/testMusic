@@ -2971,6 +2971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioOBJ: {fileID: 1562884156}
+  tapObj: {fileID: 9204103}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

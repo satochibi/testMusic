@@ -6,7 +6,10 @@ public class Pause : MonoBehaviour
 {
 
     [SerializeField]
-    public GameObject audioOBJ;
+    GameObject audioOBJ;
+
+    [SerializeField]
+    GameObject tapObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,12 +19,14 @@ public class Pause : MonoBehaviour
     {
         //pauseOBJ.SetActive(true);
         audioOBJ.GetComponent<AudioSource>().Pause();
+        tapObj.GetComponent<MultiTapTest>().IsPouse = true;
         Time.timeScale = 0.0f;
     }
     public void PauseEnd()
     {
         audioOBJ.GetComponent<AudioSource>().UnPause();
         gameObject.SetActive(false);
+        tapObj.GetComponent<MultiTapTest>().IsPouse = false;
         Time.timeScale = 1.0f;
     }
    

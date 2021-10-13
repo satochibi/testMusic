@@ -100,11 +100,14 @@ public class Fumen : MonoBehaviour
             return;
         }
         playTime = Time.fixedTime - this.GameStartTime;
-        //Playtime = loadtime - this.GameStartTime;
+        //Playtime = loadtime - this.GameStartTime;s
         KeyBoardTap();
         CheckOverNotes();
         //LongNotesEventJudge(1);
-
+        if(audioGameObj.GetComponent<AudioSource>().clip.length <=playTime)
+        {
+            Invoke("GameEnd", 3.0f);
+        }
 
         if (autoPlay)
         {
@@ -151,6 +154,10 @@ public class Fumen : MonoBehaviour
         //    Judge((int)Track.track5);
         //}
     }
+    void GameEnd()
+    {
+        system.IsEnd = true;
+    }
     /// <summary>
     /// ˆê’èŠÔŒo‚Á‚½ƒm[ƒc‚ğíœ‚·‚éˆ—
     /// </summary>
@@ -168,15 +175,15 @@ public class Fumen : MonoBehaviour
                     Destroy(notesList[index]);
                     system.AddResultPalam(JudgementType.Miss);
                     notesList.RemoveAt(0);
-                    continue;
                 }
                 //”»’è‚³‚ê‚Ä‚¢‚½‚ç‚»‚Ì‚Ü‚ÜÁ‹
                 else
                 {
                     Destroy(notesList[index]);
                     notesList.RemoveAt(0);
-                    continue;
                 }
+
+                
             }
 
         }
