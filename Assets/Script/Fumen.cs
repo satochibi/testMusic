@@ -337,6 +337,7 @@ public class Fumen : MonoBehaviour
                         {
                             notesList[index].GetComponent<MeshRenderer>().enabled = false;
                             system.AddResultPalam(JudgementType.Perfect);
+                            tapAudioSource.PlayOneShot(this.normalTapAudioClip);
                             noteCon.IsTapped = true;
                         }
 

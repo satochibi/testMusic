@@ -1840,7 +1840,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 42c2d07ad4869e742a72cc3dd8b251f6, type: 3}
   - {fileID: 8300000, guid: f4c6c87c0ff72054c918ab09088c702e, type: 3}
   - {fileID: 8300000, guid: aafee4bac133dc74ca20b7b8146c531e, type: 3}
-  normalTapAudioClip: {fileID: 8300000, guid: f1030a607b3ee4b4ba899274196e1e32, type: 3}
+  normalTapAudioClip: {fileID: 8300000, guid: 0d236ced810cfcb4ea878ba25bb9f633, type: 3}
   autoPlay: 0
   tapLList:
   - {fileID: 1614465405}

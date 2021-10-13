@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Result.unity
     guid: e130b014f8f968e42be07185c669171b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MultiTapTest.unity
     guid: 0c6c6afd6d43ab54a9d73fd02d249778
   m_configObjects: {}
