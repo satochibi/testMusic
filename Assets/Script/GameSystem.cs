@@ -367,6 +367,12 @@ public class GameSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
+        if(playerPalam.character != default)
+        {
+            playerPalam.character = CharacterType.Kerotama;
+        }
         //var a = 0;
         //var b = 0;
         switch (Application.platform)
