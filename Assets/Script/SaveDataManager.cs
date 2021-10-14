@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 using System;
 using System.IO;
@@ -17,17 +18,22 @@ public class SaveDataManager : MonoBehaviour
     {
         get
         {
+            
             switch (Application.platform)
             {
                 case RuntimePlatform.IPhonePlayer:
+                   
                     return Application.dataPath + "/SaveData/";
 
                 case RuntimePlatform.Android:
+                    
                     return Application.persistentDataPath;
 
                 default:
+                                        
                     return Application.dataPath + "/SaveData/";
             }
+            
         }
     }
     public void DirectoryOrFileCheck(string m_name)

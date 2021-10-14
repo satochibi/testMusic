@@ -21,15 +21,7 @@ public class MultiTapTest : MonoBehaviour
 
     public bool IsPouse { get; set; }
     List<string> tapsLaneNames = new List<string>();
-    readonly string[] laneNames =
-    {
-        "Lane1",
-        "Lane2",
-        "Lane3",
-        "Lane4",
-        "Lane5"
-
-    };
+    
     readonly Color[] tapColors =
     {
         Color.red,
@@ -39,9 +31,7 @@ public class MultiTapTest : MonoBehaviour
         Color.black
     };
 
-    //List<Touch> touches = new List<Touch>();
-    //List<string> messages = new List<string>();
-    //List<Ray> rays = new List<Ray>();
+    
 
 
     void Start()
@@ -52,11 +42,7 @@ public class MultiTapTest : MonoBehaviour
             tapInfoText = tapInfoTextObj.GetComponent<Text>();
         }
         fumen = fumenObj.GetComponent<Fumen>();
-        //Time.timeScale *= 0.5f;
-        //if (Physics.Raycast(ray, out hit, 10.0f))
-        //{
-        //    Debug.Log(hit.collider.gameObject.transform.position);
-        //}
+        
     }
     public void MousePointerRaycastTest()
     {
@@ -73,51 +59,26 @@ public class MultiTapTest : MonoBehaviour
                 tapText.text = mhit.collider.gameObject.name;
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    //for (int j = 0; j < laneNames.Length; j++)
-                    //{
-                    //    if (mhitOBJ.name == laneNames[j])
-                    //    {
-                    //        fumen.Judge(j + 1);
-                    //        //tapInfoText.text = "judge" + Time.deltaTime;
-                    //    }
-                    //}
+                   
                     mhitOBJ.GetComponent<LaneController>().GoJudge(NotesType.Normal);
 
                 }
                 
                 if ( Input.GetMouseButtonUp(0))
                 {
-                    //for (int j = 0; j < laneNames.Length; j++)
-                    //{
-                    //    if (mhitOBJ.name == laneNames[j])
-                    //    {
-                    //        fumen.LongNoteJudge(j + 1);
-
-                    //        //tapInfoText.text = "judge" + Time.deltaTime;
-                    //    }
-                    //}
+                   
                     mhitOBJ.GetComponent<LaneController>().GoJudge(NotesType.LongEnd);
 
                 }
                 if (Input.GetMouseButton(0))
                 {
-                    //for (int j = 0; j < laneNames.Length; j++)
-                    //{
-                    //    if (mhitOBJ.name == laneNames[j])
-                    //    {
-                    //        fumen.LongNotesEventJudge(j + 1);
-                    //        //tapInfoText.text = "judge" + Time.deltaTime;
-                    //    }
-                    //}
+                    
                     mhitOBJ.GetComponent<LaneController>().GoJudge(NotesType.Long);
 
                 }
             }
 
-            //mhit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.black;
-            //mhit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //Debug.Log(mhit.collider.gameObject.transform.position + Environment.NewLine);
-            //Debug.Log("マウス座標" + Input.mousePosition.ToString());
+            
         }
         else
         {
@@ -186,17 +147,9 @@ public class MultiTapTest : MonoBehaviour
                     {
                         // Record initial touch position.
                         case TouchPhase.Began:
-
-                            //for (int j = 0; j < laneNames.Length; j++)
-                            //{
-                            //    if (hitOBJ.name == laneNames[j])
-                            //    {
-                            //        fumen.Judge(j + 1);
-                            //    }
-                            //}
+                            
                             hitOBJ.GetComponent<LaneController>().GoJudge(NotesType.Normal);
                             break;
-
                         // Determine direction by comparing the current touch position with the initial one.
                         case TouchPhase.Moved:
                         case TouchPhase.Stationary:
@@ -205,14 +158,6 @@ public class MultiTapTest : MonoBehaviour
                         // Report that a direction has been chosen when the finger is lifted.
                         case TouchPhase.Ended:
 
-                            //for (int j = 0; j < laneNames.Length; j++)
-                            //{
-                            //    if (hitOBJ.name == laneNames[j])
-                            //    {
-                            //        //ここに離したかを判別するフラグをtrueにするコード書く。
-                            //        fumen.LongNoteJudge(j+1);
-                            //    }
-                            //}
                             hitOBJ.GetComponent<LaneController>().GoJudge(NotesType.LongEnd);
                             break;
                     }
@@ -264,10 +209,11 @@ public class MultiTapTest : MonoBehaviour
 
         if (!IsPouse)
         {
+            
             if (touchCount > 0)
             {
                 MultiTapDebugDisp(touchCount);
-                //SingleTouchTest();
+                
             }
         }
 

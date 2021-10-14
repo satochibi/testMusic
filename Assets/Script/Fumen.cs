@@ -75,9 +75,9 @@ public class Fumen : MonoBehaviour
     //判定の間隔（単位（秒））
     readonly float[] judgeStep =
     {
-        0.05f,  //パーフェクト判定間隔
-        0.1f,   //グレイト判定間隔
-        0.15f,  //グッド判定間隔
+        0.07f,  //パーフェクト判定間隔
+        0.15f,   //グレイト判定間隔
+        0.18f,  //グッド判定間隔
         0.2f    //バッド判定間隔
     
     };
@@ -100,8 +100,6 @@ public class Fumen : MonoBehaviour
             return;
         }
         playTime = Time.fixedTime - this.GameStartTime;
-        //Playtime = loadtime - this.GameStartTime;s
-        KeyBoardTap();
         CheckOverNotes();
         //LongNotesEventJudge(1);
         if(audioGameObj.GetComponent<AudioSource>().clip.length <=playTime)
@@ -120,40 +118,7 @@ public class Fumen : MonoBehaviour
     }
 
    
-    /// <summary>
-    /// デバッグ用キーボードタップ処理
-    /// </summary>
-    public void KeyBoardTap()
-    {
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-
-        //    Judge((int)Track.track1);
-        //    Debug.Log(longNotesEvent);
-
-
-        //}
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-
-        //    Judge((int)Track.track2);
-        //}
-        //if (Input.GetKeyDown(KeyCode.N))
-        //{
-
-        //    Judge((int)Track.track3);
-        //}
-        //if (Input.GetKeyDown(KeyCode.M))
-        //{
-
-        //    Judge((int)Track.track4);
-        //}
-        //if (Input.GetKeyDown(KeyCode.K))
-        //{
-
-        //    Judge((int)Track.track5);
-        //}
-    }
+   
     void GameEnd()
     {
         system.IsEnd = true;
@@ -191,7 +156,7 @@ public class Fumen : MonoBehaviour
     }
     /// <summary>
     /// ノーマルタップ判定処理(早Bad～Perfect～遅Bad)
-    ///|0.2秒   |0.15秒  |0.1秒   |0.05秒～-0.05秒|-0.1秒   |-0.15秒 |0.2秒   |
+    ///|0.2秒   |0.18秒  |0.15秒   |0.07秒～-0.07秒|-0.15秒   |-0.18秒 |0.2秒   |
     ///|Bad  → |Good　→|Great→ |　 Perfect　→ |Great→  |Good→  |Bad     |
     /// </summary>
     /// <param name="track">入力トラック番号</param>

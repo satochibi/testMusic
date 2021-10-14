@@ -3526,6 +3526,7 @@ MonoBehaviour:
   tapTextGameObj: {fileID: 968414997}
   tapInfoTextObj: {fileID: 1462992855}
   fumenObj: {fileID: 357788685}
+  IsDebug: 1
 --- !u!1 &2030605342
 GameObject:
   m_ObjectHideFlags: 0

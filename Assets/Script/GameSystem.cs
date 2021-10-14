@@ -367,6 +367,28 @@ public class GameSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //var a = 0;
+        //var b = 0;
+        switch (Application.platform)
+        {
+            case RuntimePlatform.IPhonePlayer:
+
+                AudioSettings.SetDSPBufferSize(256, 4);
+                break;
+
+            case RuntimePlatform.Android:
+
+                AudioSettings.SetDSPBufferSize(256, 4);
+                break;
+
+            default:
+
+                AudioSettings.SetDSPBufferSize(1024, 4);
+                //AudioSettings.GetDSPBufferSize(out a, out b);
+                //Debug.Log(a + " " + b);
+                break;
+
+        }
 
     }
 
@@ -420,6 +442,7 @@ public class GameSystem : MonoBehaviour
             WritePlayData();
             IsEnd = false;
             SceneManager.LoadScene("Result");
+
         }
         //リザルトパラメータをデバッグ表示
         if (Input.GetKeyDown(KeyCode.Space))
