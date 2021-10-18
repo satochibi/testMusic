@@ -7,6 +7,7 @@ public enum CharacterType
 {
     Kerotama =0,
     Cheerleader,
+    CharaA,
     Typenum
 }
 
@@ -17,8 +18,8 @@ public class GalleryManager : MonoBehaviour
      string[] charaname =
     {
         "けろたま",
-        "キャラ０２",
-        "キャラ０３"
+        "チアリーダー",
+        "キャラA"
     };
 
 

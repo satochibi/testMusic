@@ -30,12 +30,13 @@ public class CharacterManager : MonoBehaviour
     }
     IEnumerator RotateON()
     {
-        for (int turn = 0; turn < 36; turn++)
+        for (int turn = 0; turn < 20; turn++)
         {
             
-            transform.Rotate(0, -10, 0);
+            transform.Rotate(0, -18, 0);
             yield return new WaitForSeconds(0.01f);
         }
+        coroutineBool = false;
     }
     // Update is called once per frame
     void Update()
@@ -48,5 +49,6 @@ public class CharacterManager : MonoBehaviour
                 StartCoroutine("RotateON");
             }
         }
+       
     }
 }
