@@ -368,7 +368,7 @@ public class GameSystem : MonoBehaviour
     void Start()
     {
 
-
+        
         if(playerPalam.character != default)
         {
             playerPalam.character = CharacterType.Kerotama;
@@ -469,6 +469,7 @@ public class GameSystem : MonoBehaviour
     //シングルトンパターン導入
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         if (instance == null)
         {
             instance = this;
