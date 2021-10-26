@@ -1961,7 +1961,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f4c6c87c0ff72054c918ab09088c702e, type: 3}
   - {fileID: 8300000, guid: aafee4bac133dc74ca20b7b8146c531e, type: 3}
   normalTapAudioClip: {fileID: 8300000, guid: 0d236ced810cfcb4ea878ba25bb9f633, type: 3}
-  autoPlay: 1
+  autoPlay: 0
   tapLList:
   - {fileID: 1614465405}
   - {fileID: 788334631}
