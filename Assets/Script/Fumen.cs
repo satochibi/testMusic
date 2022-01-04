@@ -167,13 +167,30 @@ public class Fumen : MonoBehaviour
             for (int index = 0; index < notesList.Count; index++)
             {
                 NotesController noteCon = notesList[index].GetComponent<NotesController>();
-                if(noteCon.Type ==type)
+                List<Track> sideTracks =new List<Track>();
+                if(noteCon.NotesTrack!=Track.track1&&noteCon.NotesTrack!=Track.track5)
+                {
+                    sideTracks.Add(((Track)((int)noteCon.NotesTrack+1)));
+                    sideTracks.Add(((Track)((int)noteCon.NotesTrack-1)));
+                }
+                else if(noteCon.NotesTrack == Track.track1)
+                {
+                    sideTracks.Add(((Track)((int)noteCon.NotesTrack + 1)));
+                    sideTracks.Add(((Track)((int)noteCon.NotesTrack + 1)));
+                }
+                else
+                {
+                    sideTracks.Add(((Track)((int)noteCon.NotesTrack - 1)));
+                    sideTracks.Add(((Track)((int)noteCon.NotesTrack - 1)));
+
+                }
+                if (noteCon.Type ==type)
                 //if (noteCon.Type != NotesType.LongNormal && noteCon.Type != NotesType.LongEnd)
                 //if (notesList[index].name != LongNoteTypeName["longNotes"] && notesList[index].name != LongNoteTypeName["longNotesEnd"])
                 {
                     
                     
-                    if (noteCon.NotesTrack == (Track)track)
+                    if (noteCon.NotesTrack == (Track)track || (Track)track == sideTracks[0] || (Track)track == sideTracks[1])
                     {
                         float n_time = noteCon.NotesTime;
                         //ノーツの判定時間と現在の経過時間の差(絶対値)
